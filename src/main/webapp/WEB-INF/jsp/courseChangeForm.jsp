@@ -57,7 +57,7 @@
                                    placeholder="Uzasadnienie" required="true" rows="5"/>
                 </div>
             </div>
-            <button type="submit" class="btn btn-raised btn-success">Wyślij wniosek o stypendium</button>
+            <button type="submit" class="btn btn-raised btn-success">Wyślij podanie o zmianę kierunku</button>
         </form:form>
 
     </div>
