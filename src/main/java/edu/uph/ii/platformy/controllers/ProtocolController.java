@@ -1,9 +1,7 @@
 package edu.uph.ii.platformy.controllers;
 
+import edu.uph.ii.platformy.models.*;
 import edu.uph.ii.platformy.models.Error;
-import edu.uph.ii.platformy.models.Instructor;
-import edu.uph.ii.platformy.models.ProtocolItem;
-import edu.uph.ii.platformy.models.Subject;
 import edu.uph.ii.platformy.services.declarations.ProtocolService;
 import edu.uph.ii.platformy.services.declarations.SemestralGradeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +31,7 @@ public class ProtocolController
         public String addProtocols ( Model model )
         {
                 protocolService.addProtocols();
-                return "redirect:/";
+                return "redirect:/protocol/all";
         }
 
 
@@ -71,9 +69,39 @@ public class ProtocolController
 
 
         @PostMapping ("/error")
+        @Secured ("ROLE_INSTRUCTOR")
         public String addError ( @ModelAttribute ("error") Error error )
         {
                 protocolService.addError( error );
                 return "redirect:/protocol/list";
+        }
+
+
+        @GetMapping ("/all")
+        @Secured ("ROLE_DEAN")
+        public String getAllProtocols ( Model model )
+        {
+                model.addAttribute( "list", protocolService.getAll() );
+                model.addAttribute( "awaiting", protocolService.getAwaitingSubjectsForProtocol() );
+                model.addAttribute( "errors", protocolService.getAllErrors() );
+                return "protocolDean";
+        }
+
+
+        @Secured ("ROLE_DEAN")
+        @GetMapping ("/open")
+        public String openProtocols ( Model model )
+        {
+                protocolService.openAll();
+                return "redirect:/protocol/all";
+        }
+
+
+        @GetMapping ("/editState/{id}")
+        @Secured ("ROLE_DEAN")
+        public String editProtocolState ( @PathVariable ("id") Protocol protocol )
+        {
+                protocolService.editStateByProtocol( protocol );
+                return "redirect:/protocol/all";
         }
 }

@@ -83,6 +83,63 @@ public class ProtocolServiceImpl implements ProtocolService
                 }
         }
 
+
+        @Override
+        public List<Protocol> getAll ()
+        {
+                return protocolRepository.findAll()
+                        .stream()
+                        .sorted( ( o1, o2 ) -> ( int ) (o1.getId() - o2.getId()) )
+                        .collect( Collectors.toList() );
+        }
+
+
+        @Override
+        public List<Subject> getAwaitingSubjectsForProtocol ()
+        {
+                return subjectRepository.findAll()
+                        .stream()
+                        .filter( e -> !protocolRepository.existsBySubject( e ) )
+                        .collect( Collectors.toList() );
+        }
+
+        @Override
+        public void openAll ()
+        {
+                protocolRepository.findAll()
+                        .stream()
+                        .filter( e -> e.getStatus().equals( Statuses.PROTOCOLE_CLOSED ) )
+                        .forEach( this::editState );
+
+        }
+
+
+        @Override
+        public void editStateByProtocol ( Protocol protocol )
+        {
+                if ( protocol.getStatus().equals( Statuses.PROTOCOLE_CLOSED ) )
+                        protocol.setStatus( Statuses.PROTOCOLE_OPEN );
+                else if ( protocol.getStatus().equals( Statuses.PROTOCOLE_OPEN ) )
+                        protocol.setStatus( Statuses.PROTOCOLE_ACCEPTED );
+                else if ( protocol.getStatus().equals( Statuses.PROTOCOLE_ACCEPTED ) )
+                        protocol.setStatus( Statuses.PROTOCOLE_CLOSED );
+                protocolRepository.save( protocol );
+        }
+
+        @Override
+        public List<Error> getAllErrors ()
+        {
+                return errorRepository.findAll();
+        }
+
+
+        private void editState ( Protocol protocol )
+        {
+                protocol.setStatus( Statuses.PROTOCOLE_OPEN );
+                protocolRepository.save( protocol );
+        }
+
+
         private Protocol mapSubjectToProtocol ( Subject subject )
         {
                 Protocol protocol = new Protocol();

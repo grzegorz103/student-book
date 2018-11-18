@@ -122,7 +122,7 @@
                                     <a class="dropdown-item ${param['name'] == 'specialization' ? ' active':''}"
                                        href="/sp/edit">Specializacje</a>
                                     <a class="dropdown-item ${param['name'] == 'protocols' ? ' active':''}"
-                                       href="/protocol/">Protokoły</a>
+                                       href="/protocol/all">Protokoły</a>
                                 </div>
                             </div>
                         </li>
