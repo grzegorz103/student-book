@@ -9,12 +9,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Skrzynka odbiorcza</title>
 </head>
 <body>
-<jsp:include page="shared/header.jsp"/>
+<jsp:include page="shared/header.jsp">
+    <jsp:param name="name" value="messages"/>
+</jsp:include>
 <div class="container">
     <a href="/msg/send">Wyślij nową wiadomość</a>
+    <br/>
     <c:if test="${!empty list}">
         <table class="table table-bordered">
             <tr class="bg-success">

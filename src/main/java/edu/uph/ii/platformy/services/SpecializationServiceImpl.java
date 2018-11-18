@@ -158,4 +158,14 @@ public class SpecializationServiceImpl implements SpecializationService
                 return temp;
         }
 
+        @Override
+        public List<Student> getStudentsWithoutSpecialization ()
+        {
+                return studentRepository.findAll()
+                        .stream()
+                        .filter( e -> !e.getSpecChosen() )
+                        .sorted( ( o1, o2 ) -> ( int ) (o1.getId() - o2.getId()) )
+                        .collect( Collectors.toList() );
+        }
+
 }

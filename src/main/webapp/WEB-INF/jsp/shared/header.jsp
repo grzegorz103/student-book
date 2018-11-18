@@ -23,115 +23,124 @@
 <body>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">Strona główna</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar" aria-controls="myNavbar"
-            aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"/>
-    </button>
-    <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="navbar-nav mr-md-auto">
+    <div class="container">
+        <a class="navbar-brand" href="/">Strona główna</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar"
+                aria-controls="myNavbar"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"/>
+        </button>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="navbar-nav mr-md-auto">
 
-            <security:authorize access="isAnonymous()">
-                <li ${param['name'] == 'loginForm' ? 'class="nav-item active"' : 'class="nav-item"'}>
-                    <a class="nav-link" href="<c:url value="/login"/>">Logowanie</a>
-                </li>
-            </security:authorize>
-
-            <security:authorize access="isAnonymous()">
-                <li ${param['name'] == 'registrationForm' ? 'class="nav-item active"' : 'class="nav-item"'}>
-                    <a class="nav-link" href="<c:url value="/register"/>">Rejestracja</a>
-                </li>
-            </security:authorize>
-
-            <security:authorize access="isAuthenticated()">
-
-
-                <li ${param['name'] == 'instructorList' ? 'class="nav-item active"' : 'class="nav-item"'}>
-                    <a class="nav-link" href="/instructors/list">Wykładowcy</a>
-                </li>
-
-                <li ${param['name'] == 'subjectList' ? 'class="nav-item active"' : 'class="nav-item"'}>
-                    <a class="nav-link" href="/subjects/list">Przedmioty</a>
-                </li>
-
-                <li ${param['name'] == 'workshopList' ? 'class="nav-item active"' : 'class="nav-item"'}>
-                    <a class="nav-link" href="/workshops/list">Warsztaty</a>
-                </li>
-
-                <li ${param['name'] == 'messages' ? 'class="nav-item active"' : 'class="nav-item"'}>
-                    <a class="nav-link" href="/msg">Wiadomości</a>
-                </li>
-
-                <security:authorize access="hasRole('STUDENT')">
-                    <li class="nav-item">
-                        <div class="dropdown show">
-                            <a class="nav-link dropdown-toggle" href="#" role="button"
-                               id="dropdownMenuLinkForStudent"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Student
-                            </a>
-
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkForStudent">
-                                <a class="dropdown-item ${param['name'] == 'scholarship' ? ' active':''}"
-                                   href="/scholarships/list">Stypendia</a>
-                                <a class="dropdown-item ${param['name'] == 'bankAccount' ? ' active':''}"
-                                   href="/bankAccountNumber/show">Konto w banku</a>
-                                <a class="dropdown-item ${param['name'] == 'condition' ? ' active':''}"
-                                   href="/conditions/list">Warunki</a>
-                                <a class="dropdown-item ${param['name'] == 'courseChange' ? ' active':''}"
-                                   href="/courseChange/list">Kierunek studiów</a>
-                            </div>
-                        </div>
+                <security:authorize access="isAnonymous()">
+                    <li ${param['name'] == 'loginForm' ? 'class="nav-item active"' : 'class="nav-item"'}>
+                        <a class="nav-link" href="<c:url value="/login"/>">Logowanie</a>
                     </li>
                 </security:authorize>
-                <security:authorize access="hasRole('INSTRUCTOR')">
-                    <li class="nav-item">
-                        <div class="dropdown show">
-                            <a class="nav-link dropdown-toggle" href="#" role="button"
-                               id="dropdownMenuLinkForInstructor"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Wykładowca
-                            </a>
 
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkForInstructor">
-                                <a class="dropdown-item ${param['name'] == 'condition' ? ' active':''}"
-                                   href="/conditions/list">Warunki</a>
-                            </div>
-                        </div>
+                <security:authorize access="isAnonymous()">
+                    <li ${param['name'] == 'registrationForm' ? 'class="nav-item active"' : 'class="nav-item"'}>
+                        <a class="nav-link" href="<c:url value="/register"/>">Rejestracja</a>
                     </li>
                 </security:authorize>
-                <security:authorize access="hasRole('DEAN')">
-                    <li class="nav-item">
-                        <div class="dropdown show">
-                            <a class="nav-link dropdown-toggle" href="#" role="button"
-                               id="dropdownMenuLinkForDean"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Dziekan
-                            </a>
 
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkForDean">
-                                <a class="dropdown-item ${param['name'] == 'scholarship' ? ' active':''}"
-                                   href="/scholarships/list">Stypendia</a>
-                                <a class="dropdown-item ${param['name'] == 'condition' ? ' active':''}"
-                                   href="/conditions/list">Warunki</a>
-                                <a class="dropdown-item ${param['name'] == 'courseChange' ? ' active':''}"
-                                   href="/courseChange/list">Zmiana kierunku</a>
-                            </div>
-                        </div>
+                <security:authorize access="isAuthenticated()">
+
+
+                    <li ${param['name'] == 'instructorList' ? 'class="nav-item active"' : 'class="nav-item"'}>
+                        <a class="nav-link" href="/instructors/list">Wykładowcy</a>
                     </li>
+
+                    <li ${param['name'] == 'subjectList' ? 'class="nav-item active"' : 'class="nav-item"'}>
+                        <a class="nav-link" href="/subjects/list">Przedmioty</a>
+                    </li>
+
+                    <li ${param['name'] == 'workshopList' ? 'class="nav-item active"' : 'class="nav-item"'}>
+                        <a class="nav-link" href="/workshops/list">Warsztaty</a>
+                    </li>
+
+                    <li ${param['name'] == 'messages' ? 'class="nav-item active"' : 'class="nav-item"'}>
+                        <a class="nav-link" href="/msg">Wiadomości</a>
+                    </li>
+
+                    <security:authorize access="hasRole('STUDENT')">
+                        <li class="nav-item">
+                            <div class="dropdown show">
+                                <a class="nav-link dropdown-toggle" href="#" role="button"
+                                   id="dropdownMenuLinkForStudent"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Student
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkForStudent">
+                                    <a class="dropdown-item ${param['name'] == 'scholarship' ? ' active':''}"
+                                       href="/scholarships/list">Stypendia</a>
+                                    <a class="dropdown-item ${param['name'] == 'bankAccount' ? ' active':''}"
+                                       href="/bankAccountNumber/show">Konto w banku</a>
+                                    <a class="dropdown-item ${param['name'] == 'condition' ? ' active':''}"
+                                       href="/conditions/list">Warunki</a>
+                                    <a class="dropdown-item ${param['name'] == 'courseChange' ? ' active':''}"
+                                       href="/courseChange/list">Kierunek studiów</a>
+                                </div>
+                            </div>
+                        </li>
+                    </security:authorize>
+                    <security:authorize access="hasRole('INSTRUCTOR')">
+                        <li class="nav-item">
+                            <div class="dropdown show">
+                                <a class="nav-link dropdown-toggle" href="#" role="button"
+                                   id="dropdownMenuLinkForInstructor"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Wykładowca
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkForInstructor">
+                                    <a class="dropdown-item ${param['name'] == 'condition' ? ' active':''}"
+                                       href="/conditions/list">Warunki</a>
+                                    <a class="dropdown-item ${param['name'] == 'specialization' ? ' active':''}"
+                                       href="/protocol/list">Protokoły</a>
+                                </div>
+                            </div>
+                        </li>
+                    </security:authorize>
+                    <security:authorize access="hasRole('DEAN')">
+                        <li class="nav-item">
+                            <div class="dropdown show">
+                                <a class="nav-link dropdown-toggle" href="#" role="button"
+                                   id="dropdownMenuLinkForDean"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Dziekan
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkForDean">
+                                    <a class="dropdown-item ${param['name'] == 'scholarship' ? ' active':''}"
+                                       href="/scholarships/list">Stypendia</a>
+                                    <a class="dropdown-item ${param['name'] == 'condition' ? ' active':''}"
+                                       href="/conditions/list">Warunki</a>
+                                    <a class="dropdown-item ${param['name'] == 'courseChange' ? ' active':''}"
+                                       href="/courseChange/list">Zmiana kierunku</a>
+                                    <a class="dropdown-item ${param['name'] == 'specialization' ? ' active':''}"
+                                       href="/sp/edit">Specializacje</a>
+                                    <a class="dropdown-item ${param['name'] == 'protocols' ? ' active':''}"
+                                       href="/protocol/">Protokoły</a>
+                                </div>
+                            </div>
+                        </li>
+                    </security:authorize>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="document.getElementById('logout').submit()">Witaj
+                            <sec:authentication property="principal.username"/>, wyloguj się</a>
+                    </li>
+
+                    <form action="<c:url value="/logout"/>" id="logout" method="post" style="display: none;">
+                        <sec:csrfInput/>
+                    </form>
+
                 </security:authorize>
-                <li class="nav-item">
-                    <a class="nav-link" onclick="document.getElementById('logout').submit()">Witaj
-                        <sec:authentication property="principal.username"/>, wyloguj się</a>
-                </li>
 
-                <form action="<c:url value="/logout"/>" id="logout" method="post" style="display: none;">
-                    <sec:csrfInput/>
-                </form>
-
-            </security:authorize>
-
-        </ul>
+            </ul>
+        </div>
     </div>
 </nav>
 <br>

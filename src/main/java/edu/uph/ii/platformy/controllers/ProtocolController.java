@@ -1,5 +1,6 @@
 package edu.uph.ii.platformy.controllers;
 
+import edu.uph.ii.platformy.models.Error;
 import edu.uph.ii.platformy.models.Instructor;
 import edu.uph.ii.platformy.models.ProtocolItem;
 import edu.uph.ii.platformy.models.Subject;
@@ -40,6 +41,7 @@ public class ProtocolController
         @Secured ("ROLE_INSTRUCTOR")
         public String getProtocols ( Model model )
         {
+                model.addAttribute( "error", new Error() );
                 model.addAttribute( "list", protocolService.getProtocols() );
                 model.addAttribute( "protForm", new ProtocolItem() );
                 return "protocolPage";
@@ -65,5 +67,13 @@ public class ProtocolController
         {
                 model.addAttribute( "list", semestralGradeService.getSemestralGradesBySubject( subject ) );
                 return "semestralGradesPage";
+        }
+
+
+        @PostMapping ("/error")
+        public String addError ( @ModelAttribute ("error") Error error )
+        {
+                protocolService.addError( error );
+                return "redirect:/protocol/list";
         }
 }

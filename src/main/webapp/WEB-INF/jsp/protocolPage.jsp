@@ -10,7 +10,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Twoje protokoły</title>
 </head>
 <body>
 <jsp:include page="shared/header.jsp"/>
@@ -28,7 +28,7 @@
 
             <c:forEach items="${list}" var="protocol">
                 <tr>
-                <form:form  modelAttribute="protForm">
+                <form:form modelAttribute="protForm">
                     <td>${protocol.subject.name}</td>
 
                     <td><c:if test="${protocol.status == 'PROTOCOLE_CLOSED'}">---</c:if>
@@ -58,18 +58,42 @@
                     </td>
 
                     <td><c:if test="${protocol.status == 'PROTOCOLE_OPEN'}">
-                        <button formaction="/protocol/grades?id=${protocol.subject.instructor.id}&subj=${protocol.subject.id}" type="submit" class="btn btn-raised btn-primary">Do ocen</button>
+                        <button formaction="/protocol/grades?id=${protocol.subject.instructor.id}&subj=${protocol.subject.id}"
+                                type="submit" class="btn btn-raised btn-primary">Do ocen
+                        </button>
                     </c:if></td>
 
                     <td>
                         <c:if test="${protocol.status == 'PROTOCOLE_OPEN'}">
-                            <button formaction="/protocol/edit?id=${protocol.id}" type="submit" class="btn btn-raised btn-primary">Zapisz</button>
+                            <button formaction="/protocol/edit?id=${protocol.id}" type="submit"
+                                    class="btn btn-raised btn-primary">Zapisz
+                            </button>
                         </c:if>
                     </td>
                     </tr>
                 </form:form>
             </c:forEach>
         </table>
+        <br/><br/>
+        <hr>
+        Formularz błędu
+        <br/>
+        <form:form method="POST" modelAttribute="error" action="/protocol/error">
+
+            <div class="form-group">
+                <form:textarea placeholder="Treść zgłoszenia" rows="5" path="text" cssClass="form-control"
+                               cssStyle="width: 50%"/>
+                <form:errors path="text" cssStyle="color:red"/>
+            </div>
+
+            <div class="form-group">
+                Protokół: <form:select path="protocol.id">
+                <form:options items="${list}" itemValue="id" itemLabel="subject.name"/>
+            </form:select>
+            </div>
+            <button type="submit" class="btn btn-raised btn-primary">Zgłoś</button>
+
+        </form:form>
     </c:if>
 
     <c:if test="${empty list}">

@@ -21,4 +21,6 @@ public interface SpecializationService
         List<Specialization> getSpecializationById ( Student student );
 
         Specialization getSpecialization ( Course course );
+
+        List<Student> getStudentsWithoutSpecialization ();
 }

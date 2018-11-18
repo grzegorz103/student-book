@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface MessageService
 {
-        void send ( Message message );
+        boolean send ( Message message );
 
         List<Message> getMessages ();
 
-        List<Message> getUserMessages();
+        List<Message> getUserMessages ();
 }

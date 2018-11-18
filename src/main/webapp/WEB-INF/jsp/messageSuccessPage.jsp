@@ -1,24 +1,22 @@
 <%--
   Created by IntelliJ IDEA.
   User: Komputer
-  Date: 13.01.2019
-  Time: 15:39
+  Date: 18.01.2019
+  Time: 15:27
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Wiadomości</title>
+    <title>Informacja</title>
 </head>
 <body>
 <jsp:include page="shared/header.jsp">
     <jsp:param name="name" value="messages"/>
 </jsp:include>
-
 <div class="container">
-    <h2><a href="/msg/list">Odebrane wiadomości</a></h2>
-    <h2><a href="/msg/send">Wyślij nową wiadomość</a></h2>
-    <h2><a href="/msg/sent">Wysłane wiadomości</a></h2>
+    <br/>
+    ${info}
 </div>
 <jsp:include page="shared/footer.jsp"/>
 </body>

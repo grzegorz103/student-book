@@ -18,7 +18,7 @@ public class SpecializationController
 {
         private final SpecializationService specializationService;
         private final AccountRepository accountRepository;
-        private InformationService informationService;
+        private final InformationService informationService;
 
         @Autowired
         public SpecializationController ( SpecializationService specializationService, AccountRepository accountRepository, InformationService informationService )
@@ -60,6 +60,7 @@ public class SpecializationController
         public String getState ( Model model )
         {
                 model.addAttribute( "state", specializationService.isEnabled() );
+                model.addAttribute( "list", specializationService.getStudentsWithoutSpecialization() );
                 return "editSpecialization";
         }
 

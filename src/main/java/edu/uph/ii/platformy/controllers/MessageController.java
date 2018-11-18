@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping ("/msg")
-@PreAuthorize ( "isAuthenticated()" )
+@PreAuthorize ("isAuthenticated()")
 public class MessageController
 {
         private final MessageService messageService;
@@ -51,8 +51,8 @@ public class MessageController
         public String sendMessage ( @ModelAttribute ("message") Message message,
                                     Model model )
         {
-                messageService.send( message );
-                return "redirect:/";
+                model.addAttribute( "info", messageService.send( message ) ? "Pomyślnie wysłano wiadomość" : "Odbiorca nie istnieje w systemie!" );
+                return "messageSuccessPage";
         }
 
 

@@ -30,7 +30,7 @@ public class MessageServiceImpl implements MessageService
 
 
         @Override
-        public void send ( Message message )
+        public boolean send ( Message message )
         {
                 if ( message.getReceiver().getId() == null )
                         message.setReceiver( accountRepository.findByMail( message.getReceiver().getMail() ) );
@@ -38,7 +38,12 @@ public class MessageServiceImpl implements MessageService
                 message.setDate( new Date() );
                 message.setSender( accountRepository.findByMail( user.getUsername() ) );
                 message.setStatus( Statuses.MESSAGE_UNREAD );
-                messageRepository.save( message );
+                if ( message.getReceiver() != null )
+                {
+                        messageRepository.save( message );
+                        return true;
+                }
+                return false;
         }
 
 
