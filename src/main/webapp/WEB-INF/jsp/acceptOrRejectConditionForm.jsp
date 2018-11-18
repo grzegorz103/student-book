@@ -48,6 +48,13 @@
             </div>
             <hr>
             <div class="mb-3">
+                <div class="mb-3">
+                    <label>Typ warunku: <c:choose><c:when
+                            test="${condition.conditionType.name() == 'SHORT'}">Krótki</c:when><c:otherwise>Długi</c:otherwise></c:choose></label><br>
+                </div>
+                <div class="mb-3">
+                    <label>Przedmiot: ${condition.subject.name}</label><br>
+                </div>
                 <label>
                     Data złożenia podania: <fmt:formatDate value="${condition.submittingDate}"
                                                            pattern="yyyy-MM-dd HH:mm:ss"/>
