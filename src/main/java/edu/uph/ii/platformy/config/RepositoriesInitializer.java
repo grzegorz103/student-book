@@ -136,28 +136,28 @@ public class RepositoriesInitializer
                 instructor5.setPassword ( this.passwordEncoder.encode ( "instructor5" ) );
                 instructor5.setPasswordConfirm ( instructor5.getPassword () );
                 Instructor instructorPerson5 = this.instructorRepository.save ( new Instructor ( 6L, "Instructor", "Pięć", true, 23456789200L ) );
-                instructor4.setPerson ( instructorPerson5 );
+                instructor5.setPerson ( instructorPerson5 );
 
                 User instructor6 = new User ( 7L, "instructor6@instructor6.pl" );
                 instructor6.setRoles ( new HashSet<> ( Collections.singletonList ( roleStudent ) ) );
                 instructor6.setPassword ( this.passwordEncoder.encode ( "instructor6" ) );
                 instructor6.setPasswordConfirm ( instructor6.getPassword () );
                 Instructor instructorPerson6 = this.instructorRepository.save ( new Instructor ( 7L, "Instructor", "Sześć", true, 23456789200L ) );
-                instructor4.setPerson ( instructorPerson6 );
+                instructor6.setPerson ( instructorPerson6 );
 
                 User instructor7 = new User ( 8L, "instructor7@instructor7.pl" );
                 instructor7.setRoles ( new HashSet<> ( Collections.singletonList ( roleStudent ) ) );
                 instructor7.setPassword ( this.passwordEncoder.encode ( "instructor7" ) );
                 instructor7.setPasswordConfirm ( instructor7.getPassword () );
                 Instructor instructorPerson7 = this.instructorRepository.save ( new Instructor ( 8L, "Instructor", "Siedem", true, 23456789200L ) );
-                instructor4.setPerson ( instructorPerson7 );
+                instructor7.setPerson ( instructorPerson7 );
 
                 User instructor8 = new User ( 9L, "instructor8@instructor8.pl" );
                 instructor8.setRoles ( new HashSet<> ( Collections.singletonList ( roleStudent ) ) );
                 instructor8.setPassword ( this.passwordEncoder.encode ( "instructor8" ) );
                 instructor8.setPasswordConfirm ( instructor8.getPassword () );
                 Instructor instructorPerson8 = this.instructorRepository.save ( new Instructor ( 9L, "Instructor", "Osiem", true, 23456789200L ) );
-                instructor4.setPerson ( instructorPerson8 );
+                instructor8.setPerson ( instructorPerson8 );
 
                 //STUDENCI
                 User student = new User ( 10L, "student@student.pl" );
