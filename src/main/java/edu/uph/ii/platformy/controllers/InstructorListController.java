@@ -15,7 +15,7 @@ public class InstructorListController
 {
         @Autowired
         InstructorRepository instructorRepository;
-
+/*
         @RequestMapping(value = "/list")
         protected String handleRequest ( @ModelAttribute("vehicleSearch") VehicleFilter vehicleFilter,
                                          Model model,
@@ -66,5 +66,5 @@ public class InstructorListController
                 if (id == 0) model.addAttribute( "vehicle", new Vehicle() );
                 else model.addAttribute( "vehicle", vehicleRepository.findById( id ).get() );
                 return "vehicleDetails";
-        }
+        }*/
 }
