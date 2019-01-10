@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService
         public void save ( edu.uph.ii.platformy.models.Person user ) // person, bo bedziemy zapisywac rozne typy potomnych uzytkownikow
         {
                 user.setPassword( this.passwordEncoder.encode( user.getPassword() ) );
-                user.setRoles( new HashSet<>( Arrays.asList( roleRepository.findRoleByType( Role.UserTypes.ROLE_USER ) ) ) );
+                user.setRoles( new HashSet<>( Arrays.asList( roleRepository.findRoleByUserType( Role.UserTypes.ROLE_USER ) ) ) );
                 user.setPasswordConfirm( null );
                 instructorRepository.save( ( Instructor ) user );       // poki co instructor
         }
