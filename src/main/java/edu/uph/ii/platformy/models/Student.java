@@ -20,4 +20,8 @@ public class Student extends Person
 
         @Column (name = "age")
         private Integer age;
+
+        @ManyToOne (fetch = FetchType.EAGER)
+        @JoinColumn (name = "specialization_id")
+        private Specialization specialization;
 }
