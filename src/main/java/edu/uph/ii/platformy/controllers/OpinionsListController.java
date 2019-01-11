@@ -13,10 +13,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping ("/instructors")
 public class OpinionsListController
 {
-        //   @Autowired
-        // OpinionRepository opinionRepository;
-        // @Autowired
-        //   InstructorRepository instructorRepository;
 
         private final InstructorService instructorService;
 
@@ -30,8 +26,6 @@ public class OpinionsListController
         public String handleRequest ( Model model,
                                       @PathVariable ("id") Instructor instructor )
         {
-                //   Instructor instructor = instructorRepository.findById( id ).get();
-                // model.addAttribute( "list", opinionRepository.findAllByInstructor( instructor ) );
                 model.addAttribute( "list", instructorService.getOpinions( instructor ) );
                 return "opinionList";
         }
