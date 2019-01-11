@@ -1,9 +1,16 @@
 package edu.uph.ii.platformy.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
 @Table (name = "specializations")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Specialization
 {
         @Id
@@ -13,7 +20,7 @@ public class Specialization
         @Column (name = "name")
         private String name;
 
-        @Column (name = "limit")
+        @Column (name = "limitPlaces")
         private Long limit;
 
 }

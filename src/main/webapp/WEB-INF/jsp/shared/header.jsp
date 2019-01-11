@@ -33,6 +33,10 @@
                     <a class="nav-link" href="/instructors/list">Lista wykładowców</a>
                 </li>
 
+                <li ${param['name'] == 'instructorList' ? 'class="nav-item active"' : 'class="nav-item"'}>
+                    <a class="nav-link" href="/msg/list">Wiadomości</a>
+                </li>
+
                 <li class="nav-item">
                     <a class="nav-link" onclick="document.getElementById('logout').submit()">Witaj
                         <sec:authentication property="principal.username"/>, wyloguj się</a>

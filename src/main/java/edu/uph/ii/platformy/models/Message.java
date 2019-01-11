@@ -18,11 +18,11 @@ public class Message
 
         @OneToOne (fetch = FetchType.EAGER)
         @JoinColumn (name = "sender")
-        private Person sender;
+        private User sender;
 
         @OneToOne (fetch = FetchType.EAGER)
         @JoinColumn (name = "receiver")
-        private Person receiver;
+        private User receiver;
 
         @Temporal (TemporalType.DATE)
         @Column (name = "date")

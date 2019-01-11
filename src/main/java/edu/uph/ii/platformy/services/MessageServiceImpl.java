@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service ("messageService")
@@ -29,6 +30,11 @@ public class MessageServiceImpl implements MessageService
         @Override
         public void send ( Message message )
         {
+                if ( message.getReceiver().getId() == null )
+                        message.setReceiver( accountRepository.findByMail( message.getReceiver().getMail() ) );
+                org.springframework.security.core.userdetails.User user = ( org.springframework.security.core.userdetails.User ) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                message.setDate( new Date() );
+                message.setSender( accountRepository.findByMail( user.getUsername() ) );
                 messageRepository.save( message );
         }
 
@@ -38,6 +44,6 @@ public class MessageServiceImpl implements MessageService
         {
                 org.springframework.security.core.userdetails.User user = ( org.springframework.security.core.userdetails.User ) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                 User u = accountRepository.findByMail( user.getUsername() );
-                return messageRepository.findAllByReceiver( u.getPerson() );
+                return messageRepository.findAllByReceiver( u );
         }
 }

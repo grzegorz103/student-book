@@ -12,8 +12,38 @@
     <title>Title</title>
 </head>
 <body>
-<c:forEach var="message" items="list">
-    ${message.text}
-</c:forEach>
+<jsp:include page="shared/header.jsp"/>
+<a href="/msg/send">Wyślij nową wiadomość</a>
+<c:if test="${!empty list}">
+    <table class="table table-bordered">
+        <tr class="bg-success">
+            <th>Nadawca</th>
+            <th>Treść</th>
+            <th>Data</th>
+            <th>Odpowiedz</th>
+
+        </tr>
+
+        <c:forEach items="${list}" var="message">
+            <tr>
+
+                <td>
+                   ${message.sender.mail}
+                </td>
+
+                <td>${message.text}</td>
+
+                <td>${message.date}</td>
+
+                <td><a href="/msg/reply/${message.sender.id}">Odpowiedz</a></td>
+            </tr>
+        </c:forEach>
+    </table>
+</c:if>
+
+<c:if test="${empty list}">
+    Brak wiadomości
+</c:if>
+<jsp:include page="shared/footer.jsp"/>
 </body>
 </html>
