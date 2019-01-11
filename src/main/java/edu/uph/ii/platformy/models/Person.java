@@ -13,7 +13,6 @@ import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
-@Table (name = "persons")
 @Inheritance (strategy = InheritanceType.TABLE_PER_CLASS)
 @Getter
 @Setter
