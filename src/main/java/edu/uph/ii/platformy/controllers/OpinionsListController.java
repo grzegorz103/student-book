@@ -9,19 +9,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/instructors")
+@RequestMapping ("/instructors")
 public class OpinionsListController
 {
-    @Autowired
-    OpinionRepository opinionRepository;
-    InstructorRepository instructorRepository;
+        @Autowired
+        OpinionRepository opinionRepository;
+        @Autowired
+        InstructorRepository instructorRepository;
 
-    @GetMapping("/opinions/{id}")
-    public String handleRequest (Model model, @PathVariable Long id )
-    {
-        Instructor instructor = instructorRepository.findById(id);
-        model.addAttribute( "list", opinionRepository.findAllByInstructor( instructor ) );
-        return "opinionList";
-    }
+        @GetMapping ("/opinions/{id}")
+        public String handleRequest ( Model model,
+                                      @PathVariable Long id )
+        {
+                Instructor instructor = instructorRepository.findById( id ).get();
+                model.addAttribute( "list", opinionRepository.findAllByInstructor( instructor ) );
+                return "opinionList";
+        }
 
 }
