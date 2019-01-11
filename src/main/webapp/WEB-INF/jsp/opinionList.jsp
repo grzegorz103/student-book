@@ -18,33 +18,23 @@
     <c:if test="${!empty list}">
         <table class="table table-bordered">
             <tr class="bg-success">
-                <th>Imię</th>
-                <th>Nazwisko</th>
                 <th>Opinia</th>
                 <th>Status</th>
-
             </tr>
 
-            <c:forEach items="${list}" var="instructor">
+            <c:forEach items="${list}" var="opinion">
                 <tr>
 
                     <td>
                         <c:choose>
-                            <c:when test="${empty instructor.name}">Brak danych</c:when>
-                            <c:otherwise>${instructor.name}</c:otherwise>
+                            <c:when test="${empty opinion.opinion}">Brak danych</c:when>
+                            <c:otherwise>${opinion.opinion}</c:otherwise>
                         </c:choose>
                     </td>
 
                     <td>
-                        <c:choose>
-                            <c:when test="${empty instructor.surname}">Brak danych</c:when>
-                            <c:otherwise>${instructor.surname}</c:otherwise>
-                        </c:choose>
+                        Status opinii dla admina
                     </td>
-
-                    <td>Przedmiot wykładowcy</td>
-
-                    <td><a class="btn btn-raised btn-info" href="opinions/${instructor.id}">Opinie</a></td>
 
                 </tr>
             </c:forEach>
