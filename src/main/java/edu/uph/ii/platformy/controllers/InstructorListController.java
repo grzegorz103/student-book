@@ -15,24 +15,15 @@ public class InstructorListController
 {
         @Autowired
         InstructorRepository instructorRepository;
-/*
-        @RequestMapping(value = "/list")
-        protected String handleRequest ( @ModelAttribute("vehicleSearch") VehicleFilter vehicleFilter,
-                                         Model model,
-                                         Pageable pageable )
+
+        @RequestMapping (value = "/list")
+        protected String handleRequest ( Model model )
         {
-                Page p = vehicleFilter.isPhraseEmpty() && vehicleFilter.isPriceEmpty()
-                        ? vehicleRepository.findAll( pageable )
-                        //: vehicleRepository.findByModelContaining( vehicleFilter.getPhrase(), pageable );
-                        //: vehicleRepository.findVehicles( vehicleFilter.getPhrase(), pageable );
-                        : vehicleRepository.findAllQuery( vehicleFilter.getPhrase().toLowerCase()
-                        , vehicleFilter.getPriceMin(), vehicleFilter.getPriceMax(), pageable );
+                model.addAttribute( "list", instructorRepository.findAll() );
 
-                model.addAttribute( "list", p );
-
-                return "vehicleList";
+                return "instructorList";
         }
-
+/*
         @GetMapping("/clear")
         public String clearFilter ( @ModelAttribute("vehicleSearch") VehicleFilter vehicleFilter )
         {

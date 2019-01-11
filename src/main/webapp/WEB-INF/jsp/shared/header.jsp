@@ -29,19 +29,9 @@
             <security:authorize access="isAuthenticated()">
 
 
-                <li ${param['name'] == 'vehicleDetails' ? 'class="nav-item active"' : 'class="nav-item"'}>
-                    <a class="nav-link" href="/vehicle/0">Pojazd</a>
+                <li ${param['name'] == 'instructorList' ? 'class="nav-item active"' : 'class="nav-item"'}>
+                    <a class="nav-link" href="/instructors/list">Lista wykładowców</a>
                 </li>
-
-                <li ${param['name'] == 'vehicleList' ? 'class="nav-item active"' : 'class="nav-item"'}>
-                    <a class="nav-link" href="/vehicle/list">Lista pojazdów</a>
-                </li>
-
-                <security:authorize access="hasRole('ADMIN')">
-                    <li ${param['name'] == 'vehicleForm' ? 'class="nav-item active"' : 'class="nav-item"'}>
-                        <a class="nav-link" href="/vehicle/add">Dodaj pojazd</a>
-                    </li>
-                </security:authorize>
 
                 <li class="nav-item">
                     <a class="nav-link" onclick="document.getElementById('logout').submit()">Witaj

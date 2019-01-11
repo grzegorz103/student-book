@@ -30,7 +30,7 @@ public class Subject
         private String name;
 
         @OneToMany
-        @JoinColumn (name = "instructor_id")
+        @JoinColumn (name = "subject_id")
         private Set<Instructor> instructor;
 
         @OneToMany
