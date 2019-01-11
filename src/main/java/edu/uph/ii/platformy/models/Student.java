@@ -8,12 +8,14 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "Students")
-@PrimaryKeyJoinColumn(name = "id")
+@Table (name = "Students")
+@PrimaryKeyJoinColumn (name = "id")
 @Getter
 @Setter
 @AllArgsConstructor
-public class Student extends Person {
+public class Student extends Person
+{
 
-
+        @Column (name = "age")
+        private Integer age;
 }

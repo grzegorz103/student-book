@@ -3,6 +3,7 @@ package edu.uph.ii.platformy.services;
 import edu.uph.ii.platformy.config.ProfileNames;
 import edu.uph.ii.platformy.models.Instructor;
 import edu.uph.ii.platformy.models.Role;
+import edu.uph.ii.platformy.repositories.AccountRepository;
 import edu.uph.ii.platformy.repositories.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -11,6 +12,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,12 +34,16 @@ public class UserServiceImpl implements UserService
 
         private final RoleRepository roleRepository;
 
+        private final AccountRepository accountRepository;
+
+
         @Autowired
-        public UserServiceImpl ( PasswordEncoder passwordEncoder, InstructorRepository instructorRepository, RoleRepository roleRepository )
+        public UserServiceImpl ( PasswordEncoder passwordEncoder, InstructorRepository instructorRepository, RoleRepository roleRepository, AccountRepository accountRepository )
         {
                 this.passwordEncoder = passwordEncoder;
                 this.instructorRepository = instructorRepository;
                 this.roleRepository = roleRepository;
+                this.accountRepository = accountRepository;
         }
 
         @Transactional (readOnly = true)
@@ -45,15 +51,15 @@ public class UserServiceImpl implements UserService
         public UserDetails loadUserByUsername ( String username ) throws UsernameNotFoundException
         {
 
-                edu.uph.ii.platformy.models.Person user = instructorRepository.findByName( username );
-
+                edu.uph.ii.platformy.models.User user = accountRepository.findByMail( username );
+                user.setPassword( passwordEncoder.encode( user.getPassword() ) );
                 if ( user == null )
                         throw new UsernameNotFoundException( username );
 
                 return convertToUserDetails( user );
         }
 
-        private UserDetails convertToUserDetails ( edu.uph.ii.platformy.models.Person user )
+        private UserDetails convertToUserDetails ( edu.uph.ii.platformy.models.User user )
         {
 
                 //   user.setEnabled( false );
@@ -62,16 +68,16 @@ public class UserServiceImpl implements UserService
                         .map( role -> new SimpleGrantedAuthority( role.getUserType().toString() ) )
                         .collect( Collectors.toSet() );
 
-                return new User( user.getName(), user.getPassword(), grantedAuthorities );
+                return new User( user.getMail(), user.getPassword(), grantedAuthorities );
         }
 
         @Override
-        public void save ( edu.uph.ii.platformy.models.Person user ) // person, bo bedziemy zapisywac rozne typy potomnych uzytkownikow
+        public void save ( edu.uph.ii.platformy.models.User user ) // person, bo bedziemy zapisywac rozne typy potomnych uzytkownikow
         {
                 user.setPassword( this.passwordEncoder.encode( user.getPassword() ) );
                 user.setRoles( new HashSet<>( Arrays.asList( roleRepository.findRoleByUserType( Role.UserTypes.ROLE_USER ) ) ) );
                 user.setPasswordConfirm( null );
-                instructorRepository.save( ( Instructor ) user );       // poki co instructor
+                accountRepository.save( user );       // poki co instructor
         }
 
         @Override

@@ -20,7 +20,7 @@ public class Role
         private UserTypes userType;
 
         @ManyToMany (mappedBy = "roles")
-        private Set<Person> users;
+        private Set<User> users;
 
         public Role ( UserTypes type )
         {

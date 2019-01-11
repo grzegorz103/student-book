@@ -16,6 +16,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Instructor extends Person
 {
-
+        @Column (name = "asdd")
+        private String asd;
 
 }
