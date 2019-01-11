@@ -33,8 +33,8 @@ public class Subject
         @JoinColumn (name = "instructor_id")
         private Set<Instructor> instructor;
 
-        @JoinColumn(name="course_of_study")
         @OneToMany
+        @JoinColumn(name="course_of_study")
         private Set<Course_of_study> course_of_study;
 
 
