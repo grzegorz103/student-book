@@ -11,7 +11,7 @@
 <body>
 
 <jsp:include page="shared/header.jsp">
-    <jsp:param name="name" value="instructorList"/>
+    <jsp:param name="name" value="opinionList"/>
 </jsp:include>
 
 
@@ -20,8 +20,8 @@
             <tr class="bg-success">
                 <th>Imię</th>
                 <th>Nazwisko</th>
-                <th>Przedmiot</th>
-                <th>Opinie</th>
+                <th>Opinia</th>
+                <th>Status</th>
 
             </tr>
 
