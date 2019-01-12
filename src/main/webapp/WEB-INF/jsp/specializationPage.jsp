@@ -1,0 +1,34 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: Komputer
+  Date: 12.01.2019
+  Time: 01:15
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+<jsp:include page="shared/header.jsp"/>
+
+<form:form method="POST" modelAttribute="student">
+<table>
+
+    <tr>
+        <td>Country :</td>
+        <td><form:select path="specialization">
+            <form:options items="${list}" />
+        </form:select>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3"><input type="submit" /></td>
+    </tr>
+</table>
+</form:form>
+<jsp:include page="shared/footer.jsp"/>
+</body>
+</html>

@@ -18,26 +18,25 @@ public class SpecializationServiceImpl implements SpecializationService
 
         private final StudentRepository studentRepository;
 
-        private final AccountRepository accountRepository;
 
         @Autowired
         public SpecializationServiceImpl ( SpecializationRepository specializationRepository, StudentRepository studentRepository, AccountRepository accountRepository )
         {
                 this.specializationRepository = specializationRepository;
                 this.studentRepository = studentRepository;
-                this.accountRepository = accountRepository;
         }
 
 
         @Override
         public void addStudentSpecializaion ( Specialization specialization )
         {
-                org.springframework.security.core.userdetails.User user = ( org.springframework.security.core.userdetails.User ) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-                edu.uph.ii.platformy.models.User u = accountRepository.findByMail( user.getUsername() );
-                Student currentStudent = ( Student ) u.getPerson();
-                currentStudent.setSpecialization( specialization );
 
-                studentRepository.save( currentStudent );
+        }
+
+        @Override
+        public void addStudentSpecializaion ( Student student )
+        {
+                studentRepository.save( student );
         }
 
         @Override
