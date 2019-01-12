@@ -20,33 +20,31 @@
             <tr class="bg-success">
                 <th>Imię</th>
                 <th>Nazwisko</th>
-                <th>Przedmiot</th>
                 <th>Opinie</th>
 
             </tr>
 
             <c:forEach items="${list}" var="instructor">
-                <tr>
+                    <tr>
 
-                    <td>
-                        <c:choose>
-                            <c:when test="${empty instructor.name}">Brak danych</c:when>
-                            <c:otherwise>${instructor.name}</c:otherwise>
-                        </c:choose>
-                    </td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${empty instructor.name}">Brak danych</c:when>
+                                <c:otherwise>${instructor.name}</c:otherwise>
+                            </c:choose>
+                        </td>
 
-                    <td>
-                        <c:choose>
-                            <c:when test="${empty instructor.surname}">Brak danych</c:when>
-                            <c:otherwise>${instructor.surname}</c:otherwise>
-                        </c:choose>
-                    </td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${empty instructor.surname}">Brak danych</c:when>
+                                <c:otherwise>${instructor.surname}</c:otherwise>
+                            </c:choose>
+                        </td>
 
-                    <td>Przedmiot wykładowcy</td>
 
-                    <td><a class="btn btn-raised btn-info" href="/instructors/opinions/${instructor.id}">Opinie</a></td>
+                        <td><a class="btn btn-raised btn-info" href="/instructors/${instructor.id}/opinions">Opinie</a></td>
 
-                </tr>
+                    </tr>
             </c:forEach>
         </table>
 

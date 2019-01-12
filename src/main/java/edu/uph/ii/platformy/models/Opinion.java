@@ -24,6 +24,10 @@ public class Opinion {
     private Instructor instructor;
 
     @ManyToOne (fetch = FetchType.EAGER)
+    @JoinColumn(name = "subject_id")
+    private Subject subject;
+
+    @ManyToOne (fetch = FetchType.EAGER)
     @JoinColumn(name = "student_id")
     private Student student;
 

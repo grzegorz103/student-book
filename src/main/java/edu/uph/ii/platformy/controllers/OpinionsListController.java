@@ -24,7 +24,7 @@ public class OpinionsListController
                 this.instructorService = instructorService;
         }
 
-        @GetMapping ("/opinions/{id}")
+        @GetMapping ("/{id}/opinions")
         public String handleRequest ( Model model, @PathVariable ("id") Instructor instructor )
         {
 
@@ -33,7 +33,7 @@ public class OpinionsListController
                 return "opinionList";
         }
 
-        @GetMapping("/opinions/{id}/add")
+        @GetMapping("/{id}/opinions/add")
         public String showForm (Model model, @PathVariable ("id") Instructor instructor )
         {
                 model.addAttribute ( "opn", new Opinion() );
@@ -42,7 +42,7 @@ public class OpinionsListController
                 return "opinionForm";
         }
 
-        @PostMapping("/opinions/{id}/add")
+        @PostMapping("/{id}/opinions/add")
         public String processForm (@Valid @ModelAttribute("opn") Opinion opinion,
                                    @ModelAttribute("instructor") Instructor instructor,
                                    BindingResult result )
@@ -52,6 +52,17 @@ public class OpinionsListController
                 instructorService.addOpinion( opinion, instructor );
 
                 return "redirect:/instructors/list";
+        }
+
+        @GetMapping("/{ins}/opinions/{opn}/status/{sta}")
+        public String changeStatus (Model model,
+                                    @PathVariable ("ins") Long ins,
+                                    @PathVariable ("opn") Long opn,
+                                    @PathVariable ("sta") Long sta)
+        {
+            instructorService.changeOpinionStatus(opn, sta);
+
+            return "redirect:/instructors/"+ins+"/opinions";
         }
 
 }

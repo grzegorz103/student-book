@@ -1,11 +1,9 @@
 package edu.uph.ii.platformy.services;
 
-import edu.uph.ii.platformy.models.Instructor;
-import edu.uph.ii.platformy.models.Opinion;
-import edu.uph.ii.platformy.models.Statuses;
-import edu.uph.ii.platformy.models.Student;
+import edu.uph.ii.platformy.models.*;
 import edu.uph.ii.platformy.repositories.InstructorRepository;
 import edu.uph.ii.platformy.repositories.OpinionRepository;
+import edu.uph.ii.platformy.repositories.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,9 +27,24 @@ public class InstructorServiceImpl implements InstructorService
         @Override
         public void addOpinion(Opinion opinion, Instructor instructor) {
 
+                opinion.setId(null);
                 opinion.setStatus(Statuses.AWAITING);
                 opinion.setInstructor(instructor);
 
                 opinionRepository.save(opinion);
         }
+
+        @Override
+        public List <Instructor> findAll() {
+                return instructorRepository.findAll();
+        }
+
+        @Override
+        public void changeOpinionStatus(Long opn, Long sta) {
+
+                Opinion opinion = opinionRepository.findById(opn).get();
+                opinion.setStatus((sta == 1) ? Statuses.ACCEPTED : Statuses.REJECTED);
+                opinionRepository.save(opinion);
+        }
+
 }

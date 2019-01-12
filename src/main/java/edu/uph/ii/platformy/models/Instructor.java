@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 
 @Entity
@@ -17,7 +18,9 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Instructor extends Person
 {
-        @Column (name = "asdd")
-        private String asd;
+
+    @OneToMany
+    @JoinColumn (name = "instructor_id")
+    private Set<Subject> subject;
 
 }

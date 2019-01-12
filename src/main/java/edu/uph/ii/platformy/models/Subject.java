@@ -2,6 +2,7 @@ package edu.uph.ii.platformy.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ import java.util.Set;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class Subject
 {
 
@@ -28,10 +30,6 @@ public class Subject
         @NotEmpty
         @Size (min = 2, max = 25)
         private String name;
-
-        @OneToMany
-        @JoinColumn (name = "subject_id")
-        private Set<Instructor> instructor;
 
         @OneToMany
         @JoinColumn(name="course_of_study")
