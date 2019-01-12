@@ -1,8 +1,6 @@
 package edu.uph.ii.platformy.controllers;
 
 import edu.uph.ii.platformy.models.Instructor;
-import edu.uph.ii.platformy.repositories.InstructorRepository;
-import edu.uph.ii.platformy.repositories.OpinionRepository;
 import edu.uph.ii.platformy.services.InstructorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +24,7 @@ public class OpinionsListController
         public String handleRequest ( Model model,
                                       @PathVariable ("id") Instructor instructor )
         {
+
                 model.addAttribute( "list", instructorService.getOpinions( instructor ) );
                 return "opinionList";
         }
