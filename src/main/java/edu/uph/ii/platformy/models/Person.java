@@ -26,15 +26,9 @@ public class Person
         private Long id;
 
         @Column (name = "name")
-        @NotBlank
-        @NotEmpty
-        @Size (min = 2, max = 25)
         private String name;
 
         @Column (name = "surname")
-        @NotBlank
-        @NotEmpty
-        @Size (min = 2, max = 25)
         private String surname;
 
         @Column (name = "sex")

@@ -20,7 +20,7 @@
     <tr>
         <td>Country :</td>
         <td><form:select path="specialization">
-            <form:options items="${list}" />
+            <form:options items="${list}" itemLabel="name"/>
         </form:select>
         </td>
     </tr>

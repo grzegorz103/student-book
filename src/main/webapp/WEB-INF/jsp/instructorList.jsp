@@ -44,7 +44,7 @@
 
                     <td>Przedmiot wykładowcy</td>
 
-                    <td><a class="btn btn-raised btn-info" href="opinions/${instructor.id}">Opinie</a></td>
+                    <td><a class="btn btn-raised btn-info" href="/instructors/opinions/${instructor.id}">Opinie</a></td>
 
                 </tr>
             </c:forEach>

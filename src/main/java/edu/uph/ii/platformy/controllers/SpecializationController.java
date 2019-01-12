@@ -41,7 +41,7 @@ public class SpecializationController
         }
 
         @PostMapping ("/choose")
-        public String saveSpecializationChoice ( @ModelAttribute ("form") Specialization specialization )
+        public String saveSpecializationChoice ( @ModelAttribute ("student") Student specialization )
         {
                 specializationService.addStudentSpecializaion( specialization );
                 return "redirect:/";
