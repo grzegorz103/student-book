@@ -2,6 +2,7 @@ package edu.uph.ii.platformy.controllers;
 
 import edu.uph.ii.platformy.models.Student;
 import edu.uph.ii.platformy.models.User;
+import edu.uph.ii.platformy.services.SpecializationService;
 import edu.uph.ii.platformy.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,19 +15,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class UserController
 {
         private final UserService userService;
-
+private SpecializationService specializationService;
         @Autowired
-        public UserController ( UserService userService )
+        public UserController ( UserService userService, SpecializationService specializationService )
         {
                 this.userService = userService;
+                this.specializationService = specializationService;
         }
 
 
         @GetMapping ("/register")
         public String registerForm ( Model model )
         {
-                User user = new User();
-                user.setPerson( new Student() );
+
                 return "/registerForm";
         }
 

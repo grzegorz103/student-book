@@ -14,7 +14,7 @@
 <body>
 <jsp:include page="shared/header.jsp"/>
 
-<form:form method="POST" modelAttribute="student">
+<form:form method="POST" modelAttribute="student" action="/sp/choose?id=${student.id}">
 <table>
 
     <tr>

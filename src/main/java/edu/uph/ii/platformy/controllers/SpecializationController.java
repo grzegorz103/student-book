@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping ("/sp")
@@ -41,9 +38,11 @@ public class SpecializationController
         }
 
         @PostMapping ("/choose")
-        public String saveSpecializationChoice ( @ModelAttribute ("student") Student specialization )
+        public String saveSpecializationChoice ( @ModelAttribute ("student") Student specialization,
+                                                 @RequestParam ("id") Student s)
         {
-                specializationService.addStudentSpecializaion( specialization );
+                s.setSpecialization( specialization.getSpecialization());
+                specializationService.addStudentSpecializaion( s );
                 return "redirect:/";
         }
 
