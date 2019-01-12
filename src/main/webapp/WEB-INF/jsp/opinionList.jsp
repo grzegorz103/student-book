@@ -40,7 +40,7 @@
             </c:forEach>
         </table>
 
-        <a class="btn btn-raised btn-success" href=/instrucors/opinions/add.html">Dodaj opinię</a><br><br><br>
+        <a class="btn btn-raised btn-success" href=/instructors/opinions/add.html">Dodaj opinię</a><br><br><br>
     </c:if>
 
     <c:if test="${empty list}">
