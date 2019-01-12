@@ -1,11 +1,15 @@
 package edu.uph.ii.platformy.controllers;
 
 import edu.uph.ii.platformy.models.Instructor;
+import edu.uph.ii.platformy.models.Opinion;
 import edu.uph.ii.platformy.services.InstructorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping ("/instructors")
@@ -21,12 +25,33 @@ public class OpinionsListController
         }
 
         @GetMapping ("/opinions/{id}")
-        public String handleRequest ( Model model,
-                                      @PathVariable ("id") Instructor instructor )
+        public String handleRequest ( Model model, @PathVariable ("id") Instructor instructor )
         {
 
                 model.addAttribute( "list", instructorService.getOpinions( instructor ) );
+                model.addAttribute( "id", instructor.getId() );
                 return "opinionList";
+        }
+
+        @GetMapping("/opinions/{id}/add")
+        public String showForm (Model model, @PathVariable ("id") Instructor instructor )
+        {
+                model.addAttribute ( "opn", new Opinion() );
+                model.addAttribute( "instructor", instructor );
+
+                return "opinionForm";
+        }
+
+        @PostMapping("/opinions/{id}/add")
+        public String processForm (@Valid @ModelAttribute("opn") Opinion opinion,
+                                   @ModelAttribute("instructor") Instructor instructor,
+                                   BindingResult result )
+        {
+                if ( result.hasErrors() ) return "opinionForm";
+
+                instructorService.addOpinion( opinion, instructor );
+
+                return "redirect:/instructors/list";
         }
 
 }

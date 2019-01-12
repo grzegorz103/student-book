@@ -22,13 +22,13 @@
                 <th>Status</th>
             </tr>
 
-            <c:forEach items="${list}" var="opinion">
+            <c:forEach items="${list}" var="opn">
                 <tr>
 
                     <td>
                         <c:choose>
-                            <c:when test="${empty opinion.opinion}">Brak danych</c:when>
-                            <c:otherwise>${opinion.opinion}</c:otherwise>
+                            <c:when test="${empty opn.opinion}">Brak danych</c:when>
+                            <c:otherwise>${opn.opinion}</c:otherwise>
                         </c:choose>
                     </td>
 
@@ -37,16 +37,18 @@
                     </td>
 
                 </tr>
+
+
             </c:forEach>
         </table>
 
-        <a class="btn btn-raised btn-success" href=/instructors/opinions/add.html">Dodaj opinię</a><br><br><br>
-    </c:if>
+        </c:if>
 
     <c:if test="${empty list}">
-        Brak wykładowców w bazie
+        Brak opinii na temat tego wykładowcy.
     </c:if>
 
+<br><a class="btn btn-raised btn-success" href="/instructors/opinions/${id}/add">Dodaj opinię</a><br><br><br>
 
 </div>
 <jsp:include page="shared/footer.jsp"/>
