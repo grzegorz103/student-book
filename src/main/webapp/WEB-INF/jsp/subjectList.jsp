@@ -13,7 +13,7 @@
 <jsp:include page="shared/header.jsp">
     <jsp:param name="name" value="instructorList"/>
 </jsp:include>
-
+<div class="container">
 
     <c:if test="${!empty list}">
         <table class="table table-bordered">

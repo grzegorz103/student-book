@@ -13,6 +13,8 @@
 <jsp:include page="shared/header.jsp">
     <jsp:param name="name" value="instructorList"/>
 </jsp:include>
+<div class="container">
+
     <h2>Data: ${lesson.lessonDate}</h2>
     <h2>Przedmiot: ${lesson.subject.name}</h2>
 
@@ -64,7 +66,7 @@
     </c:if>
 
     <c:if test="${empty list}">
-        Brak lekcji w bazie
+        Brak listy obecności dla tej lekcji.
     </c:if>
 
 

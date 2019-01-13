@@ -1,14 +1,17 @@
 package edu.uph.ii.platformy.controllers;
 
+import edu.uph.ii.platformy.models.Instructor;
 import edu.uph.ii.platformy.models.Lesson;
+import edu.uph.ii.platformy.models.Opinion;
 import edu.uph.ii.platformy.models.Subject;
 import edu.uph.ii.platformy.services.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/subjects")
@@ -39,6 +42,27 @@ public class SubjectListController
                 model.addAttribute( "subject", subject );
 
                 return "lessonList";
+        }
+
+        @GetMapping (value = "/{id}/lessons/add")
+        protected String addLessonForm ( Model model, @PathVariable("id") Subject subject )
+        {
+            model.addAttribute( "les", new Lesson() );
+            model.addAttribute( "subject", subject );
+
+            return "lessonForm";
+        }
+
+        @PostMapping("/{id}/lessons/add")
+        public String addLessonFormProcess (@Valid @ModelAttribute("les") Lesson lesson,
+                                   @ModelAttribute("subject") Subject subject,
+                                   BindingResult result )
+        {
+            if ( result.hasErrors() ) return "lessonForm";
+
+            subjectService.addLesson( lesson, subject );
+
+            return "redirect:/subjects/"+subject.getId()+"/lessons/list";
         }
 
         @GetMapping (value = "/{id}/lessons/{lesson}")

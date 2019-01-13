@@ -13,6 +13,7 @@
 <jsp:include page="shared/header.jsp">
     <jsp:param name="name" value="instructorList"/>
 </jsp:include>
+<div class="container">
 
     <h2>Lista lekcji z przedmiotu: ${subject.name}</h2>
 
@@ -20,7 +21,7 @@
         <table class="table table-bordered">
             <tr class="bg-success">
                 <th>Data</th>
-                <th>Przedmiot</th>
+                <th>Lista obecności</th>
 
             </tr>
 
@@ -38,6 +39,7 @@
 
                     </tr>
             </c:forEach>
+
         </table>
 
 
@@ -47,6 +49,7 @@
         Brak lekcji w bazie
     </c:if>
 
+<br><a class="btn btn-raised btn-success" href="/subjects/${subject.id}/lessons/add">Dodaj lekcję</a><br><br><br>
 
 </div>
 <jsp:include page="shared/footer.jsp"/>

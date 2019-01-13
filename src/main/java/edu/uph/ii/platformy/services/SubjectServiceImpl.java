@@ -42,7 +42,14 @@ public class SubjectServiceImpl implements SubjectService {
         @Override
         public void changeStudentAttendance(Long atd, Long sts) {
                 Attendance attendance = attendanceRepository.findById(atd).get();
-                attendance.setPresence((sts == 1) ? false : true);
+                attendance.setPresence(sts != 1);
                 attendanceRepository.save(attendance);
+        }
+
+        @Override
+        public void addLesson(Lesson lesson, Subject subject) {
+                lesson.setId(null);
+                lesson.setSubject(subject);
+                lessonRepository.save(lesson);
         }
 }
