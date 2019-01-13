@@ -55,7 +55,6 @@ public class UserServiceImpl implements UserService
         {
 
                 edu.uph.ii.platformy.models.User user = accountRepository.findByMail( username );
-                user.setPassword( passwordEncoder.encode( user.getPassword() ) );
                 if ( user == null )
                         throw new UsernameNotFoundException( username );
 
@@ -64,7 +63,6 @@ public class UserServiceImpl implements UserService
 
         private UserDetails convertToUserDetails ( edu.uph.ii.platformy.models.User user )
         {
-
                 //   user.setEnabled( false );
                 Set<GrantedAuthority> grantedAuthorities = user.getRoles()
                         .stream()
@@ -75,6 +73,7 @@ public class UserServiceImpl implements UserService
         }
 
         @Override
+        @Transactional
         public void save ( edu.uph.ii.platformy.models.User user )
         {
                 user.setPassword( this.passwordEncoder.encode( user.getPassword() ) );

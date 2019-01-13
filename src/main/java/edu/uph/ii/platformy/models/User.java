@@ -1,14 +1,14 @@
 package edu.uph.ii.platformy.models;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table (name = "accounts")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class User
 {

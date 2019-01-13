@@ -25,40 +25,4 @@ public class RepositoriesInitializer
         @Autowired
         private PasswordEncoder passwordEncoder;
 
-        @Bean
-        InitializingBean init ()
-        {
-                return () -> {
-                        if ( roleRepository.findAll().isEmpty() )
-                        {
-                                try
-                                {
-                                        Role roleUser = roleRepository.save( new Role( Role.UserTypes.ROLE_USER ) );
-                                        Role roleAdmin = roleRepository.save( new Role( Role.UserTypes.ROLE_ADMIN ) );
-                                          /*
-                                        User user = new User("user", true);
-                                        user.setRoles(new HashSet<>(Arrays.asList(roleUser)));
-                                        user.setPassword(passwordEncoder.encode("user"));
-
-                                        User admin = new User("admin", true);
-                                        admin.setRoles(new HashSet<>(Arrays.asList(roleAdmin)));
-                                        admin.setPassword(passwordEncoder.encode("admin"));
-
-                                        User test = new User("test", true);
-                                        test.setRoles(new HashSet<>(Arrays.asList(roleAdmin, roleUser)));
-                                        test.setPassword(passwordEncoder.encode("test"));
-
-                                        instructorRepository.save(user);
-                                        instructorRepository.save(admin);
-                                        instructorRepository.save(test);
-                                        */
-                                } catch ( Exception e )
-                                {
-                                        e.printStackTrace();
-                                }
-                        }
-
-                };
-
-        }
 }

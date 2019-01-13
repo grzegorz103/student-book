@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @SessionAttributes ("user")
@@ -47,9 +50,11 @@ public class UserController
 
         @PostMapping ("/register")
         public String registerUser ( @ModelAttribute ("user") User user,
-                                     Model model )
+                                     Model model,
+                                     SessionStatus sessionStatus )
         {
                 userService.save( user );
+                sessionStatus.setComplete();
                 return "redirect:/";
         }
 }
