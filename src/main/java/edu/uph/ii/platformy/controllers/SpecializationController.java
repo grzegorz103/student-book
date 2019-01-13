@@ -28,6 +28,8 @@ public class SpecializationController
         @GetMapping ("/choose")
         public String specializationChoose ( Model model )
         {
+                if ( !specializationService.isEnabled() || specializationService.isUserSpecialization() )
+                        return "redirect:/";
                 org.springframework.security.core.userdetails.User user = ( org.springframework.security.core.userdetails.User ) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                 edu.uph.ii.platformy.models.User u = accountRepository.findByMail( user.getUsername() );
                 Student currentStudent = ( Student ) u.getPerson();
@@ -39,11 +41,25 @@ public class SpecializationController
 
         @PostMapping ("/choose")
         public String saveSpecializationChoice ( @ModelAttribute ("student") Student specialization,
-                                                 @RequestParam ("id") Student s)
+                                                 @RequestParam ("id") Student s )
         {
-                s.setSpecialization( specialization.getSpecialization());
+                s.setSpecialization( specialization.getSpecialization() );
                 specializationService.addStudentSpecializaion( s );
                 return "redirect:/";
         }
 
+
+        @GetMapping ("/edit")
+        public String getState ( Model model )
+        {
+                model.addAttribute( "state", specializationService.isEnabled() );
+                return "editSpecialization";
+        }
+
+        @GetMapping ("/edit/state")
+        public String editState ( Model model )
+        {
+                specializationService.editStatus();
+                return "redirect:/sp/edit";
+        }
 }

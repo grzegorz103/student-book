@@ -13,22 +13,23 @@
 </head>
 <body>
 <jsp:include page="shared/header.jsp"/>
+<div class="container">
+    <form:form method="POST" modelAttribute="student" action="/sp/choose?id=${student.id}">
+        <table>
 
-<form:form method="POST" modelAttribute="student" action="/sp/choose?id=${student.id}">
-<table>
-
-    <tr>
-        <td>Country :</td>
-        <td><form:select path="specialization">
-            <form:options items="${list}" itemLabel="name"/>
-        </form:select>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="3"><input type="submit" /></td>
-    </tr>
-</table>
-</form:form>
+            <tr>
+                <td>Country :</td>
+                <td><form:select path="specialization">
+                    <form:options items="${list}" itemLabel="name"/>
+                </form:select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3"><input type="submit"/></td>
+            </tr>
+        </table>
+    </form:form>
+</div>
 <jsp:include page="shared/footer.jsp"/>
 </body>
 </html>

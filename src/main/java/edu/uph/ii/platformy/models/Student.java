@@ -24,4 +24,7 @@ public class Student extends Person
         @ManyToOne (fetch = FetchType.EAGER)
         @JoinColumn (name = "specialization_id")
         private Specialization specialization;
+
+        @Column(name = "spec_choosen")
+        private Boolean specChosen;
 }

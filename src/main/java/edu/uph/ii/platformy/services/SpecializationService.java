@@ -12,4 +12,10 @@ public interface SpecializationService
         void addStudentSpecializaion ( Student student );
 
         List<Specialization> getAllSpecializations ();
+
+        boolean isEnabled();
+
+        boolean isUserSpecialization();
+
+        void editStatus();
 }
