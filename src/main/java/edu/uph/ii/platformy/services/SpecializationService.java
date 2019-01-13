@@ -7,15 +7,13 @@ import java.util.List;
 
 public interface SpecializationService
 {
-        void addStudentSpecializaion ( Specialization specialization );
-
         void addStudentSpecializaion ( Student student );
 
         List<Specialization> getAllSpecializations ();
 
-        boolean isEnabled();
+        boolean isEnabled ();
 
-        boolean isUserSpecialization();
+        boolean isUserSpecialization ();
 
-        void editStatus();
+        void editStatus ();
 }
