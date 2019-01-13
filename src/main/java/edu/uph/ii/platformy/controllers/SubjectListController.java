@@ -93,7 +93,7 @@ public class SubjectListController
         {
                 subjectService.addAttendanceList(sub, les);
 
-                return "redirect:/subjects/"+sub+"/lessons/"+les+"/attendances";
+                return "redirect:/subjects/"+sub.getId()+"/lessons/"+les.getId();
         }
 
 }
