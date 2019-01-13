@@ -1,6 +1,7 @@
 package edu.uph.ii.platformy.services;
 
 import edu.uph.ii.platformy.models.Message;
+import edu.uph.ii.platformy.models.Statuses;
 import edu.uph.ii.platformy.models.User;
 import edu.uph.ii.platformy.repositories.AccountRepository;
 import edu.uph.ii.platformy.repositories.MessageRepository;
@@ -35,6 +36,7 @@ public class MessageServiceImpl implements MessageService
                 org.springframework.security.core.userdetails.User user = ( org.springframework.security.core.userdetails.User ) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                 message.setDate( new Date() );
                 message.setSender( accountRepository.findByMail( user.getUsername() ) );
+                message.setStatus( Statuses.MESSAGE_UNREAD );
                 messageRepository.save( message );
         }
 
@@ -44,6 +46,24 @@ public class MessageServiceImpl implements MessageService
         {
                 org.springframework.security.core.userdetails.User user = ( org.springframework.security.core.userdetails.User ) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                 User u = accountRepository.findByMail( user.getUsername() );
-                return messageRepository.findAllByReceiver( u );
+                return changeStatus( messageRepository.findAllByReceiver( u ) );
+        }
+
+
+        @Override
+        public List<Message> getUserMessages ()
+        {
+                org.springframework.security.core.userdetails.User user = ( org.springframework.security.core.userdetails.User ) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                User u = accountRepository.findByMail( user.getUsername() );
+
+                return messageRepository.findAllBySender( u );
+        }
+
+
+        private List<Message> changeStatus ( List<Message> list )
+        {
+                list.forEach( e -> e.setStatus( Statuses.MESSAGE_READ ) );
+                messageRepository.saveAll( list );
+                return list;
         }
 }

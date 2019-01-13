@@ -9,4 +9,6 @@ public interface MessageService
         void send ( Message message );
 
         List<Message> getMessages ();
+
+        List<Message> getUserMessages();
 }

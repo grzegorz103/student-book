@@ -22,6 +22,13 @@ public class MessageController
         }
 
 
+        @GetMapping ()
+        public String messagePage ()
+        {
+                return "messagePage";
+        }
+
+
         @GetMapping ("/list")
         public String getMessages ( Model model )
         {
@@ -55,5 +62,13 @@ public class MessageController
                 message.setReceiver( user );
                 model.addAttribute( "message", message );
                 return "sendMsgPage";
+        }
+
+
+        @GetMapping ("/sent")
+        public String showSentMessages ( Model model )
+        {
+                model.addAttribute( "list", messageService.getUserMessages() );
+                return "sentMessagesPage";
         }
 }

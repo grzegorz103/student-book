@@ -4,13 +4,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css">
+    <link rel="stylesheet"
+          href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css">
     <link rel="stylesheet" type="text/css" href="/statics/css/main.css"/>
 </head>
 <body>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">Strona główna</a>
+    <div class="container">
+        <a class="navbar-brand" href="/">Strona główna</a>
 
         <ul class="navbar-nav mr-auto">
 
@@ -34,7 +36,7 @@
                 </li>
 
                 <li ${param['name'] == 'instructorList' ? 'class="nav-item active"' : 'class="nav-item"'}>
-                    <a class="nav-link" href="/msg/list">Wiadomości</a>
+                    <a class="nav-link" href="/msg">Wiadomości</a>
                 </li>
 
                 <li class="nav-item">

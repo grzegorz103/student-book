@@ -30,4 +30,8 @@ public class Message
 
         @Column (name = "text")
         private String text;
+
+        @Enumerated (EnumType.STRING)
+        @Column (name = "status")
+        private Statuses status;
 }

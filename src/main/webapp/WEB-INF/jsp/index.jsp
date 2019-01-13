@@ -7,9 +7,9 @@
 </head>
 <body>
 <jsp:include page="shared/header.jsp"/>
-
-<h2>Hello World!</h2>
-
+<div class="container">
+    <h2>Hello World!</h2>
+</div>
 <jsp:include page="shared/footer.jsp"/>
 </body>
 </html>
