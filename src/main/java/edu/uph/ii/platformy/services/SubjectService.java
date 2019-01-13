@@ -18,4 +18,6 @@ public interface SubjectService
         void changeStudentAttendance(Long atd, Long sts);
 
         void addLesson(Lesson lesson, Subject subject);
+
+        void addAttendanceList(Subject sub, Lesson les);
 }

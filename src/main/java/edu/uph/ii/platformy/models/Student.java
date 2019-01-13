@@ -27,4 +27,11 @@ public class Student extends Person
 
         @Column(name = "spec_choosen")
         private Boolean specChosen;
+
+        @Column(name = "semester")
+        private Long semester;
+
+        @ManyToOne
+        @JoinColumn(name="course_of_study")
+        private Course_of_study course_of_study;
 }

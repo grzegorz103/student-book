@@ -2,9 +2,11 @@ package edu.uph.ii.platformy.services;
 
 import edu.uph.ii.platformy.models.Attendance;
 import edu.uph.ii.platformy.models.Lesson;
+import edu.uph.ii.platformy.models.Student;
 import edu.uph.ii.platformy.models.Subject;
 import edu.uph.ii.platformy.repositories.AttendanceRepository;
 import edu.uph.ii.platformy.repositories.LessonRepository;
+import edu.uph.ii.platformy.repositories.StudentRepository;
 import edu.uph.ii.platformy.repositories.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,9 @@ public class SubjectServiceImpl implements SubjectService {
 
         @Autowired
         private AttendanceRepository attendanceRepository;
+
+        @Autowired
+        private StudentRepository studentRepository;
 
         @Override
         public List<Subject> findAll() {
@@ -51,5 +56,13 @@ public class SubjectServiceImpl implements SubjectService {
                 lesson.setId(null);
                 lesson.setSubject(subject);
                 lessonRepository.save(lesson);
+        }
+
+        @Override
+        public void addAttendanceList(Subject sub, Lesson les) {
+                List <Student> students = studentRepository.findAllByCourse_of_study(sub.getCourse_of_study());
+                for (Student stud : students) {
+                        
+                }
         }
 }

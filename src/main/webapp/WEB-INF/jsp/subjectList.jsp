@@ -43,7 +43,7 @@
     </c:if>
 
     <c:if test="${empty list}">
-        Brak wykładowców w bazie
+        Brak przedmiotów w bazie.
     </c:if>
 
 

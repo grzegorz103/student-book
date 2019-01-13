@@ -86,4 +86,14 @@ public class SubjectListController
                 return "redirect:/subjects/"+sub+"/lessons/"+les;
         }
 
+        @GetMapping("/{sub}/lessons/{les}/attendances/add")
+        public String addAttendanceList (Model model,
+                                        @PathVariable ("sub") Subject sub,
+                                        @PathVariable ("les") Lesson les)
+        {
+                subjectService.addAttendanceList(sub, les);
+
+                return "redirect:/subjects/"+sub+"/lessons/"+les+"/attendances";
+        }
+
 }

@@ -67,6 +67,7 @@
 
     <c:if test="${empty list}">
         Brak listy obecności dla tej lekcji.
+        <br><a class="btn btn-raised btn-success" href="/subjects/${lesson.subject.id}/lessons/${lesson.id}/attendances/add">Dodaj listę obecności</a><br><br><br>
     </c:if>
 
 

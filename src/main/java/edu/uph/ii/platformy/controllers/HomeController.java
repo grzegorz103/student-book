@@ -1,7 +1,5 @@
 package edu.uph.ii.platformy.controllers;
 
-import edu.uph.ii.platformy.models.Student;
-import edu.uph.ii.platformy.models.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;

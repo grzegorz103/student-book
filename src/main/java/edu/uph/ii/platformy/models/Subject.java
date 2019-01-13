@@ -31,9 +31,12 @@ public class Subject
         @Size (min = 2, max = 25)
         private String name;
 
-        @OneToMany
+        @Column(name = "semester")
+        private Long semester;
+
+        @ManyToOne
         @JoinColumn(name="course_of_study")
-        private Set<Course_of_study> course_of_study;
+        private Course_of_study course_of_study;
 
 
 }
