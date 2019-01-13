@@ -1,5 +1,6 @@
 package edu.uph.ii.platformy.services;
 
+import edu.uph.ii.platformy.models.Information;
 import edu.uph.ii.platformy.models.Specialization;
 import edu.uph.ii.platformy.models.Student;
 import edu.uph.ii.platformy.models.Utils;
@@ -12,7 +13,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service ("specializationService")
 public class SpecializationServiceImpl implements SpecializationService
@@ -24,6 +27,9 @@ public class SpecializationServiceImpl implements SpecializationService
         private final UtilsRepository utilsRepository;
 
         private final AccountRepository accountRepository;
+
+        @Autowired
+        private InformationService informationService;
 
         @Autowired
         public SpecializationServiceImpl ( SpecializationRepository specializationRepository,
@@ -86,7 +92,10 @@ public class SpecializationServiceImpl implements SpecializationService
 
         private void confirmSpecialization ()
         {
-                List<Student> students = studentRepository.findAll();
+                List<Student> students = studentRepository.findAll()
+                        .stream()
+                        .filter( e -> !e.getSpecChosen() )
+                        .collect( Collectors.toList() );
 
                 for ( Student x : students )
                 {
@@ -98,6 +107,19 @@ public class SpecializationServiceImpl implements SpecializationService
                         }
                         studentRepository.save( x );
                 }
+                createInfo( students );
+        }
+
+        private void createInfo ( List<Student> students )
+        {
+                Information information = new Information();
+                information.setDate( new Date() );
+                final String[] a = {"Wyniki wyborów specjalizacji: \r\n"};
+                students.forEach( e -> a[0] += e.getPesel() + " " + e.getSpecialization().getName() + "\r\n" );
+                information.setTitle( "Wyniki wyborów specjalizacji" );
+                information.setText( a[0] );
+                information.setAuthor( "Dziekan" );
+                informationService.add( information );
         }
 
 

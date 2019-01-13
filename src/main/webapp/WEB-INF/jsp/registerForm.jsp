@@ -57,6 +57,8 @@
             <form:input path="person.age" cssClass="form-control"/>
             <form:errors path="person.age" cssStyle="color:red"/>
         </div>
+
+        <form:input type="hidden" path="person.specChosen" value="false"/>
         <button type="submit" class="btn btn-raised btn-primary">OK</button>
 
     </form:form>

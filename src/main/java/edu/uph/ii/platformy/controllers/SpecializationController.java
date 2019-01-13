@@ -1,8 +1,8 @@
 package edu.uph.ii.platformy.controllers;
 
-import edu.uph.ii.platformy.models.Specialization;
 import edu.uph.ii.platformy.models.Student;
 import edu.uph.ii.platformy.repositories.AccountRepository;
+import edu.uph.ii.platformy.services.InformationService;
 import edu.uph.ii.platformy.services.SpecializationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,12 +16,14 @@ public class SpecializationController
 {
         private final SpecializationService specializationService;
         private final AccountRepository accountRepository;
+        private InformationService informationService;
 
         @Autowired
-        public SpecializationController ( SpecializationService specializationService, AccountRepository accountRepository )
+        public SpecializationController ( SpecializationService specializationService, AccountRepository accountRepository, InformationService informationService )
         {
                 this.specializationService = specializationService;
                 this.accountRepository = accountRepository;
+                this.informationService = informationService;
         }
 
 
@@ -61,5 +63,14 @@ public class SpecializationController
         {
                 specializationService.editStatus();
                 return "redirect:/sp/edit";
+        }
+
+
+        @GetMapping ("/{id}")
+        public String infoDetails ( Model model,
+                                    @PathVariable ("id") Long id )
+        {
+                model.addAttribute( "sp", informationService.getById( id ) );
+                return "details";
         }
 }

@@ -18,7 +18,7 @@
         <table>
 
             <tr>
-                <td>Country :</td>
+                <td>Specjalizacja :</td>
                 <td><form:select path="specialization">
                     <form:options items="${list}" itemLabel="name"/>
                 </form:select>
