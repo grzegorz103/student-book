@@ -60,9 +60,18 @@ public class SubjectServiceImpl implements SubjectService {
 
         @Override
         public void addAttendanceList(Subject sub, Lesson les) {
-                List <Student> students = studentRepository.findAllByCourse_of_study(sub.getCourse_of_study());
+                List <Student> students = studentRepository.findAllByCourse(sub.getCourse());
+                Attendance atd = new Attendance();
+
                 for (Student stud : students) {
-                        
+                       if (stud.getSemester().equals(sub.getSemester()))
+                       {
+                                atd.setId(null);
+                                atd.setPresence(false);
+                                atd.setStudent(stud);
+                                atd.setLesson(les);
+                                attendanceRepository.save(atd);
+                       }
                 }
         }
 }

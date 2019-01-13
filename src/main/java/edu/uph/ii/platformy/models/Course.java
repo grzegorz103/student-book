@@ -12,12 +12,12 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "Courses_of_study")
+@Table(name = "Courses")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Course_of_study {
+public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

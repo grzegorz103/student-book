@@ -32,6 +32,6 @@ public class Student extends Person
         private Long semester;
 
         @ManyToOne
-        @JoinColumn(name="course_of_study")
-        private Course_of_study course_of_study;
+        @JoinColumn(name="course_id")
+        private Course course;
 }
