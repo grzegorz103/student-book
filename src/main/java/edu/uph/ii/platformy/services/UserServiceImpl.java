@@ -3,8 +3,10 @@ package edu.uph.ii.platformy.services;
 import edu.uph.ii.platformy.config.ProfileNames;
 import edu.uph.ii.platformy.models.Instructor;
 import edu.uph.ii.platformy.models.Role;
+import edu.uph.ii.platformy.models.Student;
 import edu.uph.ii.platformy.repositories.AccountRepository;
 import edu.uph.ii.platformy.repositories.RoleRepository;
+import edu.uph.ii.platformy.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.GrantedAuthority;
@@ -35,7 +37,8 @@ public class UserServiceImpl implements UserService
         private final RoleRepository roleRepository;
 
         private final AccountRepository accountRepository;
-
+        @Autowired
+        private StudentRepository studentRepository;
 
         @Autowired
         public UserServiceImpl ( PasswordEncoder passwordEncoder, InstructorRepository instructorRepository, RoleRepository roleRepository, AccountRepository accountRepository )
@@ -72,12 +75,14 @@ public class UserServiceImpl implements UserService
         }
 
         @Override
-        public void save ( edu.uph.ii.platformy.models.User user ) // person, bo bedziemy zapisywac rozne typy potomnych uzytkownikow
+        public void save ( edu.uph.ii.platformy.models.User user )
         {
                 user.setPassword( this.passwordEncoder.encode( user.getPassword() ) );
                 user.setRoles( new HashSet<>( Arrays.asList( roleRepository.findRoleByUserType( Role.UserTypes.ROLE_USER ) ) ) );
                 user.setPasswordConfirm( null );
-                accountRepository.save( user );       // poki co instructor
+                Student s = ( Student ) user.getPerson();
+                studentRepository.save( s );
+                accountRepository.save( user );
         }
 
         @Override
