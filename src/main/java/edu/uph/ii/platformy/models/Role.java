@@ -30,6 +30,7 @@ public class Role
         public static enum UserTypes
         {
                 ROLE_ADMIN,
-                ROLE_USER
+                ROLE_USER,
+                ROLE_INSTRUCTOR
         }
 }

@@ -32,10 +32,14 @@
 
 
                 <li ${param['name'] == 'instructorList' ? 'class="nav-item active"' : 'class="nav-item"'}>
-                    <a class="nav-link" href="/instructors/list">Lista wykładowców</a>
+                    <a class="nav-link" href="/instructors/list">Wykładowcy</a>
                 </li>
 
-                <li ${param['name'] == 'instructorList' ? 'class="nav-item active"' : 'class="nav-item"'}>
+                <li ${param['name'] == 'subjectList' ? 'class="nav-item active"' : 'class="nav-item"'}>
+                    <a class="nav-link" href="/subjects/list">Przedmioty</a>
+                </li>
+
+                <li ${param['name'] == 'messages' ? 'class="nav-item active"' : 'class="nav-item"'}>
                     <a class="nav-link" href="/msg">Wiadomości</a>
                 </li>
 

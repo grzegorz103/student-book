@@ -6,12 +6,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Lista pojazdów</title>
+    <title>Lista lekcji</title>
 </head>
 <body>
 
 <jsp:include page="shared/header.jsp">
-    <jsp:param name="name" value="instructorList"/>
+    <jsp:param name="name" value="lessonList"/>
 </jsp:include>
 <div class="container">
 
@@ -49,7 +49,9 @@
         Brak lekcji w bazie
     </c:if>
 
-<br><a class="btn btn-raised btn-success" href="/subjects/${subject.id}/lessons/add">Dodaj lekcję</a><br><br><br>
+    <security:authorize access="hasAnyRole('ADMIN', 'INSTRUCTOR')">
+        <br><a class="btn btn-raised btn-success" href="/subjects/${subject.id}/lessons/add">Dodaj lekcję</a><br><br><br>
+    </security:authorize>
 
 </div>
 <jsp:include page="shared/footer.jsp"/>

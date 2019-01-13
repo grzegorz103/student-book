@@ -6,12 +6,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Lista pojazdów</title>
+    <title>Lista obecności</title>
 </head>
 <body>
 
 <jsp:include page="shared/header.jsp">
-    <jsp:param name="name" value="instructorList"/>
+    <jsp:param name="name" value="attendanceList"/>
 </jsp:include>
 <div class="container">
 
@@ -23,8 +23,9 @@
             <tr class="bg-success">
                 <th>Student</th>
                 <th>Obecność</th>
-                <th>Zmiana</th>
-
+                <security:authorize access="hasAnyRole('ADMIN', 'INSTRUCTOR')">
+                    <th>Zmiana</th>
+                </security:authorize>
             </tr>
 
             <c:forEach items="${list}" var="attendance">
@@ -44,20 +45,20 @@
                                 <c:otherwise>Nieobecny</c:otherwise>
                             </c:choose>
                         </td>
+                        <security:authorize access="hasAnyRole('ADMIN', 'INSTRUCTOR')">
+                            <td>
+                                <c:choose>
+                                    <c:when test="${empty attendance.presence}">Brak danych</c:when>
+                                    <c:when test="${attendance.presence}">
+                                        <a class="btn btn-raised btn-danger" href="/subjects/${lesson.subject.id}/lessons/${lesson.id}/attendances/${attendance.id}/status/1">Wstaw nieobecność</a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a class="btn btn-raised btn-success" href="/subjects/${lesson.subject.id}/lessons/${lesson.id}/attendances/${attendance.id}/status/2">Wstaw obecność</a>
+                                    </c:otherwise>
+                                </c:choose>
 
-                        <td>
-                            <c:choose>
-                                <c:when test="${empty attendance.presence}">Brak danych</c:when>
-                                <c:when test="${attendance.presence}">
-                                    <a class="btn btn-raised btn-danger" href="/subjects/${lesson.subject.id}/lessons/${lesson.id}/attendances/${attendance.id}/status/1">Wstaw nieobecność</a>
-                                </c:when>
-                                <c:otherwise>
-                                    <a class="btn btn-raised btn-success" href="/subjects/${lesson.subject.id}/lessons/${lesson.id}/attendances/${attendance.id}/status/2">Wstaw obecność</a>
-                                </c:otherwise>
-                            </c:choose>
-
-                        </td>
-
+                            </td>
+                        </security:authorize>
                     </tr>
             </c:forEach>
         </table>

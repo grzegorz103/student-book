@@ -6,12 +6,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Lista pojazdów</title>
+    <title>Lista przedmiotów</title>
 </head>
 <body>
 
 <jsp:include page="shared/header.jsp">
-    <jsp:param name="name" value="instructorList"/>
+    <jsp:param name="name" value="subjectList"/>
 </jsp:include>
 <div class="container">
 

@@ -8,7 +8,7 @@
 </head>
 <body>
 <jsp:include page="shared/header.jsp">
-    <jsp:param name="name" value="opinionForm"/>
+    <jsp:param name="name" value="lessonForm"/>
 </jsp:include>
 
 <div id="main" class="container">
