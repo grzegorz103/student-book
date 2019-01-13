@@ -1,6 +1,7 @@
 package edu.uph.ii.platformy.config;
 
 import edu.uph.ii.platformy.models.Role;
+import edu.uph.ii.platformy.models.User;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -34,7 +35,7 @@ public class RepositoriesInitializer
                                 {
                                         Role roleUser = roleRepository.save( new Role( Role.UserTypes.ROLE_USER ) );
                                         Role roleAdmin = roleRepository.save( new Role( Role.UserTypes.ROLE_ADMIN ) );
-/*
+                                          /*
                                         User user = new User("user", true);
                                         user.setRoles(new HashSet<>(Arrays.asList(roleUser)));
                                         user.setPassword(passwordEncoder.encode("user"));

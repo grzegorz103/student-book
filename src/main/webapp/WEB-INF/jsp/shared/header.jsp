@@ -24,7 +24,7 @@
 
             <security:authorize access="isAnonymous()">
                 <li ${param['name'] == 'registrationForm' ? 'class="nav-item active"' : 'class="nav-item"'}>
-                    <a class="nav-link" href="<c:url value="/registrationForm"/>">Rejestracja</a>
+                    <a class="nav-link" href="<c:url value="/register"/>">Rejestracja</a>
                 </li>
             </security:authorize>
 

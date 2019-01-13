@@ -10,12 +10,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
+@SessionAttributes ("user")
 public class UserController
 {
         private final UserService userService;
-private SpecializationService specializationService;
+        private SpecializationService specializationService;
+
         @Autowired
         public UserController ( UserService userService, SpecializationService specializationService )
         {
@@ -24,16 +27,26 @@ private SpecializationService specializationService;
         }
 
 
-        @GetMapping ("/register")
-        public String registerForm ( Model model )
+        @ModelAttribute ("user")
+        public User user ()
         {
+                User u = new User();
+                u.setPerson( new Student() );
+                return u;
+        }
 
-                return "/registerForm";
+
+        @GetMapping ("/register")
+        public String registerForm ( Model model,
+                                     @ModelAttribute ("user") User u )
+        {
+                model.addAttribute( "user", u );
+                return "registerForm";
         }
 
 
         @PostMapping ("/register")
-        public String registerUser ( @ModelAttribute ("form") User user,
+        public String registerUser ( @ModelAttribute ("user") User user,
                                      Model model )
         {
                 userService.save( user );

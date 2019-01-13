@@ -34,4 +34,6 @@ public class Person
         @Column (name = "sex")
         private boolean sex;
 
+        @Column (name = "pesel")
+        private Integer pesel;
 }
