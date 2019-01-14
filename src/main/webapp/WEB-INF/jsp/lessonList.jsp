@@ -49,7 +49,7 @@
         Brak lekcji w bazie
     </c:if>
 
-    <security:authorize access="hasAnyRole('ADMIN', 'INSTRUCTOR')">
+    <security:authorize access="hasAnyRole('DEAN', 'INSTRUCTOR')">
         <br><a class="btn btn-raised btn-success" href="/subjects/${subject.id}/lessons/add">Dodaj lekcję</a><br><br><br>
     </security:authorize>
 

@@ -17,7 +17,7 @@
 
     <c:if test="${!empty list}">
 
-        <security:authorize access="hasAnyRole('USER', 'INSTRUCTOR')">
+        <security:authorize access="hasAnyRole('STUDENT', 'INSTRUCTOR')">
 
 
             <table class="table table-bordered">
@@ -54,7 +54,7 @@
 
         </security:authorize>
 
-        <security:authorize access="hasRole('ADMIN')">
+        <security:authorize access="hasRole('DEAN')">
 
             <table class="table table-bordered">
                 <tr class="bg-success">

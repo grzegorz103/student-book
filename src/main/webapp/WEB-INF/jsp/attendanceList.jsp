@@ -23,7 +23,7 @@
             <tr class="bg-success">
                 <th>Student</th>
                 <th>Obecność</th>
-                <security:authorize access="hasAnyRole('ADMIN', 'INSTRUCTOR')">
+                <security:authorize access="hasAnyRole('DEAN', 'INSTRUCTOR')">
                     <th>Zmiana</th>
                 </security:authorize>
             </tr>
@@ -45,7 +45,7 @@
                                 <c:otherwise>Nieobecny</c:otherwise>
                             </c:choose>
                         </td>
-                        <security:authorize access="hasAnyRole('ADMIN', 'INSTRUCTOR')">
+                        <security:authorize access="hasAnyRole('DEAN', 'INSTRUCTOR')">
                             <td>
                                 <c:choose>
                                     <c:when test="${empty attendance.presence}">Brak danych</c:when>
