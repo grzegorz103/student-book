@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
-@Inheritance (strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance ( strategy = InheritanceType.TABLE_PER_CLASS )
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,19 +21,19 @@ import java.util.Set;
 public class Person
 {
 
-        @Id
-        @GeneratedValue (strategy = GenerationType.AUTO)
-        private Long id;
+    @Id
+    @GeneratedValue ( strategy = GenerationType.AUTO )
+    private Long id;
 
-        @Column (name = "name")
-        private String name;
+    @Column ( name = "name" )
+    private String name;
 
-        @Column (name = "surname")
-        private String surname;
+    @Column ( name = "surname" )
+    private String surname;
 
-        @Column (name = "sex")
-        private boolean sex;
+    @Column ( name = "sex" )
+    private boolean sex;
 
-        @Column (name = "pesel")
-        private Integer pesel;
+    @Column ( name = "pesel" )
+    private Long pesel;
 }
