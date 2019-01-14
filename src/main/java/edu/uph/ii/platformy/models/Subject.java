@@ -38,5 +38,9 @@ public class Subject
         @JoinColumn(name="course_id")
         private Course course;
 
+        @ManyToOne
+        @JoinColumn(name="instructor_id")
+        private Instructor instructor;
+
 
 }

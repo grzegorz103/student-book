@@ -19,7 +19,7 @@
         <div class="form-group">
             <label for="subject"></label>
             <form:select path="subject" cssClass="form-control">
-                <form:options items="${instructor.subject}" itemLabel="name" itemValue="id"/>
+                <form:options items="${subjects}" itemLabel="name" itemValue="id"/>
             </form:select>
         </div>
 

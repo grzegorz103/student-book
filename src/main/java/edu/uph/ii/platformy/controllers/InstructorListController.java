@@ -23,7 +23,7 @@ public class InstructorListController
         @RequestMapping (value = "/list")
         protected String handleRequest ( Model model )
         {
-                model.addAttribute( "list", instructorService.findAll() );
+                model.addAttribute( "list", instructorService.findInstructors() );
 
                 return "instructorList";
         }

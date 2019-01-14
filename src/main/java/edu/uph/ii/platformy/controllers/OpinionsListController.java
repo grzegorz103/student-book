@@ -38,6 +38,7 @@ public class OpinionsListController
         {
                 model.addAttribute ( "opn", new Opinion() );
                 model.addAttribute( "instructor", instructor );
+                model.addAttribute( "subjects", instructorService.findSubjectsByInstructor (instructor) );
 
                 return "opinionForm";
         }

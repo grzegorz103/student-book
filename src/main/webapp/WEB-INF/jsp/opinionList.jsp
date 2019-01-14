@@ -17,7 +17,8 @@
 
     <c:if test="${!empty list}">
 
-        <security:authorize access="hasRole('USER')">
+        <security:authorize access="hasAnyRole('USER', 'INSTRUCTOR')">
+
 
             <table class="table table-bordered">
                 <tr class="bg-success">
@@ -26,8 +27,7 @@
                 </tr>
 
                 <c:forEach items="${list}" var="opn">
-                    <c:forEach items="${opn.instructor.subject}" var="subjects">
-                        <c:if test="${subjects.id == opn.subject.id}">
+
                             <c:if test="${opn.status == 'ACCEPTED'}">
                                 <tr>
 
@@ -40,22 +40,21 @@
 
                                     <td>
                                         <c:choose>
-                                            <c:when test="${empty subjects.name}">Brak danych</c:when>
-                                            <c:otherwise>${subjects.name}</c:otherwise>
+                                            <c:when test="${empty opn.subject.name}">Brak danych</c:when>
+                                            <c:otherwise>${opn.subject.name}</c:otherwise>
                                         </c:choose>
                                     </td>
 
                                 </tr>
                             </c:if>
-                        </c:if>
 
                     </c:forEach>
-                </c:forEach>
+
             </table>
 
         </security:authorize>
 
-        <security:authorize access="hasAnyRole('ADMIN', 'INSTRUCTOR')">
+        <security:authorize access="hasRole('ADMIN')">
 
             <table class="table table-bordered">
                 <tr class="bg-success">
@@ -64,9 +63,7 @@
                     <th>Status</th>
                 </tr>
 
-                <c:forEach items="${list}" var="opn">
-                    <c:forEach items="${opn.instructor.subject}" var="subjects">
-                        <c:if test="${subjects.id == opn.subject.id}">
+            <c:forEach items="${list}" var="opn">
                             <tr>
 
                                 <td>
@@ -78,8 +75,8 @@
 
                                 <td>
                                     <c:choose>
-                                        <c:when test="${empty subjects.name}">Brak danych</c:when>
-                                        <c:otherwise>${subjects.name}</c:otherwise>
+                                        <c:when test="${empty opn.subject.name}">Brak danych</c:when>
+                                        <c:otherwise>${opn.subject.name}</c:otherwise>
                                     </c:choose>
                                 </td>
 
@@ -105,9 +102,7 @@
                                 </td>
 
                             </tr>
-                        </c:if>
 
-                    </c:forEach>
                 </c:forEach>
             </table>
 

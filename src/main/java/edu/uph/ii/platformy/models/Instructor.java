@@ -15,12 +15,8 @@ import java.util.Set;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 public class Instructor extends Person
 {
 
-    @OneToMany
-    @JoinColumn (name = "instructor_id")
-    private Set<Subject> subject;
 
 }
