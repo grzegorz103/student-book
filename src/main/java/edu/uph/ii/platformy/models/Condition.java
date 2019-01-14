@@ -41,4 +41,8 @@ public class Condition
 
     @Column ( name = "condition_justification", columnDefinition = "TEXT" )
     private String conditionJustification; //Uzasadnienie podania
+
+    @ManyToOne ( fetch = FetchType.EAGER )
+    @JoinColumn ( name = "student_id" )
+    private Student student;
 }
