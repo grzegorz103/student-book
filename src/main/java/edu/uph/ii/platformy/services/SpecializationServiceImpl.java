@@ -1,9 +1,6 @@
 package edu.uph.ii.platformy.services;
 
-import edu.uph.ii.platformy.models.Information;
-import edu.uph.ii.platformy.models.Specialization;
-import edu.uph.ii.platformy.models.Student;
-import edu.uph.ii.platformy.models.Utils;
+import edu.uph.ii.platformy.models.*;
 import edu.uph.ii.platformy.repositories.AccountRepository;
 import edu.uph.ii.platformy.repositories.SpecializationRepository;
 import edu.uph.ii.platformy.repositories.StudentRepository;
@@ -79,7 +76,7 @@ public class SpecializationServiceImpl implements SpecializationService
         @Override
         public void editStatus ()
         {
-                Utils status =utilsRepository.getOne( 1L );
+                Utils status = utilsRepository.getOne( 1L );
                 if ( isEnabled() )
                 {
                         status.setSpecialization_enabled( Boolean.FALSE );
@@ -102,7 +99,7 @@ public class SpecializationServiceImpl implements SpecializationService
                         if ( !x.getSpecChosen() )
                         {
                                 if ( x.getSpecialization() == null )
-                                        x.setSpecialization( getSpecialization() );
+                                        x.setSpecialization( getSpecialization( x.getCourse() ) );
                                 x.setSpecChosen( true );
                         }
                         studentRepository.save( x );
@@ -123,9 +120,14 @@ public class SpecializationServiceImpl implements SpecializationService
         }
 
 
-        private Specialization getSpecialization ()
+        private Specialization getSpecialization ( Course course )
         {
-                List<Specialization> list = specializationRepository.findAll();
+                List<Specialization> list = specializationRepository.findAll()
+                        .stream()
+                        .filter( e -> e.getCourse() == course )
+                        .filter( e -> e.getLimit() > studentRepository.findAllBySpecialization( e ).size() )
+                        .collect( Collectors.toList() );
+
                 long number = Long.MAX_VALUE;
                 for ( Specialization x : list )
                 {
