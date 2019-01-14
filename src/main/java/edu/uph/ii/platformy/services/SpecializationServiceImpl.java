@@ -131,13 +131,16 @@ public class SpecializationServiceImpl implements SpecializationService
                 long number = Long.MAX_VALUE;
                 for ( Specialization x : list )
                 {
-                        int studNumber = studentRepository.findAllBySpecialization( x ).size();
+                        long studNumber = studentRepository.findAllBySpecialization( x ).stream()
+                                .filter( e -> !e.getSpecChosen() ).count();
                         if ( number > studNumber )
                                 number = studNumber;
                 }
                 for ( Specialization x : list )
-                        if ( number == studentRepository.findAllBySpecialization( x ).size() )
+                        if ( number == studentRepository.findAllBySpecialization( x ).
+                                stream().filter( e -> !e.getSpecChosen() ).count() )
                                 return x;
                 return specializationRepository.getOne( 1L );
         }
+
 }
