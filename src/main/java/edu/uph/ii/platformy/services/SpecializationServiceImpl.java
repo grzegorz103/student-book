@@ -79,7 +79,7 @@ public class SpecializationServiceImpl implements SpecializationService
         @Override
         public void editStatus ()
         {
-                Utils status = utilsRepository.getOne( 1L );
+                Utils status =utilsRepository.getOne( 1L );
                 if ( isEnabled() )
                 {
                         status.setSpecialization_enabled( Boolean.FALSE );
