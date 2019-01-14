@@ -7,10 +7,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-
 @Entity
-@Table (name = "Students")
-@PrimaryKeyJoinColumn (name = "id")
+@Table ( name = "Students" )
+@PrimaryKeyJoinColumn ( name = "id" )
 @Getter
 @Setter
 @AllArgsConstructor
@@ -18,20 +17,22 @@ import javax.persistence.*;
 public class Student extends Person
 {
 
-        @Column (name = "age")
-        private Integer age;
+    @Column ( name = "age" )
+    private Integer age;
 
-        @ManyToOne (fetch = FetchType.EAGER)
-        @JoinColumn (name = "specialization_id")
-        private Specialization specialization;
+    @ManyToOne ( fetch = FetchType.EAGER )
+    @JoinColumn ( name = "specialization_id" )
+    private Specialization specialization;
 
-        @Column(name = "spec_choosen")
-        private Boolean specChosen;
+    @Column ( name = "spec_choosen" )
+    private Boolean specChosen;
 
-        @Column(name = "semester")
-        private Long semester;
+    @Column ( name = "semester" )
+    private Long semester;
 
-        @ManyToOne
-        @JoinColumn(name="course_id")
-        private Course course;
+    @ManyToOne
+    @JoinColumn ( name = "course_id" )
+    private Course course;
+
+    private String bankAccountNumber; //numer konta bankowego (w rzeczywistości 26 cyfr)
 }
