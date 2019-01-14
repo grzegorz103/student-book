@@ -12,81 +12,97 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service ("instructorService")
+@Service ( "instructorService" )
 public class InstructorServiceImpl implements InstructorService
 {
-        @Autowired
-        private InstructorRepository instructorRepository;
+    private final InstructorRepository instructorRepository;
 
-        @Autowired
-        private OpinionRepository opinionRepository;
+    private final OpinionRepository opinionRepository;
 
-        @Autowired
-        private AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
 
-        @Autowired
-        private SubjectRepository subjectRepository;
+    private final SubjectRepository subjectRepository;
 
-        @Override
-        public List<Opinion> getOpinions ( Instructor instructor )
+    @Autowired
+    public InstructorServiceImpl ( InstructorRepository instructorRepository, OpinionRepository opinionRepository, AccountRepository accountRepository, SubjectRepository subjectRepository )
+    {
+        this.instructorRepository = instructorRepository;
+        this.opinionRepository = opinionRepository;
+        this.accountRepository = accountRepository;
+        this.subjectRepository = subjectRepository;
+    }
+
+    @Override
+    public List< Opinion > getOpinions ( Instructor instructor )
+    {
+        return opinionRepository.findAllByInstructor ( instructor );
+    }
+
+    @Override
+    public void addOpinion ( Opinion opinion, Instructor instructor )
+    {
+
+        opinion.setId ( null );
+        opinion.setStatus ( Statuses.AWAITING );
+        opinion.setInstructor ( instructor );
+
+        opinionRepository.save ( opinion );
+    }
+
+    @Override
+    public List< Instructor > findAll ()
+    {
+        return instructorRepository.findAll ();
+    }
+
+    @Override
+    public void changeOpinionStatus ( Long opn, Long sta )
+    {
+
+        Opinion opinion = opinionRepository.findById ( opn )
+                .get ();
+        opinion.setStatus ( ( sta == 1 ) ? Statuses.ACCEPTED : Statuses.REJECTED );
+        opinionRepository.save ( opinion );
+    }
+
+    @Override
+    public List< Subject > findSubjectsByInstructor ( Instructor instructor )
+    {
+        return subjectRepository.findAllByInstructor ( instructor );
+    }
+
+    @Override
+    public List< Instructor > findInstructors ()
+    {
+
+        org.springframework.security.core.userdetails.User user = ( org.springframework.security.core.userdetails.User ) SecurityContextHolder.getContext ()
+                .getAuthentication ()
+                .getPrincipal ();
+        edu.uph.ii.platformy.models.User u = accountRepository.findByMail ( user.getUsername () );
+
+        for ( Role role : u.getRoles () )
         {
-                return opinionRepository.findAllByInstructor( instructor );
-        }
+            if ( role.getUserType () == Role.UserTypes.ROLE_DEAN || role.getUserType () == Role.UserTypes.ROLE_INSTRUCTOR )
+            {
+                return instructorRepository.findAll ();
+            }
+            else if ( role.getUserType () == Role.UserTypes.ROLE_STUDENT )
+            {
+                Student std = ( Student ) u.getPerson ();
+                List< Instructor > ins = new ArrayList<> ();
 
-        @Override
-        public void addOpinion(Opinion opinion, Instructor instructor) {
+                for ( Subject sbj : subjectRepository.findAllByCourse ( std.getCourse () ) )
+                {
 
-                opinion.setId(null);
-                opinion.setStatus(Statuses.AWAITING);
-                opinion.setInstructor(instructor);
-
-                opinionRepository.save(opinion);
-        }
-
-        @Override
-        public List <Instructor> findAll() {
-                return instructorRepository.findAll();
-        }
-
-        @Override
-        public void changeOpinionStatus(Long opn, Long sta) {
-
-                Opinion opinion = opinionRepository.findById(opn).get();
-                opinion.setStatus((sta == 1) ? Statuses.ACCEPTED : Statuses.REJECTED);
-                opinionRepository.save(opinion);
-        }
-
-        @Override
-        public List<Subject> findSubjectsByInstructor(Instructor instructor) {
-                return subjectRepository.findAllByInstructor(instructor);
-        }
-
-        @Override
-        public List<Instructor> findInstructors() {
-
-                org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-                edu.uph.ii.platformy.models.User u = accountRepository.findByMail( user.getUsername() );
-                
-                for (Role role : u.getRoles()) {
-                        if (role.getUserType() == Role.UserTypes.ROLE_ADMIN || role.getUserType() == Role.UserTypes.ROLE_INSTRUCTOR ) 
-                                {
-                                        return instructorRepository.findAll();
-                                }
-                        else if (role.getUserType() == Role.UserTypes.ROLE_USER)
-                                {
-                                        Student std = ( Student ) u.getPerson();
-                                        List<Instructor> ins = new ArrayList<>();
-
-                                        for (Subject sbj : subjectRepository.findAllByCourse(std.getCourse()) ) {
-
-                                                if(!ins.contains(sbj.getInstructor()) && sbj.getSemester() <= std.getSemester()) ins.add(sbj.getInstructor());
-                                        }
-                                        return ins;
-                                }
+                    if ( !ins.contains ( sbj.getInstructor () ) && sbj.getSemester () <= std.getSemester () )
+                        ins.add ( sbj.getInstructor () );
                 }
-
-                return instructorRepository.findAll();
+                return ins;
+            }
         }
+
+        return instructorRepository.findAll ();
+    }
 
 
 }

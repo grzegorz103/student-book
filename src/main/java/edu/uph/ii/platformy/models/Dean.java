@@ -15,7 +15,10 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 public class Dean extends Person
 {
+    public Dean ( Long id, String name, String surname, boolean sex, Long pesel )
+    {
+        super ( id, name, surname, sex, pesel );
+    }
 }

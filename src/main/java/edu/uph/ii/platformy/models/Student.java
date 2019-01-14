@@ -35,4 +35,9 @@ public class Student extends Person
     private Course course;
 
     private String bankAccountNumber; //numer konta bankowego (w rzeczywistości 26 cyfr)
+
+    public Student ( Long id, String name, String surname, boolean sex, Long pesel )
+    {
+        super ( id, name, surname, sex, pesel );
+    }
 }

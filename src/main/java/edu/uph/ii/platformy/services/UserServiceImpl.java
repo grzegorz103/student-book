@@ -26,68 +26,70 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-@Profile (ProfileNames.DATABASE)
+@Profile ( ProfileNames.DATABASE )
 public class UserServiceImpl implements UserService
 {
 
-        private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-        private final InstructorRepository instructorRepository;
+    private final InstructorRepository instructorRepository;
 
-        private final RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
 
-        private final AccountRepository accountRepository;
-        @Autowired
-        private StudentRepository studentRepository;
+    private final AccountRepository accountRepository;
 
-        @Autowired
-        public UserServiceImpl ( PasswordEncoder passwordEncoder, InstructorRepository instructorRepository, RoleRepository roleRepository, AccountRepository accountRepository )
-        {
-                this.passwordEncoder = passwordEncoder;
-                this.instructorRepository = instructorRepository;
-                this.roleRepository = roleRepository;
-                this.accountRepository = accountRepository;
-        }
+    private final StudentRepository studentRepository;
 
-        @Transactional (readOnly = true)
-        @Override
-        public UserDetails loadUserByUsername ( String username ) throws UsernameNotFoundException
-        {
+    @Autowired
+    public UserServiceImpl ( PasswordEncoder passwordEncoder, InstructorRepository instructorRepository, RoleRepository roleRepository, AccountRepository accountRepository, StudentRepository studentRepository )
+    {
+        this.passwordEncoder = passwordEncoder;
+        this.instructorRepository = instructorRepository;
+        this.roleRepository = roleRepository;
+        this.accountRepository = accountRepository;
+        this.studentRepository = studentRepository;
+    }
 
-                edu.uph.ii.platformy.models.User user = accountRepository.findByMail( username );
-                if ( user == null )
-                        throw new UsernameNotFoundException( username );
+    @Transactional ( readOnly = true )
+    @Override
+    public UserDetails loadUserByUsername ( String username ) throws UsernameNotFoundException
+    {
 
-                return convertToUserDetails( user );
-        }
+        edu.uph.ii.platformy.models.User user = accountRepository.findByMail ( username );
+        if ( user == null )
+            throw new UsernameNotFoundException ( username );
 
-        private UserDetails convertToUserDetails ( edu.uph.ii.platformy.models.User user )
-        {
-                //   user.setEnabled( false );
-                Set<GrantedAuthority> grantedAuthorities = user.getRoles()
-                        .stream()
-                        .map( role -> new SimpleGrantedAuthority( role.getUserType().toString() ) )
-                        .collect( Collectors.toSet() );
+        return convertToUserDetails ( user );
+    }
 
-                return new User( user.getMail(), user.getPassword(), grantedAuthorities );
-        }
+    private UserDetails convertToUserDetails ( edu.uph.ii.platformy.models.User user )
+    {
+        //   user.setEnabled( false );
+        Set< GrantedAuthority > grantedAuthorities = user.getRoles ()
+                .stream ()
+                .map ( role -> new SimpleGrantedAuthority ( role.getUserType ()
+                        .toString () ) )
+                .collect ( Collectors.toSet () );
 
-        @Override
-        @Transactional
-        public void save ( edu.uph.ii.platformy.models.User user )
-        {
-                user.setPassword( this.passwordEncoder.encode( user.getPassword() ) );
-                user.setRoles( new HashSet<>( Arrays.asList( roleRepository.findRoleByUserType( Role.UserTypes.ROLE_USER ) ) ) );
-                user.setPasswordConfirm( null );
-                Student s = ( Student ) user.getPerson();
-                studentRepository.save( s );
-                accountRepository.save( user );
-        }
+        return new User ( user.getMail (), user.getPassword (), grantedAuthorities );
+    }
 
-        @Override
-        public boolean isLoginAvailable ( String value )
-        {
-                return this.instructorRepository.findByName( value ) == null;
-        }
+    @Override
+    @Transactional
+    public void save ( edu.uph.ii.platformy.models.User user )
+    {
+        user.setPassword ( this.passwordEncoder.encode ( user.getPassword () ) );
+        user.setRoles ( new HashSet<> ( Arrays.asList ( roleRepository.findRoleByUserType ( Role.UserTypes.ROLE_STUDENT ) ) ) );
+        user.setPasswordConfirm ( null );
+        Student s = ( Student ) user.getPerson ();
+        studentRepository.save ( s );
+        accountRepository.save ( user );
+    }
+
+    @Override
+    public boolean isLoginAvailable ( String value )
+    {
+        return this.instructorRepository.findByName ( value ) == null;
+    }
 
 }

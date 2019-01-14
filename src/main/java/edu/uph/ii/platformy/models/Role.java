@@ -7,30 +7,30 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table (name = "roles")
+@Table ( name = "roles" )
 @Data
 @NoArgsConstructor
 public class Role
 {
-        @Id
-        @GeneratedValue (strategy = GenerationType.IDENTITY)
-        private Integer id;
+    @Id
+    @GeneratedValue ( strategy = GenerationType.IDENTITY )
+    private Integer id;
 
-        @Enumerated (EnumType.STRING)
-        private UserTypes userType;
+    @Enumerated ( EnumType.STRING )
+    private UserTypes userType;
 
-        @ManyToMany (mappedBy = "roles")
-        private Set<User> users;
+    @ManyToMany ( mappedBy = "roles" )
+    private Set< User > users;
 
-        public Role ( UserTypes type )
-        {
-                this.userType = type;
-        }
+    public Role ( UserTypes type )
+    {
+        this.userType = type;
+    }
 
-        public static enum UserTypes
-        {
-                ROLE_ADMIN,
-                ROLE_USER,
-                ROLE_INSTRUCTOR
-        }
+    public enum UserTypes
+    {
+        ROLE_DEAN,
+        ROLE_INSTRUCTOR,
+        ROLE_STUDENT
+    }
 }
