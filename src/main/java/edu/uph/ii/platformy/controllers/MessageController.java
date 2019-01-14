@@ -4,12 +4,14 @@ import edu.uph.ii.platformy.models.Message;
 import edu.uph.ii.platformy.models.User;
 import edu.uph.ii.platformy.services.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping ("/msg")
+@PreAuthorize ( "isAuthenticated()" )
 public class MessageController
 {
         private final MessageService messageService;

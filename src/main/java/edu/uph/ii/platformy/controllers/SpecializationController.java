@@ -5,6 +5,8 @@ import edu.uph.ii.platformy.repositories.AccountRepository;
 import edu.uph.ii.platformy.services.InformationService;
 import edu.uph.ii.platformy.services.SpecializationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +30,7 @@ public class SpecializationController
 
 
         @GetMapping ("/choose")
+        @Secured ("ROLE_STUDENT")
         public String specializationChoose ( Model model )
         {
                 if ( !specializationService.isEnabled() || specializationService.isUserSpecialization() )
@@ -36,12 +39,13 @@ public class SpecializationController
                 edu.uph.ii.platformy.models.User u = accountRepository.findByMail( user.getUsername() );
                 Student currentStudent = ( Student ) u.getPerson();
 
-                model.addAttribute( "list", specializationService.getAllSpecializations() );
+                model.addAttribute( "list", specializationService.getSpecializationById( currentStudent ) );
                 model.addAttribute( "student", currentStudent );
                 return "specializationPage";
         }
 
         @PostMapping ("/choose")
+        @Secured ("ROLE_STUDENT")
         public String saveSpecializationChoice ( @ModelAttribute ("student") Student specialization,
                                                  @RequestParam ("id") Student s )
         {
@@ -52,6 +56,7 @@ public class SpecializationController
 
 
         @GetMapping ("/edit")
+        @Secured ("ROLE_DEAN")
         public String getState ( Model model )
         {
                 model.addAttribute( "state", specializationService.isEnabled() );
@@ -59,6 +64,7 @@ public class SpecializationController
         }
 
         @GetMapping ("/edit/state")
+        @Secured ("ROLE_DEAN")
         public String editState ( Model model )
         {
                 specializationService.editStatus();
@@ -67,6 +73,7 @@ public class SpecializationController
 
 
         @GetMapping ("/{id}")
+        @PreAuthorize ("isAuthenticated()")
         public String infoDetails ( Model model,
                                     @PathVariable ("id") Long id )
         {

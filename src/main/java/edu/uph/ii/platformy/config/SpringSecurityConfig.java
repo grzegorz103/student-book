@@ -16,24 +16,24 @@ import org.springframework.security.web.access.AccessDeniedHandlerImpl;
 
 
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true)
+@EnableGlobalMethodSecurity (securedEnabled = true, prePostEnabled = true)
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter
 {
 
 
-    @Bean
-    @Profile(ProfileNames.INMEMORY)
-    public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder)
-    {
-        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        User.UserBuilder userBuilder = User.builder();
+        @Bean
+        @Profile (ProfileNames.INMEMORY)
+        public UserDetailsService userDetailsService ( PasswordEncoder passwordEncoder )
+        {
+                InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+                User.UserBuilder userBuilder = User.builder();
 
-        manager.createUser( userBuilder.username( "user" ).password(passwordEncoder.encode("user")).roles( "USER" ).build() );
-        manager.createUser( userBuilder.username( "admin" ).password(passwordEncoder.encode("admin")).roles( "ADMIN" ).build() );
-        manager.createUser( userBuilder.username( "test" ).password(passwordEncoder.encode("test")).roles( "USER", "ADMIN" ).build() );
+                manager.createUser( userBuilder.username( "user" ).password( passwordEncoder.encode( "user" ) ).roles( "USER" ).build() );
+                manager.createUser( userBuilder.username( "admin" ).password( passwordEncoder.encode( "admin" ) ).roles( "ADMIN" ).build() );
+                manager.createUser( userBuilder.username( "test" ).password( passwordEncoder.encode( "test" ) ).roles( "USER", "ADMIN" ).build() );
 
-        return manager;
-    }
+                return manager;
+        }
 
 
     /*
@@ -53,14 +53,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter
 */
 
 
-
         @Bean
         public PasswordEncoder passwordEncoder ()
         {
                 return new BCryptPasswordEncoder();
         }
-
-
 
 
         @Override
@@ -78,15 +75,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter
                         .logout()
                         .permitAll();
 
-                http.exceptionHandling ().accessDeniedHandler ( createAccessDeniedHandler () );
+                http.exceptionHandling().accessDeniedHandler( createAccessDeniedHandler() );
         }
-
 
 
         private AccessDeniedHandler createAccessDeniedHandler ()
         {
                 AccessDeniedHandlerImpl impl = new AccessDeniedHandlerImpl();
-                impl.setErrorPage ( "/accessDenied" );
+                impl.setErrorPage( "/accessDenied" );
                 return impl;
         }
 }
