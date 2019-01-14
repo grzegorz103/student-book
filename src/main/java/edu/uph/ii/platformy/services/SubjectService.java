@@ -20,4 +20,6 @@ public interface SubjectService
         void addLesson(Lesson lesson, Subject subject);
 
         void addAttendanceList(Subject sub, Lesson les);
+
+        List<Subject> findSubjects();
 }

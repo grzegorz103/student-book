@@ -30,7 +30,7 @@ public class SubjectListController
         @RequestMapping (value = "/list")
         protected String handleRequest ( Model model )
         {
-                model.addAttribute( "list", subjectService.findAll() );
+                model.addAttribute( "list", subjectService.findSubjects() );
 
                 return "subjectList";
         }

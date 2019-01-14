@@ -1,16 +1,12 @@
 package edu.uph.ii.platformy.services;
 
-import edu.uph.ii.platformy.models.Attendance;
-import edu.uph.ii.platformy.models.Lesson;
-import edu.uph.ii.platformy.models.Student;
-import edu.uph.ii.platformy.models.Subject;
-import edu.uph.ii.platformy.repositories.AttendanceRepository;
-import edu.uph.ii.platformy.repositories.LessonRepository;
-import edu.uph.ii.platformy.repositories.StudentRepository;
-import edu.uph.ii.platformy.repositories.SubjectRepository;
+import edu.uph.ii.platformy.models.*;
+import edu.uph.ii.platformy.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service ("subjectService")
@@ -26,6 +22,9 @@ public class SubjectServiceImpl implements SubjectService {
 
         @Autowired
         private StudentRepository studentRepository;
+
+        @Autowired
+        private AccountRepository accountRepository;
 
         @Override
         public List<Subject> findAll() {
@@ -74,4 +73,35 @@ public class SubjectServiceImpl implements SubjectService {
                        }
                 }
         }
+
+        @Override
+        public List<Subject> findSubjects() {
+
+                org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                edu.uph.ii.platformy.models.User u = accountRepository.findByMail( user.getUsername() );
+
+                for (Role role : u.getRoles()) {
+                        if (role.getUserType() == Role.UserTypes.ROLE_ADMIN )
+                                {
+                                        return subjectRepository.findAll();
+                                }
+                        else if (role.getUserType() == Role.UserTypes.ROLE_INSTRUCTOR)
+                                {
+                                        Instructor ins = ( Instructor ) u.getPerson();
+                                        return subjectRepository.findAllByInstructor(ins);
+                                }
+                        else if (role.getUserType() == Role.UserTypes.ROLE_USER)
+                                {
+                                        Student std = ( Student ) u.getPerson();
+                                        List<Subject> sbjs = new ArrayList<>();
+
+                                        for (Subject sbj : subjectRepository.findAllByCourse(std.getCourse())) {
+                                                if (sbj.getSemester() <= std.getSemester()) sbjs.add(sbj);
+                                        } return sbjs;
+                                }
+                }
+
+                return subjectRepository.findAll();
+        }
+
 }
