@@ -7,6 +7,16 @@
     <link rel="stylesheet"
           href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css">
     <link rel="stylesheet" type="text/css" href="/statics/css/main.css"/>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js"
+            integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U"
+            crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
+            integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9"
+            crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -41,6 +51,25 @@
 
                 <li ${param['name'] == 'messages' ? 'class="nav-item active"' : 'class="nav-item"'}>
                     <a class="nav-link" href="/msg">Wiadomości</a>
+                </li>
+
+                <li class="nav-item">
+                    <div class="dropdown show">
+                        <a class="nav-link dropdown-toggle" href="#" role="button"
+                           id="dropdownMenuLinkForAdmin"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Student
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkForAdmin">
+                            <a class="dropdown-item ${param['pageName'] == 'scholarship' ? ' active':''}"
+                               href="#">Stypendia</a>
+                            <a class="dropdown-item ${param['pageName'] == 'condition' ? ' active':''}"
+                               href="#">Warunki</a>
+                            <a class="dropdown-item ${param['pageName'] == 'courseChange' ? ' active':''}"
+                               href="#">Zmiana kierunku</a>
+                        </div>
+                    </div>
                 </li>
 
                 <li class="nav-item">
