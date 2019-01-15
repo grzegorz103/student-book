@@ -229,8 +229,10 @@ public class RepositoriesInitializer
                 if ( this.scholarshipRepository.findAll ()
                         .isEmpty () )
                 {
-                    this.scholarshipRepository.save ( new Scholarship ( 1L, ScholarshipTypes.SOCIAL, 2, new BigDecimal ( 3000.00 ), new BigDecimal ( 0.00 ), 0.0d, new Date ( 119, 1, 12 ), null, Statuses.AWAITING, studentPerson ) );
-                    this.scholarshipRepository.save ( new Scholarship ( 2L, ScholarshipTypes.SOCIAL, 1, new BigDecimal ( 1000.00 ), new BigDecimal ( 500.00 ), 0.0d, new Date ( 119, 1, 13 ), new Date ( 119, 1, 14 ), Statuses.ACCEPTED, studentPerson2 ) );
+                    this.scholarshipRepository.save ( new Scholarship ( 1L, ScholarshipTypes.SOCIAL, 2, new BigDecimal ( 3000.00 ), new BigDecimal ( 0.00 ), 0.0d, new Date ( 119, 1, 12 ), null, Statuses.AWAITING, ( Student ) this.accountRepository.findByMail ( "student@student.pl" )
+                            .getPerson () ) );
+                    this.scholarshipRepository.save ( new Scholarship ( 2L, ScholarshipTypes.SOCIAL, 1, new BigDecimal ( 1000.00 ), new BigDecimal ( 500.00 ), 0.0d, new Date ( 119, 1, 13 ), new Date ( 119, 1, 14 ), Statuses.ACCEPTED, ( Student ) this.accountRepository.findByMail ( "student2@student2.pl" )
+                            .getPerson () ) );
                 }
 
             }
