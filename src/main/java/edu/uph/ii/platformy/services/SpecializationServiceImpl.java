@@ -86,6 +86,16 @@ public class SpecializationServiceImpl implements SpecializationService
                 utilsRepository.save( status );
         }
 
+        @Override
+        public List<Specialization> getSpecializationById ( Student student )
+        {
+                return specializationRepository.findAllByCourse( student.getCourse() )
+                        .stream()
+                        .filter( e -> e.getLimit() > studentRepository.findAllBySpecialization( e ).stream()
+                                .filter( f -> !f.getSpecChosen() ).count() )
+                        .collect( Collectors.toList() );
+        }
+
 
         private void confirmSpecialization ()
         {
@@ -100,10 +110,12 @@ public class SpecializationServiceImpl implements SpecializationService
                         {
                                 if ( x.getSpecialization() == null )
                                         x.setSpecialization( getSpecialization( x.getCourse() ) );
-                                x.setSpecChosen( true );
+                                //   x.setSpecChosen( true );
+                                studentRepository.save( x );
                         }
-                        studentRepository.save( x );
                 }
+                students.forEach( e -> e.setSpecChosen( true ) );
+                studentRepository.saveAll( students );
                 createInfo( students );
         }
 
@@ -125,22 +137,23 @@ public class SpecializationServiceImpl implements SpecializationService
                 List<Specialization> list = specializationRepository.findAll()
                         .stream()
                         .filter( e -> e.getCourse() == course )
-                        .filter( e -> e.getLimit() > studentRepository.findAllBySpecialization( e ).size() )
+                        .filter( e -> e.getLimit() > studentRepository.findAllBySpecialization( e ).stream()
+                                .filter( f -> !f.getSpecChosen() ).count() )
                         .collect( Collectors.toList() );
 
                 long number = Long.MAX_VALUE;
+                Specialization temp = null;
                 for ( Specialization x : list )
                 {
                         long studNumber = studentRepository.findAllBySpecialization( x ).stream()
                                 .filter( e -> !e.getSpecChosen() ).count();
                         if ( number > studNumber )
+                        {
                                 number = studNumber;
+                                temp = x;
+                        }
                 }
-                for ( Specialization x : list )
-                        if ( number == studentRepository.findAllBySpecialization( x ).
-                                stream().filter( e -> !e.getSpecChosen() ).count() )
-                                return x;
-                return specializationRepository.getOne( 1L );
+                return temp;
         }
 
 }

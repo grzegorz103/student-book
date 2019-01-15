@@ -16,4 +16,6 @@ public interface SpecializationService
         boolean isUserSpecialization ();
 
         void editStatus ();
+
+        List<Specialization> getSpecializationById ( Student student );
 }

@@ -22,6 +22,10 @@ public class Scholarship
     @GeneratedValue ( strategy = GenerationType.IDENTITY )
     private Long id;
 
+    @Column ( name = "scholarship_type" )
+    @Enumerated ( EnumType.STRING )
+    private ScholarshipTypes scholarshipType;
+
     @Column ( name = "people_number" )
     private Integer peopleNumber = 0; //Liczba osób w rodzinie studenta (razem ze studentem) - 0 jeśli stypendium naukowe
 
@@ -29,7 +33,7 @@ public class Scholarship
     private BigDecimal allMembersIncome; //wspólny dochód wszystkich członków rodziny
 
     @NumberFormat ( style = NumberFormat.Style.CURRENCY )
-    private BigDecimal amount; //kwota stypendium
+    private BigDecimal amount = null; //przyznana kwota stypendium
 
     @Column ( name = "average_grade" )
     private double averageGrade = 0.0d; //średnia ocen z poprzedniego roku (tylko stypendium naukowe)
