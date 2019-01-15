@@ -1,5 +1,6 @@
 package edu.uph.ii.platformy.controllers;
 
+import edu.uph.ii.platformy.models.ProtocolItem;
 import edu.uph.ii.platformy.services.ProtocolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -34,6 +35,7 @@ public class ProtocolController
         public String getProtocols ( Model model )
         {
                 model.addAttribute( "list", protocolService.getProtocols() );
+                model.addAttribute( "protForm", new ProtocolItem() );
                 return "protocolPage";
         }
 }
