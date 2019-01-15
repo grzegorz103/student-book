@@ -216,8 +216,8 @@
                         </td>
                         <td>
                             <c:if test="${scholarship.status == 'AWAITING'}">
-                                <a href="#" class="btn btn-raised btn-success">Zatwierdź</a>
-                                <a href="#" class="btn btn-raised btn-success">Odrzuć</a>
+                                <a href="/scholarships/list/more/${scholarship.id}"
+                                   class="btn btn-raised btn-success">Więcej</a>
                             </c:if>
                         </td>
 
