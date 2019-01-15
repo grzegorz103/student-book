@@ -57,25 +57,61 @@
                     <a class="nav-link" href="/msg">Wiadomości</a>
                 </li>
 
-                <li class="nav-item">
-                    <div class="dropdown show">
-                        <a class="nav-link dropdown-toggle" href="#" role="button"
-                           id="dropdownMenuLinkForStudent"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Student
-                        </a>
+                <security:authorize access="hasRole('STUDENT')">
+                    <li class="nav-item">
+                        <div class="dropdown show">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                               id="dropdownMenuLinkForStudent"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Student
+                            </a>
 
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkForStudent">
-                            <a class="dropdown-item ${param['name'] == 'scholarship' ? ' active':''}"
-                               href="/scholarships/list">Stypendia</a>
-                            <a class="dropdown-item ${param['name'] == 'condition' ? ' active':''}"
-                               href="#">Warunki</a>
-                            <a class="dropdown-item ${param['name'] == 'courseChange' ? ' active':''}"
-                               href="#">Zmiana kierunku</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkForStudent">
+                                <a class="dropdown-item ${param['name'] == 'scholarship' ? ' active':''}"
+                                   href="/scholarships/list">Stypendia</a>
+                                <a class="dropdown-item ${param['name'] == 'condition' ? ' active':''}"
+                                   href="#">Warunki</a>
+                                <a class="dropdown-item ${param['name'] == 'courseChange' ? ' active':''}"
+                                   href="#">Zmiana kierunku</a>
+                            </div>
                         </div>
-                    </div>
-                </li>
+                    </li>
+                </security:authorize>
+                <security:authorize access="hasRole('INSTRUCTOR')">
+                    <li class="nav-item">
+                        <div class="dropdown show">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                               id="dropdownMenuLinkForInstructor"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Wykładowca
+                            </a>
 
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkForInstructor">
+
+                            </div>
+                        </div>
+                    </li>
+                </security:authorize>
+                <security:authorize access="hasRole('DEAN')">
+                    <li class="nav-item">
+                        <div class="dropdown show">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                               id="dropdownMenuLinkForDean"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Dziekan
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkForDean">
+                                <a class="dropdown-item ${param['name'] == 'scholarship' ? ' active':''}"
+                                   href="/scholarships/list">Stypendia</a>
+                                <a class="dropdown-item ${param['name'] == 'condition' ? ' active':''}"
+                                   href="#">Warunki</a>
+                                <a class="dropdown-item ${param['name'] == 'courseChange' ? ' active':''}"
+                                   href="#">Zmiana kierunku</a>
+                            </div>
+                        </div>
+                    </li>
+                </security:authorize>
                 <li class="nav-item">
                     <a class="nav-link" onclick="document.getElementById('logout').submit()">Witaj
                         <sec:authentication property="principal.username"/>, wyloguj się</a>
