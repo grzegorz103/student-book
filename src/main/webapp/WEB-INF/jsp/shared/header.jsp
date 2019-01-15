@@ -66,11 +66,11 @@
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkForStudent">
-                            <a class="dropdown-item ${param['pageName'] == 'scholarship' ? ' active':''}"
+                            <a class="dropdown-item ${param['name'] == 'scholarship' ? ' active':''}"
                                href="/scholarships/list">Stypendia</a>
-                            <a class="dropdown-item ${param['pageName'] == 'condition' ? ' active':''}"
+                            <a class="dropdown-item ${param['name'] == 'condition' ? ' active':''}"
                                href="#">Warunki</a>
-                            <a class="dropdown-item ${param['pageName'] == 'courseChange' ? ' active':''}"
+                            <a class="dropdown-item ${param['name'] == 'courseChange' ? ' active':''}"
                                href="#">Zmiana kierunku</a>
                         </div>
                     </div>
