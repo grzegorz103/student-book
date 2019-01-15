@@ -16,7 +16,6 @@ import java.util.HashSet;
 @Configuration
 public class RepositoriesInitializer
 {
-
     private final InstructorRepository instructorRepository;
 
     private final DeanRepository deanRepository;
