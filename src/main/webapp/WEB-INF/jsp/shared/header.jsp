@@ -56,14 +56,14 @@
                 <li class="nav-item">
                     <div class="dropdown show">
                         <a class="nav-link dropdown-toggle" href="#" role="button"
-                           id="dropdownMenuLinkForAdmin"
+                           id="dropdownMenuLinkForStudent"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Student
                         </a>
 
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkForAdmin">
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkForStudent">
                             <a class="dropdown-item ${param['pageName'] == 'scholarship' ? ' active':''}"
-                               href="#">Stypendia</a>
+                               href="/scholarships/list">Stypendia</a>
                             <a class="dropdown-item ${param['pageName'] == 'condition' ? ' active':''}"
                                href="#">Warunki</a>
                             <a class="dropdown-item ${param['pageName'] == 'courseChange' ? ' active':''}"
