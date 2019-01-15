@@ -3,6 +3,7 @@ package edu.uph.ii.platformy.services;
 
 import edu.uph.ii.platformy.models.Information;
 import edu.uph.ii.platformy.repositories.InformationRepository;
+import edu.uph.ii.platformy.services.declarations.InformationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

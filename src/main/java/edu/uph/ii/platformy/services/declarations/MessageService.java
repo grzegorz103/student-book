@@ -1,4 +1,4 @@
-package edu.uph.ii.platformy.services;
+package edu.uph.ii.platformy.services.declarations;
 
 import edu.uph.ii.platformy.models.Message;
 

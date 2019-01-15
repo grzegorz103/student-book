@@ -5,6 +5,7 @@ import edu.uph.ii.platformy.models.Statuses;
 import edu.uph.ii.platformy.models.User;
 import edu.uph.ii.platformy.repositories.AccountRepository;
 import edu.uph.ii.platformy.repositories.MessageRepository;
+import edu.uph.ii.platformy.services.declarations.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;

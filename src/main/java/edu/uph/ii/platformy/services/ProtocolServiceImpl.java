@@ -1,13 +1,11 @@
 package edu.uph.ii.platformy.services;
 
-import edu.uph.ii.platformy.models.Instructor;
-import edu.uph.ii.platformy.models.Protocol;
-import edu.uph.ii.platformy.models.Statuses;
-import edu.uph.ii.platformy.models.Subject;
+import edu.uph.ii.platformy.models.*;
 import edu.uph.ii.platformy.repositories.AccountRepository;
 import edu.uph.ii.platformy.repositories.InstructorRepository;
 import edu.uph.ii.platformy.repositories.ProtocolRepository;
 import edu.uph.ii.platformy.repositories.SubjectRepository;
+import edu.uph.ii.platformy.services.declarations.ProtocolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -60,6 +58,16 @@ public class ProtocolServiceImpl implements ProtocolService
                         .stream()
                         .map( protocolRepository::findBySubject )
                         .collect( Collectors.toList() );
+        }
+
+
+        @Override
+        public void update ( ProtocolItem item )
+        {
+                Protocol p = protocolRepository.findById( item.getProtocolId() ).get();
+                p.setFirstTermin( item.getFirstTermin() );
+                p.setSecondTermin( item.getSecondTermin() );
+                protocolRepository.save( p );
         }
 
         private Protocol mapSubjectToProtocol ( Subject subject )

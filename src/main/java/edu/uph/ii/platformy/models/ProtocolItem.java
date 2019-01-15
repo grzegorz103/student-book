@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ProtocolItem
 {
-        private Integer protocolId;
+        private Long protocolId;
         private String firstTermin;
         private String secondTermin;
 }

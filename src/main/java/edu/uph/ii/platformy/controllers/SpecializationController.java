@@ -2,8 +2,8 @@ package edu.uph.ii.platformy.controllers;
 
 import edu.uph.ii.platformy.models.Student;
 import edu.uph.ii.platformy.repositories.AccountRepository;
-import edu.uph.ii.platformy.services.InformationService;
-import edu.uph.ii.platformy.services.SpecializationService;
+import edu.uph.ii.platformy.services.declarations.InformationService;
+import edu.uph.ii.platformy.services.declarations.SpecializationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;

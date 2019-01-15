@@ -5,6 +5,8 @@ import edu.uph.ii.platformy.repositories.AccountRepository;
 import edu.uph.ii.platformy.repositories.SpecializationRepository;
 import edu.uph.ii.platformy.repositories.StudentRepository;
 import edu.uph.ii.platformy.repositories.UtilsRepository;
+import edu.uph.ii.platformy.services.declarations.InformationService;
+import edu.uph.ii.platformy.services.declarations.SpecializationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;

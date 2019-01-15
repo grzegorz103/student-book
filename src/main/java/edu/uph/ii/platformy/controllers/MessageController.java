@@ -2,7 +2,7 @@ package edu.uph.ii.platformy.controllers;
 
 import edu.uph.ii.platformy.models.Message;
 import edu.uph.ii.platformy.models.User;
-import edu.uph.ii.platformy.services.MessageService;
+import edu.uph.ii.platformy.services.declarations.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;

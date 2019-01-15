@@ -1,6 +1,6 @@
 package edu.uph.ii.platformy.controllers;
 
-import edu.uph.ii.platformy.services.InformationService;
+import edu.uph.ii.platformy.services.declarations.InformationService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

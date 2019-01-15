@@ -28,12 +28,15 @@
 
             <c:forEach items="${list}" var="protocol">
                 <tr>
-                <form:form action="/protocol/edit?id=${protocol.id}" modelAttribute="protForm">
+                <form:form  modelAttribute="protForm">
                     <td>${protocol.subject.name}</td>
 
                     <td><c:if test="${protocol.status == 'PROTOCOLE_CLOSED'}">---</c:if>
                         <c:if test="${protocol.status == 'PROTOCOLE_OPEN'}">
                             <form:input path="firstTermin" value="${protocol.firstTermin}"/>
+                        </c:if>
+                        <c:if test="${protocol.status == 'PROTOCOLE_ACCEPTED'}">
+                            ${protocol.firstTermin}
                         </c:if>
                     </td>
 
@@ -41,14 +44,26 @@
                         <c:if test="${protocol.status == 'PROTOCOLE_OPEN'}">
                             <form:input path="secondTermin" value="${protocol.secondTermin}"/>
                         </c:if>
+                        <c:if test="${protocol.status == 'PROTOCOLE_ACCEPTED'}">
+                            ${protocol.secondTermin}
+                        </c:if>
                     </td>
-                    <td></td>
+                    <td>
+                        <c:if test="${protocol.status == 'PROTOCOLE_CLOSED'}">Zamknięty</c:if>
+                        <c:if test="${protocol.status == 'PROTOCOLE_OPEN'}">
+                            Otwarty
+                        </c:if>
+                        <c:if test="${protocol.status == 'PROTOCOLE_ACCEPTED'}">Zatwierdzony</c:if>
+
+                    </td>
+
                     <td><c:if test="${protocol.status == 'PROTOCOLE_OPEN'}">
-                        <button type="submit" class="btn btn-raised btn-primary">Do ocen</button>
+                        <button formaction="/protocol/grades?id=${protocol.subject.instructor.id}&subj=${protocol.subject.id}" type="submit" class="btn btn-raised btn-primary">Do ocen</button>
                     </c:if></td>
+
                     <td>
                         <c:if test="${protocol.status == 'PROTOCOLE_OPEN'}">
-                            <button type="submit" class="btn btn-raised btn-primary">Zapisz</button>
+                            <button formaction="/protocol/edit?id=${protocol.id}" type="submit" class="btn btn-raised btn-primary">Zapisz</button>
                         </c:if>
                     </td>
                     </tr>

@@ -2,7 +2,7 @@ package edu.uph.ii.platformy.controllers;
 
 import edu.uph.ii.platformy.models.Student;
 import edu.uph.ii.platformy.models.User;
-import edu.uph.ii.platformy.services.SpecializationService;
+import edu.uph.ii.platformy.services.declarations.SpecializationService;
 import edu.uph.ii.platformy.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-
-import javax.servlet.http.HttpSession;
 
 @Controller
 @SessionAttributes ("user")
