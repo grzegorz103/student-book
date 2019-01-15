@@ -19,4 +19,5 @@ public interface InstructorService
         List<Instructor> findInstructors();
 
         List <Subject> findSubjectsByInstructor(Instructor instructor);
+
 }

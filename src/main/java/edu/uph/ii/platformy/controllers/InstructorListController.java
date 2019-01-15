@@ -1,6 +1,5 @@
 package edu.uph.ii.platformy.controllers;
 
-import edu.uph.ii.platformy.repositories.InstructorRepository;
 import edu.uph.ii.platformy.services.InstructorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

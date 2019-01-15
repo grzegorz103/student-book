@@ -49,6 +49,10 @@
                     <a class="nav-link" href="/subjects/list">Przedmioty</a>
                 </li>
 
+                <li ${param['name'] == 'workshopList' ? 'class="nav-item active"' : 'class="nav-item"'}>
+                    <a class="nav-link" href="/workshops/list">Warsztaty</a>
+                </li>
+
                 <li ${param['name'] == 'messages' ? 'class="nav-item active"' : 'class="nav-item"'}>
                     <a class="nav-link" href="/msg">Wiadomości</a>
                 </li>

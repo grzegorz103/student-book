@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table ( name = "Students" )
@@ -35,6 +36,9 @@ public class Student extends Person
     private Course course;
 
     private String bankAccountNumber; //numer konta bankowego (w rzeczywistości 26 cyfr)
+
+    @ManyToMany ( mappedBy = "students" )
+    private Set< Workshop > workshops;
 
     public Student ( Long id, String name, String surname, boolean sex, Long pesel )
     {
