@@ -1,9 +1,6 @@
 package edu.uph.ii.platformy.services;
 
-import edu.uph.ii.platformy.models.Role;
-import edu.uph.ii.platformy.models.Scholarship;
-import edu.uph.ii.platformy.models.Statuses;
-import edu.uph.ii.platformy.models.User;
+import edu.uph.ii.platformy.models.*;
 import edu.uph.ii.platformy.repositories.AccountRepository;
 import edu.uph.ii.platformy.repositories.ScholarshipRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,5 +74,51 @@ public class ScholarshipServiceImpl implements ScholarshipService
 
             this.scholarshipRepository.save ( scholarship );
         }
+    }
+
+    @Override
+    public boolean scholarshipBelongsToLoggedStudent ( Scholarship scholarship )
+    {
+        org.springframework.security.core.userdetails.User user = ( org.springframework.security.core.userdetails.User ) SecurityContextHolder.getContext ()
+                .getAuthentication ()
+                .getPrincipal ();
+
+        User myUser = accountRepository.findByMail ( user.getUsername () );
+
+        return scholarship.getStudent ()
+                .getId ()
+                .equals ( myUser.getPerson ()
+                        .getId () );
+    }
+
+    @Override
+    public boolean hasStudentAwaitingScholarship ( ScholarshipTypes scholarshipTypes )
+    {
+        org.springframework.security.core.userdetails.User user = ( org.springframework.security.core.userdetails.User ) SecurityContextHolder.getContext ()
+                .getAuthentication ()
+                .getPrincipal ();
+
+        User myUser = accountRepository.findByMail ( user.getUsername () );
+
+        return ( !this.scholarshipRepository.findAwaitingsByStudentAndScholarshipType ( myUser.getPerson ()
+                .getId (), scholarshipTypes )
+                .isEmpty () );
+    }
+
+    @Override
+    public void save ( Scholarship scholarship )
+    {
+        org.springframework.security.core.userdetails.User user = ( org.springframework.security.core.userdetails.User ) SecurityContextHolder.getContext ()
+                .getAuthentication ()
+                .getPrincipal ();
+
+        User myUser = accountRepository.findByMail ( user.getUsername () );
+
+        scholarship.setStudent ( ( Student ) myUser.getPerson () );
+        scholarship.setSubmittingDate ( new Date () );
+        scholarship.setStatus ( Statuses.AWAITING );
+        scholarship.setId ( null );
+
+        this.scholarshipRepository.save ( scholarship );
     }
 }

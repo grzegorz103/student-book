@@ -35,13 +35,14 @@
                     <th>Opcje</th>
                 </tr>
                 <c:forEach items="${scholarshipList.content}" var="scholarship">
-
-
                     <tr>
                         <td>
                             <c:choose>
                                 <c:when test="${scholarship.scholarshipType == 'SOCIAL'}">
-                                    ${scholarship.scholarshipType}
+                                    Socjalne
+                                </c:when>
+                                <c:when test="${scholarship.scholarshipType == 'SCIENTIFIC'}">
+                                    Naukowe
                                 </c:when>
                                 <c:otherwise>
                                     Nie dotyczy
@@ -106,18 +107,27 @@
                         </td>
                         <td>
                             <c:if test="${scholarship.status == 'REJECTED'}">
-                                <a href="#" class="btn btn-raised btn-success">Wyślij ponownie</a>
+                                <c:choose>
+                                    <c:when test="${scholarship.scholarshipType == 'SOCIAL'}">
+                                        <a href="/scholarships/edit/social/${scholarship.id}"
+                                           class="btn btn-raised btn-success">Wyślij ponownie</a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="/scholarships/edit/scientific/${scholarship.id}"
+                                           class="btn btn-raised btn-success">Wyślij ponownie</a>
+                                    </c:otherwise>
+                                </c:choose>
                             </c:if>
                         </td>
-
                     </tr>
-
                 </c:forEach>
 
             </table>
 
-            <a class="btn btn-raised btn-success" href="/instructors/${id}/opinions/add">Złóż nowe
-                podanie</a><br><br><br>
+            <a class="btn btn-raised btn-success" href="/scholarships/add/social">Nowe
+                podanie o stypendium socjalne</a>
+            <a class="btn btn-raised btn-success" href="/scholarships/add/scientific">Nowe
+                podanie o stypendium naukowe</a><br><br><br>
 
         </security:authorize>
 
@@ -151,7 +161,10 @@
                         <td>
                             <c:choose>
                                 <c:when test="${scholarship.scholarshipType == 'SOCIAL'}">
-                                    ${scholarship.scholarshipType}
+                                    Socjalne
+                                </c:when>
+                                <c:when test="${scholarship.scholarshipType == 'SCIENTIFIC'}">
+                                    Naukowe
                                 </c:when>
                                 <c:otherwise>
                                     Nie dotyczy
