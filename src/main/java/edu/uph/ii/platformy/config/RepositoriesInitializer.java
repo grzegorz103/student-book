@@ -33,10 +33,12 @@ public class RepositoriesInitializer
 
     private final SubjectRepository subjectRepository;
 
+    private final ScholarshipRepository scholarshipRepository;
+
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public RepositoriesInitializer ( InstructorRepository instructorRepository, DeanRepository deanRepository, StudentRepository studentRepository, RoleRepository roleRepository, CourseRepository courseRepository, SpecializationRepository specializationRepository, AccountRepository accountRepository, SubjectRepository subjectRepository, PasswordEncoder passwordEncoder )
+    public RepositoriesInitializer ( InstructorRepository instructorRepository, DeanRepository deanRepository, StudentRepository studentRepository, RoleRepository roleRepository, CourseRepository courseRepository, SpecializationRepository specializationRepository, AccountRepository accountRepository, SubjectRepository subjectRepository, PasswordEncoder passwordEncoder, ScholarshipRepository scholarshipRepository )
     {
         this.instructorRepository = instructorRepository;
         this.deanRepository = deanRepository;
@@ -47,6 +49,7 @@ public class RepositoriesInitializer
         this.accountRepository = accountRepository;
         this.subjectRepository = subjectRepository;
         this.passwordEncoder = passwordEncoder;
+        this.scholarshipRepository = scholarshipRepository;
     }
 
     @Bean
@@ -221,6 +224,15 @@ public class RepositoriesInitializer
                             .orElse ( null ), instructorPerson ) );
                     this.subjectRepository.save ( new Subject ( 6L, "Podstawy Termodynamiki", 3L, this.courseRepository.findById ( 4L )
                             .orElse ( null ), fizykPerson ) );
+                }
+
+                if ( this.scholarshipRepository.findAll ()
+                        .isEmpty () )
+                {
+                    this.scholarshipRepository.save ( new Scholarship ( 1L, ScholarshipTypes.SOCIAL, 2, new BigDecimal ( 3000.00 ), new BigDecimal ( 0.00 ), 0.0d, new Date ( 119, 1, 12 ), null, Statuses.AWAITING, ( Student ) this.accountRepository.findByMail ( "student@student.pl" )
+                            .getPerson () ) );
+                    this.scholarshipRepository.save ( new Scholarship ( 2L, ScholarshipTypes.SOCIAL, 1, new BigDecimal ( 1000.00 ), new BigDecimal ( 500.00 ), 0.0d, new Date ( 119, 1, 13 ), new Date ( 119, 1, 14 ), Statuses.ACCEPTED, ( Student ) this.accountRepository.findByMail ( "student2@student2.pl" )
+                            .getPerson () ) );
                 }
             }
         };
