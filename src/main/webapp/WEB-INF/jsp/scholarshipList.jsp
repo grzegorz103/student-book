@@ -9,7 +9,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="shared/header.jsp">
-    <jsp:param name="name" value="opinionList"/>
+    <jsp:param name="name" value="scholarship"/>
 </jsp:include>
 <html>
 <head>
@@ -216,8 +216,8 @@
                         </td>
                         <td>
                             <c:if test="${scholarship.status == 'AWAITING'}">
-                                <a href="#" class="btn btn-raised btn-success">Zatwierdź</a>
-                                <a href="#" class="btn btn-raised btn-success">Odrzuć</a>
+                                <a href="/scholarships/list/more/${scholarship.id}"
+                                   class="btn btn-raised btn-success">Więcej</a>
                             </c:if>
                         </td>
 
@@ -229,6 +229,9 @@
 
         </security:authorize>
 
+        <c:set var="page" value="${scholarshipList}" scope="request"/>
+        <c:set var="mainUrl" value="/scholarships/list" scope="request"/>
+        <c:import url="shared/pagination.jsp"/>
     </c:if>
 
     <c:if test="${empty list}">

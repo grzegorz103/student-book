@@ -2,6 +2,7 @@ package edu.uph.ii.platformy.services;
 
 import edu.uph.ii.platformy.models.Role;
 import edu.uph.ii.platformy.models.Scholarship;
+import edu.uph.ii.platformy.models.Statuses;
 import edu.uph.ii.platformy.models.User;
 import edu.uph.ii.platformy.repositories.AccountRepository;
 import edu.uph.ii.platformy.repositories.ScholarshipRepository;
@@ -10,6 +11,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.util.Date;
 
 @Service ( "scholarshipService" )
 public class ScholarshipServiceImpl implements ScholarshipService
@@ -42,5 +46,36 @@ public class ScholarshipServiceImpl implements ScholarshipService
             }
         }
         return null;
+    }
+
+    @Override
+    public void acceptScholarship ( Scholarship scholarship )
+    {
+        BigDecimal amount = scholarship.getAmount ();
+
+        scholarship = this.scholarshipRepository.findById ( scholarship.getId () )
+                .orElse ( null );
+
+        if ( scholarship != null )
+        {
+            scholarship.setStatus ( Statuses.ACCEPTED );
+            scholarship.setStatusChangeDate ( new Date () );
+            scholarship.setAmount ( amount );
+
+            this.scholarshipRepository.save ( scholarship );
+        }
+    }
+
+    @Override
+    public void rejectScholarship ( Scholarship scholarship )
+    {
+        if ( scholarship != null && scholarship.getStatus () == Statuses.AWAITING )
+        {
+            scholarship.setStatus ( Statuses.REJECTED );
+            scholarship.setStatusChangeDate ( new Date () );
+            scholarship.setAmount ( new BigDecimal ( 0.00 ) );
+
+            this.scholarshipRepository.save ( scholarship );
+        }
     }
 }

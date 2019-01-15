@@ -7,4 +7,8 @@ import org.springframework.data.domain.Pageable;
 public interface ScholarshipService
 {
     Page< Scholarship > findScholarships ( Pageable pageable );
+
+    void acceptScholarship ( Scholarship scholarship );
+
+    void rejectScholarship ( Scholarship scholarship );
 }
