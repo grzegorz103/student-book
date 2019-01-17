@@ -38,4 +38,7 @@ public class Workshop
             inverseJoinColumns = @JoinColumn ( name = "student_id" ) )
     private Set< Student > students;
 
+    @OneToMany(mappedBy="workshop", cascade = CascadeType.ALL)
+    private Set<Unit> units;
+
 }

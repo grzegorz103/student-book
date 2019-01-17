@@ -22,6 +22,9 @@
                 <th>Prowadzący</th>
                 <th>Zajęcia</th>
                 <th>Ilośc osób</th>
+                <security:authorize access="hasAnyRole('DEAN', 'INSTRUCTOR')">
+                    <th>Usuń</th>
+                </security:authorize>
 
             </tr>
 
@@ -44,7 +47,7 @@
 
                         <security:authorize access="hasAnyRole('DEAN', 'INSTRUCTOR')">
                             <td>
-                                <a class="btn btn-raised btn-info" href="/workshops/${workshop.id}">Lista zajęć</a>
+                                <a class="btn btn-raised btn-info" href="/workshops/${workshop.id}/units">Lista zajęć</a>
                             </td>
                         </security:authorize>
 
@@ -53,7 +56,7 @@
 
                                 <c:choose>
                                     <c:when test="${workshop.students.contains(student)}">
-                                        <a class="btn btn-raised btn-info" href="/workshops/${workshop.id}">Lista zajęć</a>
+                                        <a class="btn btn-raised btn-info" href="/workshops/${workshop.id}/units/">Lista zajęć</a>
                                         <a class="btn btn-raised btn-danger" href="/workshops/${workshop.id}/exit/${student.id}">Opuść</a>
                                     </c:when>
                                     <c:when test="${workshop.students.size() >= workshop.limit}">
@@ -66,12 +69,32 @@
                             </td>
                         </security:authorize>
 
-                        <td>
-                            <c:choose>
-                                <c:when test="${empty workshop.students}">0/${workshop.limit}</c:when>
-                                <c:otherwise>${workshop.students.size()}/${workshop.limit}</c:otherwise>
-                            </c:choose>
-                        </td>
+                        <security:authorize access="hasAnyRole('DEAN', 'INSTRUCTOR')">
+                            <td>
+                                <c:choose>
+                                    <c:when test="${empty workshop.students}">0/${workshop.limit}</c:when>
+                                    <c:otherwise>
+                                        ${workshop.students.size()}/${workshop.limit}
+                                        <a class="btn btn-raised btn-warning" href="/workshops/${workshop.id}/students">Lista członków</a>
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
+                        </security:authorize>
+
+                        <security:authorize access="hasRole('STUDENT')">
+                            <td>
+                                <c:choose>
+                                    <c:when test="${empty workshop.students}">0/${workshop.limit}</c:when>
+                                    <c:otherwise>${workshop.students.size()}/${workshop.limit}</c:otherwise>
+                                </c:choose>
+                            </td>
+                        </security:authorize>
+
+                        <security:authorize access="hasAnyRole('DEAN', 'INSTRUCTOR')">
+                            <td>
+                                <a class="btn btn-raised btn-danger" href="/workshops/${workshop.id}/delete">Usuń</a>
+                            </td>
+                        </security:authorize>
 
                     </tr>
             </c:forEach>
@@ -82,7 +105,7 @@
     </c:if>
 
     <c:if test="${empty list}">
-        Ten wykładowca nie prowadzi żadnych warsztatów.
+        Brak warsztatów w bazie.
     </c:if>
 
     <security:authorize access="hasAnyRole('DEAN', 'INSTRUCTOR')">
