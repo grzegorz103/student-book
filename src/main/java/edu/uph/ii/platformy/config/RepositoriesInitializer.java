@@ -1,12 +1,12 @@
 package edu.uph.ii.platformy.config;
 
 import edu.uph.ii.platformy.models.*;
+import edu.uph.ii.platformy.repositories.*;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import edu.uph.ii.platformy.repositories.*;
 
 import java.math.BigDecimal;
 import java.util.Arrays;

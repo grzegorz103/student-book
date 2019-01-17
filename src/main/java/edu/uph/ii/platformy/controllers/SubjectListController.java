@@ -1,8 +1,6 @@
 package edu.uph.ii.platformy.controllers;
 
-import edu.uph.ii.platformy.models.Instructor;
 import edu.uph.ii.platformy.models.Lesson;
-import edu.uph.ii.platformy.models.Opinion;
 import edu.uph.ii.platformy.models.Subject;
 import edu.uph.ii.platformy.services.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;

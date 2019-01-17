@@ -1,6 +1,5 @@
 package edu.uph.ii.platformy.controllers;
 
-import edu.uph.ii.platformy.models.Instructor;
 import edu.uph.ii.platformy.models.Student;
 import edu.uph.ii.platformy.models.Workshop;
 import edu.uph.ii.platformy.services.WorkshopService;

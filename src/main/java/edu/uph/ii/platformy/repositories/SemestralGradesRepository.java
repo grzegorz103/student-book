@@ -1,7 +1,6 @@
 package edu.uph.ii.platformy.repositories;
 
 import edu.uph.ii.platformy.models.SemestralGrade;
-import edu.uph.ii.platformy.models.Student;
 import edu.uph.ii.platformy.models.Subject;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

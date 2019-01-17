@@ -2,7 +2,6 @@ package edu.uph.ii.platformy.repositories;
 
 import edu.uph.ii.platformy.models.Course;
 import edu.uph.ii.platformy.models.Instructor;
-import edu.uph.ii.platformy.models.Opinion;
 import edu.uph.ii.platformy.models.Subject;
 import org.springframework.data.jpa.repository.JpaRepository;
 

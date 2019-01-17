@@ -1,14 +1,10 @@
 package edu.uph.ii.platformy.controllers;
 
-import edu.uph.ii.platformy.models.Scholarship;
-import edu.uph.ii.platformy.models.ScholarshipTypes;
 import edu.uph.ii.platformy.models.Student;
 import edu.uph.ii.platformy.models.User;
 import edu.uph.ii.platformy.repositories.AccountRepository;
 import edu.uph.ii.platformy.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;

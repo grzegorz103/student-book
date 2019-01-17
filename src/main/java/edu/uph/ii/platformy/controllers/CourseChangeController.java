@@ -1,11 +1,11 @@
 package edu.uph.ii.platformy.controllers;
 
-import edu.uph.ii.platformy.models.*;
+import edu.uph.ii.platformy.models.Course;
+import edu.uph.ii.platformy.models.CourseChange;
+import edu.uph.ii.platformy.models.Statuses;
 import edu.uph.ii.platformy.services.CourseChangeService;
 import edu.uph.ii.platformy.services.CourseService;
-import edu.uph.ii.platformy.services.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.annotation.Secured;
@@ -13,12 +13,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @Controller
