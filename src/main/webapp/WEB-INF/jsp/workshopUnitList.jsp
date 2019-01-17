@@ -15,7 +15,7 @@
 </jsp:include>
 <div class="container">
 <h2>Lista meteriałów z warsztatu: ${workshop.name}</h2>
-    <c:if test="${!empty workshop.students}">
+    <c:if test="${!empty workshop.units}">
         <table class="table table-bordered">
             <tr class="bg-success">
                 <th>Nazwa</th>
@@ -50,7 +50,7 @@
                         </td>
 
                         <td>
-                            <a class="btn btn-raised btn-danger" href="/workshops/${workshop.id}/units/${unit.id}">Usuń</a>
+                            <a class="btn btn-raised btn-danger" href="/workshops/${workshop.id}/units/${unit.id}/delete">Usuń</a>
                         </td>
 
                     </tr>
@@ -61,7 +61,7 @@
 
     </c:if>
 
-    <c:if test="${empty workshop.students}">
+    <c:if test="${empty workshop.units}">
         Do tego warsztatu nie dodano jeszcze żadnych materiałów.
     </c:if>
 

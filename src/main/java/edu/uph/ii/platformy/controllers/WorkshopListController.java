@@ -95,11 +95,18 @@ public class WorkshopListController
         {
                 if ( result.hasErrors() ) return "workshopForm";
 
-
+                System.out.println(workshop.getUnits().size());
                 workshopService.addUnit( unit, workshop );
 
-                return "redirect:/workshops/list";
+                return "redirect:/workshops/"+workshop.getId()+"/units";
         }
 
+        @GetMapping("/{wks}/units/{unt}/delete")
+        public String addUnit (Model model, @PathVariable ("wks") Workshop workshop, @PathVariable ("unt") Unit unit)
+        {
+               workshopService.deleteUnit(unit);
+
+               return "redirect:/workshops/"+workshop.getId()+"/units";
+        }
 
 }

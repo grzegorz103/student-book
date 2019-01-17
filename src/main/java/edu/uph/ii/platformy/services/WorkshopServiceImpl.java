@@ -2,7 +2,6 @@ package edu.uph.ii.platformy.services;
 
 import edu.uph.ii.platformy.models.*;
 import edu.uph.ii.platformy.repositories.*;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -140,6 +139,11 @@ public class WorkshopServiceImpl implements WorkshopService
         workshopRepository.save(workshop);
 
 
+    }
+
+    @Override
+    public void deleteUnit(Unit unit) {
+        unitRepository.delete(unit);
     }
 
 

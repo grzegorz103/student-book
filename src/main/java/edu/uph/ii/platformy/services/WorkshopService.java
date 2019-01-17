@@ -6,7 +6,6 @@ import edu.uph.ii.platformy.models.Unit;
 import edu.uph.ii.platformy.models.Workshop;
 
 import java.util.List;
-import java.util.Set;
 
 public interface WorkshopService
 {
@@ -29,4 +28,6 @@ public interface WorkshopService
         void deleteWorkshop(Workshop workshop);
 
         void addUnit(Unit unit, Workshop workshop);
+
+        void deleteUnit(Unit unit);
 }

@@ -23,7 +23,7 @@ public class Unit
     @Column (name = "name")
     private String name;
 
-    @ManyToOne (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne (fetch = FetchType.EAGER)
     @JoinColumn(name = "workshop_id")
     private Workshop workshop;
 
