@@ -58,7 +58,8 @@
                             <form:errors path="averageGrade" cssClass="alert-danger"/>
                             <form:input path="averageGrade" cssClass="form-control col-md-1 mr-auto"
                                         cssErrorClass="form-control is-invalid"
-                                        placeholder="Średnia ocen" required="true"/>
+                                        placeholder="Średnia ocen" required="true" min="2.0" max="5.0" step="0.01"
+                                        type="number"/>
                         </div>
                     </div>
                 </c:otherwise>

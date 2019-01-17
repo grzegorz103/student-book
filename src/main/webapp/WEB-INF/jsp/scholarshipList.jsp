@@ -102,20 +102,35 @@
                                 </c:otherwise>
                             </c:choose>
                         </td>
-                        <td>
-                                ${scholarship.status}
-                        </td>
+
+                        <c:choose>
+                            <c:when test="${scholarship.status == 'AWAITING'}">
+                                <td class="text-info">
+                                    Oczekujące
+                                </td>
+                            </c:when>
+                            <c:when test="${scholarship.status == 'ACCEPTED'}">
+                                <td class="text-success">
+                                    Przyznane
+                                </td>
+                            </c:when>
+                            <c:when test="${scholarship.status == 'REJECTED'}">
+                                <td class="text-danger">
+                                    Odrzucone
+                                </td>
+                            </c:when>
+                        </c:choose>
                         <td>
                             <c:if test="${scholarship.status == 'REJECTED'}">
                                 <c:choose>
-                                    <c:when test="${scholarship.scholarshipType == 'SOCIAL'}">
+                                    <c:when test="${scholarship.scholarshipType == 'SOCIAL' && !hasAwaitingSocial}">
                                         <a href="/scholarships/edit/social/${scholarship.id}"
                                            class="btn btn-raised btn-success">Wyślij ponownie</a>
                                     </c:when>
-                                    <c:otherwise>
+                                    <c:when test="${scholarship.scholarshipType == 'SCIENTIFIC' && !hasAwaitingScientific}">
                                         <a href="/scholarships/edit/scientific/${scholarship.id}"
                                            class="btn btn-raised btn-success">Wyślij ponownie</a>
-                                    </c:otherwise>
+                                    </c:when>
                                 </c:choose>
                             </c:if>
                         </td>
@@ -124,10 +139,14 @@
 
             </table>
 
-            <a class="btn btn-raised btn-success" href="/scholarships/add/social">Nowe
-                podanie o stypendium socjalne</a>
-            <a class="btn btn-raised btn-success" href="/scholarships/add/scientific">Nowe
-                podanie o stypendium naukowe</a><br><br><br>
+            <c:if test="${!hasAwaitingSocial}">
+                <a class="btn btn-raised btn-success" href="/scholarships/add/social">Nowe
+                    podanie o stypendium socjalne</a>
+            </c:if>
+            <c:if test="${!hasAwaitingScientific}">
+                <a class="btn btn-raised btn-success" href="/scholarships/add/scientific">Nowe
+                    podanie o stypendium naukowe</a>
+            </c:if><br><br><br>
 
         </security:authorize>
 

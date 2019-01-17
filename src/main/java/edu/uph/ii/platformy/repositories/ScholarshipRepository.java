@@ -13,10 +13,14 @@ import java.util.List;
 public interface ScholarshipRepository extends JpaRepository< Scholarship, Long >
 {
     @Query ( "SELECT s FROM Scholarship s WHERE (" +
-            " s.student.id = :id)" )
+            " s.student.id = :id)" +
+            " ORDER BY (CASE WHEN s.status = 'AWAITING' THEN '1' ELSE s.status END) ASC, s.submittingDate DESC, s.statusChangeDate DESC" )
     Page< Scholarship > findAllByStudent ( @Param ( "id" ) Long id, Pageable pageable );
 
-    @Query ( "SELECT s FROM Scholarship s WHERE (" +
-            " s.student.id = :id AND s.scholarshipType = :scholarshipType AND s.status != 'REJECTED')" )
+    @Query ( "SELECT s FROM Scholarship s" +
+            " ORDER BY (CASE WHEN s.status = 'AWAITING' THEN '1' ELSE s.status END) ASC, s.submittingDate DESC, s.statusChangeDate DESC" )
+    Page< Scholarship > findAllOrdered ( Pageable pageable );
+
+    @Query ( "SELECT s FROM Scholarship s WHERE s.student.id = :id AND s.scholarshipType = :scholarshipType AND s.status <> 'REJECTED'" )
     List< Scholarship > findAwaitingsByStudentAndScholarshipType ( @Param ( "id" ) Long id, @Param ( "scholarshipType" ) ScholarshipTypes scholarshipType );
 }

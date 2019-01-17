@@ -87,7 +87,8 @@
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkForInstructor">
-
+                                <a class="dropdown-item ${param['name'] == 'condition' ? ' active':''}"
+                                   href="#">Warunki</a>
                             </div>
                         </div>
                     </li>

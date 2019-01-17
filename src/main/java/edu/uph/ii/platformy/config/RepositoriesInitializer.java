@@ -234,7 +234,7 @@ public class RepositoriesInitializer
                     this.scholarshipRepository.save ( new Scholarship ( 2L, ScholarshipTypes.SOCIAL, 1, new BigDecimal ( 1000.00 ), new BigDecimal ( 500.00 ), 0.0d, new Date ( 119, 1, 13 ), new Date ( 119, 1, 14 ), Statuses.ACCEPTED, ( Student ) this.accountRepository.findByMail ( "student2@student2.pl" )
                             .getPerson () ) );
                 }
-
+//TODO dodawanie oceny
             }
         };
     }

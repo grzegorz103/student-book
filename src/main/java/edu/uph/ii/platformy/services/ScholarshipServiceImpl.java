@@ -39,7 +39,7 @@ public class ScholarshipServiceImpl implements ScholarshipService
 
             if ( role.getUserType () == Role.UserTypes.ROLE_DEAN )
             {
-                return this.scholarshipRepository.findAll ( pageable );
+                return this.scholarshipRepository.findAllOrdered ( pageable );
             }
         }
         return null;

@@ -29,6 +29,8 @@ public class ScholarshipController
     {
         Page page = this.scholarshipService.findScholarships ( pageable );
 
+        model.addAttribute ( "hasAwaitingSocial", this.scholarshipService.hasStudentAwaitingScholarship ( ScholarshipTypes.SOCIAL ) );
+        model.addAttribute ( "hasAwaitingScientific", this.scholarshipService.hasStudentAwaitingScholarship ( ScholarshipTypes.SCIENTIFIC ) );
         model.addAttribute ( "scholarshipList", page );
 
         return "scholarshipList";
@@ -102,7 +104,7 @@ public class ScholarshipController
             return "redirect:/scholarships/list";
         }
 
-        scholarship.setAmount ( null );
+        scholarship.setAmount ( null );//TODO obliczyć średnią ocen
         model.addAttribute ( "scholarship", scholarship );
 
         return "acceptOrRejectScholarshipForm";
