@@ -104,7 +104,8 @@ public class ScholarshipController
             return "redirect:/scholarships/list";
         }
 
-        scholarship.setAmount ( null );//TODO obliczyć średnią ocen
+        scholarship.setAmount ( null );
+        model.addAttribute ( "avgGrade", this.scholarshipService.getPreviousSemesterStudentsMarks ( scholarship.getStudent () ) );
         model.addAttribute ( "scholarship", scholarship );
 
         return "acceptOrRejectScholarshipForm";

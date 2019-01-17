@@ -1,6 +1,7 @@
 package edu.uph.ii.platformy.services;
 
 import edu.uph.ii.platformy.models.SemestralGrade;
+import edu.uph.ii.platformy.models.Student;
 import edu.uph.ii.platformy.models.Subject;
 import edu.uph.ii.platformy.repositories.SemestralGradesRepository;
 import edu.uph.ii.platformy.services.declarations.SemestralGradeService;
@@ -9,20 +10,26 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service ("semestralGradeService")
+@Service ( "semestralGradeService" )
 public class SemestralGradeServiceImpl implements SemestralGradeService
 {
-        private final SemestralGradesRepository semestralGradesRepository;
+    private final SemestralGradesRepository semestralGradesRepository;
 
-        @Autowired
-        public SemestralGradeServiceImpl ( SemestralGradesRepository semestralGradesRepository )
-        {
-                this.semestralGradesRepository = semestralGradesRepository;
-        }
+    @Autowired
+    public SemestralGradeServiceImpl ( SemestralGradesRepository semestralGradesRepository )
+    {
+        this.semestralGradesRepository = semestralGradesRepository;
+    }
 
-        @Override
-        public List<SemestralGrade> getSemestralGradesBySubject ( Subject subject )
-        {
-                return semestralGradesRepository.findAllBySubject( subject );
-        }
+    @Override
+    public List< SemestralGrade > getSemestralGradesBySubject ( Subject subject )
+    {
+        return semestralGradesRepository.findAllBySubject ( subject );
+    }
+
+    @Override
+    public List< SemestralGrade > getSemestralGradesByStudentAndSemester ( Student student )
+    {
+        return this.semestralGradesRepository.findSemestralGradesByStudentAndSemester ( student.getId (), ( student.getSemester () > 1 ) ? ( student.getSemester () - 1 ) : student.getSemester () );
+    }
 }

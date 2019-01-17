@@ -243,9 +243,23 @@
                                 </c:otherwise>
                             </c:choose>
                         </td>
-                        <td>
-                                ${scholarship.status}
-                        </td>
+                        <c:choose>
+                            <c:when test="${scholarship.status == 'AWAITING'}">
+                                <td class="text-info">
+                                    Oczekujące
+                                </td>
+                            </c:when>
+                            <c:when test="${scholarship.status == 'ACCEPTED'}">
+                                <td class="text-success">
+                                    Przyznane
+                                </td>
+                            </c:when>
+                            <c:when test="${scholarship.status == 'REJECTED'}">
+                                <td class="text-danger">
+                                    Odrzucone
+                                </td>
+                            </c:when>
+                        </c:choose>
                         <td>
                             <c:if test="${scholarship.status == 'AWAITING'}">
                                 <a href="/scholarships/list/more/${scholarship.id}"

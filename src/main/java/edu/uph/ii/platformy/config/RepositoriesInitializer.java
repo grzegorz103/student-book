@@ -110,7 +110,7 @@ public class RepositoriesInitializer
                 studentPerson.setSpecialization ( this.specializationRepository.findById ( 1L )
                         .orElse ( null ) );
                 studentPerson.setSpecChosen ( studentPerson.getSpecialization () != null );
-                studentPerson.setSemester ( 2L );
+                studentPerson.setSemester ( 3L );
                 studentPerson.setBankAccountNumber ( "12345678901234567890123456" );
                 student.setPerson ( this.studentRepository.save ( studentPerson ) );
 

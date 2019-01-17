@@ -61,7 +61,8 @@
                 <c:otherwise>
                     <h3>Dane stypendium naukowego</h3>
                     <div class="mb-3">
-                        <label>Średnia ocen: ${scholarship.averageGrade}</label><br>
+                        <label>Średnia ocen podana przez studenta: ${scholarship.averageGrade}</label><br>
+                        <label>Średnia ocen wyliczona przez system: ${avgGrade}</label><br>
                     </div>
                 </c:otherwise>
             </c:choose>

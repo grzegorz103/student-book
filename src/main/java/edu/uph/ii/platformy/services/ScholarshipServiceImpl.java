@@ -3,6 +3,7 @@ package edu.uph.ii.platformy.services;
 import edu.uph.ii.platformy.models.*;
 import edu.uph.ii.platformy.repositories.AccountRepository;
 import edu.uph.ii.platformy.repositories.ScholarshipRepository;
+import edu.uph.ii.platformy.services.declarations.SemestralGradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,7 +11,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
+import java.util.List;
 
 @Service ( "scholarshipService" )
 public class ScholarshipServiceImpl implements ScholarshipService
@@ -19,6 +22,8 @@ public class ScholarshipServiceImpl implements ScholarshipService
     private ScholarshipRepository scholarshipRepository;
     @Autowired
     private AccountRepository accountRepository;
+    @Autowired
+    private SemestralGradeService semestralGradeService;
 
     @Override
     public Page< Scholarship > findScholarships ( Pageable pageable )
@@ -120,5 +125,39 @@ public class ScholarshipServiceImpl implements ScholarshipService
         scholarship.setId ( null );
 
         this.scholarshipRepository.save ( scholarship );
+    }
+
+    @Override
+    public Double getPreviousSemesterStudentsMarks ( Student student )
+    {
+        double sum = 0;
+        int count = 0;
+
+        List< SemestralGrade > semestralGrades = this.semestralGradeService.getSemestralGradesByStudentAndSemester ( student );
+
+        for ( SemestralGrade semestralGrade : semestralGrades )
+        {
+            if ( semestralGrade.getTotalGrade () == null )
+            {
+                continue;
+            }
+
+            sum += semestralGrade.getTotalGrade ();
+            ++count;
+        }
+
+        Double avg;
+
+        if ( count == 0 )
+        {
+            avg = 2.0d;
+        }
+        else
+        {
+            BigDecimal tmp = new BigDecimal ( sum / count );
+            avg = tmp.setScale ( 2, RoundingMode.HALF_UP )
+                    .doubleValue ();
+        }
+        return avg;
     }
 }
