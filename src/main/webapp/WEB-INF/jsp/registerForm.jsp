@@ -58,6 +58,12 @@
             <form:errors path="person.age" cssStyle="color:red"/>
         </div>
 
+        <div class="form-group">
+            <label for="person.bankAccountNumber">Numer konta bankowego</label>
+            <form:input path="person.bankAccountNumber" cssClass="form-control"/>
+            <form:errors path="person.bankAccountNumber" cssStyle="color:red"/>
+        </div>
+
         <form:input type="hidden" path="person.specChosen" value="false"/>
         <button type="submit" class="btn btn-raised btn-primary">OK</button>
 

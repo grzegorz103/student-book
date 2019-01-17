@@ -69,6 +69,8 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkForStudent">
                                 <a class="dropdown-item ${param['name'] == 'scholarship' ? ' active':''}"
                                    href="/scholarships/list">Stypendia</a>
+                                <a class="dropdown-item ${param['name'] == 'bankAccount' ? ' active':''}"
+                                   href="/bankAccountNumber/show">Konto w banku</a>
                                 <a class="dropdown-item ${param['name'] == 'condition' ? ' active':''}"
                                    href="#">Warunki</a>
                                 <a class="dropdown-item ${param['name'] == 'courseChange' ? ' active':''}"

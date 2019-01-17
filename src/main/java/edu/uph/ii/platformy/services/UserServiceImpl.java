@@ -82,6 +82,7 @@ public class UserServiceImpl implements UserService
         user.setRoles ( new HashSet<> ( Arrays.asList ( roleRepository.findRoleByUserType ( Role.UserTypes.ROLE_STUDENT ) ) ) );
         user.setPasswordConfirm ( null );
         Student s = ( Student ) user.getPerson ();
+        s.setSemester ( 1L );
         studentRepository.save ( s );
         accountRepository.save ( user );
     }
