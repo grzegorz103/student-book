@@ -22,6 +22,10 @@
 
         <security:authorize access="hasRole('STUDENT')">
             <H1>Stypendia</H1>
+            <c:if test="${!isOpen}">
+                <h3 class="text-warning">Możliwość składania podań o stypendium jest zamknięta</h3>
+            </c:if>
+
             <table class="table table-bordered">
                 <tr class="bg-success">
                     <th>Typ stypendium</th>
@@ -121,7 +125,7 @@
                             </c:when>
                         </c:choose>
                         <td>
-                            <c:if test="${scholarship.status == 'REJECTED'}">
+                            <c:if test="${scholarship.status == 'REJECTED' && isOpen}">
                                 <c:choose>
                                     <c:when test="${scholarship.scholarshipType == 'SOCIAL' && !hasAwaitingSocial}">
                                         <a href="/scholarships/edit/social/${scholarship.id}"
@@ -139,18 +143,31 @@
 
             </table>
 
-            <c:if test="${!hasAwaitingSocial}">
-                <a class="btn btn-raised btn-success" href="/scholarships/add/social">Nowe
-                    podanie o stypendium socjalne</a>
-            </c:if>
-            <c:if test="${!hasAwaitingScientific}">
-                <a class="btn btn-raised btn-success" href="/scholarships/add/scientific">Nowe
-                    podanie o stypendium naukowe</a>
+            <c:if test="${isOpen}">
+                <c:if test="${!hasAwaitingSocial}">
+                    <a class="btn btn-raised btn-success" href="/scholarships/add/social">Nowe
+                        podanie o stypendium socjalne</a>
+                </c:if>
+                <c:if test="${!hasAwaitingScientific}">
+                    <a class="btn btn-raised btn-success" href="/scholarships/add/scientific">Nowe
+                        podanie o stypendium naukowe</a>
+                </c:if>
             </c:if><br><br><br>
 
         </security:authorize>
 
         <security:authorize access="hasRole('DEAN')">
+
+            <c:choose>
+                <c:when test="${isOpen}">
+                    <a href="/scholarships/close"
+                       class="btn btn-raised btn-warning">Zamknij możliwość składania podań o stypendium</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="/scholarships/open"
+                       class="btn btn-raised btn-success">Otwórz możliwość składania podań o stypendium</a>
+                </c:otherwise>
+            </c:choose>
 
             <H1>Stypendia</H1>
             <table class="table table-bordered">

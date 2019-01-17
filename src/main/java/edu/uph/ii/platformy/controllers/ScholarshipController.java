@@ -31,6 +31,7 @@ public class ScholarshipController
 
         model.addAttribute ( "hasAwaitingSocial", this.scholarshipService.hasStudentAwaitingScholarship ( ScholarshipTypes.SOCIAL ) );
         model.addAttribute ( "hasAwaitingScientific", this.scholarshipService.hasStudentAwaitingScholarship ( ScholarshipTypes.SCIENTIFIC ) );
+        model.addAttribute ( "isOpen", this.scholarshipService.isOpen () );
         model.addAttribute ( "scholarshipList", page );
 
         return "scholarshipList";
@@ -51,7 +52,7 @@ public class ScholarshipController
             return "redirect:/scholarships/list";
         }
 
-        if ( this.scholarshipService.hasStudentAwaitingScholarship ( ScholarshipTypes.SOCIAL ) )
+        if ( this.scholarshipService.hasStudentAwaitingScholarship ( ScholarshipTypes.SOCIAL ) || !this.scholarshipService.isOpen () )
         {
             return "redirect:/scholarships/list";
         }
@@ -76,7 +77,7 @@ public class ScholarshipController
             return "redirect:/scholarships/list";
         }
 
-        if ( this.scholarshipService.hasStudentAwaitingScholarship ( ScholarshipTypes.SCIENTIFIC ) )
+        if ( this.scholarshipService.hasStudentAwaitingScholarship ( ScholarshipTypes.SCIENTIFIC ) || !this.scholarshipService.isOpen () )
         {
             return "redirect:/scholarships/list";
         }
@@ -90,6 +91,11 @@ public class ScholarshipController
     @PostMapping ( "/save" )
     public String addScholarship ( @Valid @ModelAttribute ( "scholarship" ) Scholarship scholarship, BindingResult bindingResult )
     {
+        if ( !this.scholarshipService.isOpen () )
+        {
+            return "redirect:/scholarships/list";
+        }
+
         this.scholarshipService.save ( scholarship );
 
         return "redirect:/scholarships/list";
@@ -125,6 +131,15 @@ public class ScholarshipController
     public String rejectScholarship ( @PathVariable ( "id" ) Scholarship scholarship )
     {
         this.scholarshipService.rejectScholarship ( scholarship );
+
+        return "redirect:/scholarships/list";
+    }
+
+    @Secured ( "ROLE_DEAN" )
+    @GetMapping ( { "/open", "/close" } )
+    public String openOrCloseScholarships ()
+    {
+        this.scholarshipService.openOrClose ();
 
         return "redirect:/scholarships/list";
     }

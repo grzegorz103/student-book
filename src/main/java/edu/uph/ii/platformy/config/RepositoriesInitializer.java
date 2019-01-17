@@ -37,8 +37,10 @@ public class RepositoriesInitializer
 
     private final ScholarshipRepository scholarshipRepository;
 
+    private final UtilsRepository utilsRepository;
+
     @Autowired
-    public RepositoriesInitializer ( InstructorRepository instructorRepository, DeanRepository deanRepository, StudentRepository studentRepository, RoleRepository roleRepository, CourseRepository courseRepository, SpecializationRepository specializationRepository, AccountRepository accountRepository, SubjectRepository subjectRepository, PasswordEncoder passwordEncoder, ScholarshipRepository scholarshipRepository )
+    public RepositoriesInitializer ( InstructorRepository instructorRepository, DeanRepository deanRepository, StudentRepository studentRepository, RoleRepository roleRepository, CourseRepository courseRepository, SpecializationRepository specializationRepository, AccountRepository accountRepository, SubjectRepository subjectRepository, PasswordEncoder passwordEncoder, ScholarshipRepository scholarshipRepository, UtilsRepository utilsRepository )
     {
         this.instructorRepository = instructorRepository;
         this.deanRepository = deanRepository;
@@ -50,13 +52,18 @@ public class RepositoriesInitializer
         this.subjectRepository = subjectRepository;
         this.passwordEncoder = passwordEncoder;
         this.scholarshipRepository = scholarshipRepository;
+        this.utilsRepository = utilsRepository;
     }
 
     @Bean
     InitializingBean init ()
     {
         return () -> {
-
+            if ( this.utilsRepository.findAll ()
+                    .isEmpty () )
+            {
+                this.utilsRepository.save ( new Utils ( 1L, true, false ) );
+            }
             if ( this.courseRepository.findAll ()
                     .isEmpty () )
             {

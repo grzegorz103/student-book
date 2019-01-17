@@ -21,4 +21,8 @@ public interface ScholarshipService
     void save ( Scholarship scholarship );
 
     Double getPreviousSemesterStudentsMarks ( Student student );
+
+    void openOrClose ();
+
+    boolean isOpen ();
 }

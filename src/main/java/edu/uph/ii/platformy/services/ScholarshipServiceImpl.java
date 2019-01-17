@@ -3,6 +3,7 @@ package edu.uph.ii.platformy.services;
 import edu.uph.ii.platformy.models.*;
 import edu.uph.ii.platformy.repositories.AccountRepository;
 import edu.uph.ii.platformy.repositories.ScholarshipRepository;
+import edu.uph.ii.platformy.repositories.UtilsRepository;
 import edu.uph.ii.platformy.services.declarations.SemestralGradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,6 +25,8 @@ public class ScholarshipServiceImpl implements ScholarshipService
     private AccountRepository accountRepository;
     @Autowired
     private SemestralGradeService semestralGradeService;
+    @Autowired
+    private UtilsRepository utilsRepository;
 
     @Override
     public Page< Scholarship > findScholarships ( Pageable pageable )
@@ -159,5 +162,22 @@ public class ScholarshipServiceImpl implements ScholarshipService
                     .doubleValue ();
         }
         return avg;
+    }
+
+    @Override
+    public void openOrClose ()
+    {
+        Utils status = utilsRepository.getOne ( 1L );
+
+        status.setScholarshipEnabled ( !status.getScholarshipEnabled () );
+
+        utilsRepository.save ( status );
+    }
+
+    @Override
+    public boolean isOpen ()
+    {
+        return utilsRepository.getOne ( 1L )
+                .getScholarshipEnabled ();
     }
 }
