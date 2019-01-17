@@ -27,12 +27,15 @@ public class CourseChange
     @Column ( name = "course_change_justification", columnDefinition = "TEXT" )
     private String courseChangeJustification; //Uzasadnienie podania
 
+    @Column ( name = "course_rejection_justification", columnDefinition = "TEXT" )
+    private String courseRejectionJustification; //Uzasadnienie odrzucenia podania
+
     @Column ( name = "submitting_date" )
-    @Temporal ( TemporalType.DATE )
+    @Temporal ( TemporalType.TIMESTAMP )
     private Date submittingDate;
 
     @Column ( name = "status_change_date" )
-    @Temporal ( TemporalType.DATE )
+    @Temporal ( TemporalType.TIMESTAMP )
     private Date statusChangeDate;
 
     @Enumerated ( EnumType.STRING )

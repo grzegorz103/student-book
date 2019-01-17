@@ -134,7 +134,7 @@ public class SpecializationServiceImpl implements SpecializationService
         }
 
 
-        private Specialization getSpecialization ( Course course )
+        public Specialization getSpecialization ( Course course )
         {
                 List<Specialization> list = specializationRepository.findAll()
                         .stream()

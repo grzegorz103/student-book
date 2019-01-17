@@ -1,5 +1,6 @@
 package edu.uph.ii.platformy.services.declarations;
 
+import edu.uph.ii.platformy.models.Course;
 import edu.uph.ii.platformy.models.Specialization;
 import edu.uph.ii.platformy.models.Student;
 
@@ -18,4 +19,6 @@ public interface SpecializationService
         void editStatus ();
 
         List<Specialization> getSpecializationById ( Student student );
+
+        Specialization getSpecialization ( Course course );
 }

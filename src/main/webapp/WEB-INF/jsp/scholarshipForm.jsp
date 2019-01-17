@@ -9,14 +9,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html>
 <c:import url="shared/header.jsp">
     <c:param name="name" value="scholarships"/>
 </c:import>
 <head>
-    <title>Formularz akceptacji stypendium</title>
+    <title>Formularz składania wniosku o stypendium</title>
 </head>
 <body>
 <div class="container text-center">

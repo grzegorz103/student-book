@@ -9,19 +9,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html>
 <c:import url="shared/header.jsp">
     <c:param name="name" value="scholarships"/>
 </c:import>
 <head>
-    <title>Formularz akceptacji stypendium</title>
+    <title>Szczegóły wniosku o stypendium</title>
 </head>
 <body>
 <div class="container text-center">
     <div class="order-md-1">
-        <h2 class="mb-3">Akceptacja stypendium</h2>
+        <h2 class="mb-3">Szczegóły wniosku o stypendium</h2>
 
         <form:form modelAttribute="scholarship" action="/scholarships/list/accept">
             <form:input path="id" cssClass="invisible disabled"/>
@@ -68,7 +68,8 @@
             </c:choose>
             <hr>
             <div class="mb-3">
-                <label>Data złożenia wniosku: ${scholarship.submittingDate}</label><br>
+                <label>Data złożenia wniosku: <fmt:formatDate value="${scholarship.submittingDate}"
+                                                              pattern="yyyy-MM-dd HH:mm:ss"/></label><br>
             </div>
             <div class="mb-3">
                 <div class="input-group">

@@ -74,7 +74,7 @@
                                 <a class="dropdown-item ${param['name'] == 'condition' ? ' active':''}"
                                    href="#">Warunki</a>
                                 <a class="dropdown-item ${param['name'] == 'courseChange' ? ' active':''}"
-                                   href="#">Zmiana kierunku</a>
+                                   href="/courseChange/list">Kierunek studiów</a>
                             </div>
                         </div>
                     </li>
@@ -110,7 +110,7 @@
                                 <a class="dropdown-item ${param['name'] == 'condition' ? ' active':''}"
                                    href="#">Warunki</a>
                                 <a class="dropdown-item ${param['name'] == 'courseChange' ? ' active':''}"
-                                   href="#">Zmiana kierunku</a>
+                                   href="/courseChange/list">Zmiana kierunku</a>
                             </div>
                         </div>
                     </li>
