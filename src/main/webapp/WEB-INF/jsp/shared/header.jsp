@@ -5,6 +5,7 @@
 <html>
 <head>
     <title>Header</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
     <link rel="stylesheet"
           href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css">
     <link rel="stylesheet" type="text/css" href="/resources/css/main.css"/>
@@ -22,10 +23,13 @@
 <body>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand" href="/">Strona główna</a>
-
-        <ul class="navbar-nav mr-auto">
+    <a class="navbar-brand" href="/">Strona główna</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar" aria-controls="myNavbar"
+            aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"/>
+    </button>
+    <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="navbar-nav mr-md-auto">
 
             <security:authorize access="isAnonymous()">
                 <li ${param['name'] == 'loginForm' ? 'class="nav-item active"' : 'class="nav-item"'}>
