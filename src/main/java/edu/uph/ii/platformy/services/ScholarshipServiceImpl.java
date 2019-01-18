@@ -19,14 +19,19 @@ import java.util.List;
 @Service ( "scholarshipService" )
 public class ScholarshipServiceImpl implements ScholarshipService
 {
+    private final ScholarshipRepository scholarshipRepository;
+    private final AccountRepository accountRepository;
+    private final SemestralGradeService semestralGradeService;
+    private final UtilsRepository utilsRepository;
+
     @Autowired
-    private ScholarshipRepository scholarshipRepository;
-    @Autowired
-    private AccountRepository accountRepository;
-    @Autowired
-    private SemestralGradeService semestralGradeService;
-    @Autowired
-    private UtilsRepository utilsRepository;
+    public ScholarshipServiceImpl ( ScholarshipRepository scholarshipRepository, AccountRepository accountRepository, SemestralGradeService semestralGradeService, UtilsRepository utilsRepository )
+    {
+        this.scholarshipRepository = scholarshipRepository;
+        this.accountRepository = accountRepository;
+        this.semestralGradeService = semestralGradeService;
+        this.utilsRepository = utilsRepository;
+    }
 
     @Override
     public Page< Scholarship > findScholarships ( Pageable pageable )
@@ -93,7 +98,7 @@ public class ScholarshipServiceImpl implements ScholarshipService
 
         User myUser = accountRepository.findByMail ( user.getUsername () );
 
-        return scholarship.getStudent ()
+        return !scholarship.getStudent ()
                 .getId ()
                 .equals ( myUser.getPerson ()
                         .getId () );
@@ -149,7 +154,7 @@ public class ScholarshipServiceImpl implements ScholarshipService
             ++count;
         }
 
-        Double avg;
+        double avg;
 
         if ( count == 0 )
         {

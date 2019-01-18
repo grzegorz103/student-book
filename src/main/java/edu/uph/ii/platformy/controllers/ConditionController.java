@@ -24,8 +24,13 @@ import java.util.List;
 @RequestMapping ( "/conditions" )
 public class ConditionController
 {
+    private final ConditionService conditionService;
+
     @Autowired
-    private ConditionService conditionService;
+    public ConditionController ( ConditionService conditionService )
+    {
+        this.conditionService = conditionService;
+    }
 
     @RequestMapping ( "/list" )
     public String showConditionList ( Model model, Pageable pageable )

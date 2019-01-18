@@ -17,20 +17,21 @@ import java.util.Date;
 @Service ( "changeCourseService" )
 public class CourseChangeServiceImpl implements CourseChangeService
 {
-    @Autowired
-    private AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
+    private final CourseChangeRepository courseChangeRepository;
+    private final StudentRepository studentRepository;
+    private final UtilsRepository utilsRepository;
+    private final SpecializationService specializationService;
 
     @Autowired
-    private CourseChangeRepository courseChangeRepository;
-
-    @Autowired
-    private StudentRepository studentRepository;
-
-    @Autowired
-    private UtilsRepository utilsRepository;
-
-    @Autowired
-    private SpecializationService specializationService;
+    public CourseChangeServiceImpl ( AccountRepository accountRepository, CourseChangeRepository courseChangeRepository, StudentRepository studentRepository, UtilsRepository utilsRepository, SpecializationService specializationService )
+    {
+        this.accountRepository = accountRepository;
+        this.courseChangeRepository = courseChangeRepository;
+        this.studentRepository = studentRepository;
+        this.utilsRepository = utilsRepository;
+        this.specializationService = specializationService;
+    }
 
     @Override
     public Page< CourseChange > findCourseChange ( Pageable pageable )
@@ -78,11 +79,10 @@ public class CourseChangeServiceImpl implements CourseChangeService
                 .getAuthentication ()
                 .getPrincipal ();
 
-        User myUser = accountRepository.findByMail ( user.getUsername () );
-
         return courseChange.getStudent ()
                 .getId ()
-                .equals ( myUser.getPerson ()
+                .equals ( accountRepository.findByMail ( user.getUsername () )
+                        .getPerson ()
                         .getId () );
     }
 

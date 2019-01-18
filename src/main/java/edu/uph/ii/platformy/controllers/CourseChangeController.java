@@ -23,10 +23,15 @@ import java.util.List;
 @RequestMapping ( "/courseChange" )
 public class CourseChangeController
 {
+    private final CourseChangeService courseChangeService;
+    private final CourseService courseService;
+
     @Autowired
-    private CourseChangeService courseChangeService;
-    @Autowired
-    private CourseService courseService;
+    public CourseChangeController ( CourseChangeService courseChangeService, CourseService courseService )
+    {
+        this.courseChangeService = courseChangeService;
+        this.courseService = courseService;
+    }
 
     @RequestMapping ( "/list" )
     public String showCourseChangeList ( Model model, @RequestParam ( name = "notEnoughtCourses", required = false ) Boolean notEnoughtCourses, @RequestParam ( name = "hasAwaiting", required = false ) Boolean hasAwaiting, Pageable pageable )

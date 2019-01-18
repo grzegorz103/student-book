@@ -27,10 +27,4 @@ public interface ConditionRepository extends JpaRepository< Condition, Long >
             " ORDER BY (CASE WHEN c.status = 'AWAITING' THEN '1' ELSE c.status END) ASC," +
             " c.submittingDate DESC, c.statusChangeDate DESC" )
     Page< Condition > findAllByInstructor ( @Param ( "id" ) Long id, Pageable pageable );
-
-    @Query ( "SELECT s FROM Scholarship s WHERE" +
-            " s.student.id = :id" +
-            " AND s.scholarshipType = :scholarshipType" +
-            " AND s.status <> 'REJECTED'" )
-    List< Condition > canStudentGetCondition ( Long id );
 }

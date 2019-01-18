@@ -19,14 +19,19 @@ import java.util.stream.Collectors;
 @Service ( "conditionService" )
 public class ConditionServiceImpl implements ConditionService
 {
+    private final ConditionRepository conditionRepository;
+    private final AccountRepository accountRepository;
+    private final SemestralGradeService semestralGradeService;
+    private final UtilsRepository utilsRepository;
+
     @Autowired
-    private ConditionRepository conditionRepository;
-    @Autowired
-    private AccountRepository accountRepository;
-    @Autowired
-    private SemestralGradeService semestralGradeService;
-    @Autowired
-    private UtilsRepository utilsRepository;
+    public ConditionServiceImpl ( ConditionRepository conditionRepository, AccountRepository accountRepository, SemestralGradeService semestralGradeService, UtilsRepository utilsRepository )
+    {
+        this.conditionRepository = conditionRepository;
+        this.accountRepository = accountRepository;
+        this.semestralGradeService = semestralGradeService;
+        this.utilsRepository = utilsRepository;
+    }
 
     @Override
     public Page< Condition > findConditions ( Pageable pageable )
@@ -133,12 +138,12 @@ public class ConditionServiceImpl implements ConditionService
                 .getAuthentication ()
                 .getPrincipal ();
 
-        User myUser = accountRepository.findByMail ( user.getUsername () );
+        Student student = ( Student ) accountRepository.findByMail ( user.getUsername () )
+                .getPerson ();
 
         return condition.getStudent ()
                 .getId ()
-                .equals ( myUser.getPerson ()
-                        .getId () );
+                .equals ( student.getId () );
     }
 
     @Override

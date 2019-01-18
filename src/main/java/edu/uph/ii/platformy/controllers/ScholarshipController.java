@@ -21,8 +21,13 @@ import javax.validation.Valid;
 @RequestMapping ( "/scholarships" )
 public class ScholarshipController
 {
+    private final ScholarshipService scholarshipService;
+
     @Autowired
-    private ScholarshipService scholarshipService;
+    public ScholarshipController ( ScholarshipService scholarshipService )
+    {
+        this.scholarshipService = scholarshipService;
+    }
 
     @RequestMapping ( "/list" )
     public String showScholarshipList ( Model model, Pageable pageable )
@@ -47,7 +52,7 @@ public class ScholarshipController
             scholarship.setScholarshipType ( ScholarshipTypes.SOCIAL );
             scholarship.setPeopleNumber ( null );
         }
-        else if ( scholarship.getStatus () != Statuses.REJECTED || scholarship.getScholarshipType () != ScholarshipTypes.SOCIAL || !this.scholarshipService.scholarshipBelongsToLoggedStudent ( scholarship ) )
+        else if ( scholarship.getStatus () != Statuses.REJECTED || scholarship.getScholarshipType () != ScholarshipTypes.SOCIAL || this.scholarshipService.scholarshipBelongsToLoggedStudent ( scholarship ) )
         {
             return "redirect:/scholarships/list";
         }
@@ -71,7 +76,7 @@ public class ScholarshipController
             scholarship = new Scholarship ();
             scholarship.setScholarshipType ( ScholarshipTypes.SCIENTIFIC );
         }
-        else if ( scholarship.getStatus () != Statuses.REJECTED || scholarship.getScholarshipType () != ScholarshipTypes.SCIENTIFIC || !this.scholarshipService.scholarshipBelongsToLoggedStudent ( scholarship ) )
+        else if ( scholarship.getStatus () != Statuses.REJECTED || scholarship.getScholarshipType () != ScholarshipTypes.SCIENTIFIC || this.scholarshipService.scholarshipBelongsToLoggedStudent ( scholarship ) )
         {
 
             return "redirect:/scholarships/list";

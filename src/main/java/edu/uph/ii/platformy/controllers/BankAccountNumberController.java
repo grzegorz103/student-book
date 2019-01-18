@@ -22,11 +22,15 @@ import javax.validation.Valid;
 @RequestMapping ( "/bankAccountNumber" )
 public class BankAccountNumberController
 {
-    @Autowired
-    private AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
+    private final StudentRepository studentRepository;
 
     @Autowired
-    private StudentRepository studentRepository;
+    public BankAccountNumberController ( AccountRepository accountRepository, StudentRepository studentRepository )
+    {
+        this.accountRepository = accountRepository;
+        this.studentRepository = studentRepository;
+    }
 
     @RequestMapping ( "/show" )
     public String showBankAccountNumber ( Model model, @RequestParam ( name = "saved", required = false ) Boolean saved )
