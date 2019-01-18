@@ -58,13 +58,29 @@ public class ProtocolController
 
 
         @Secured ("ROLE_INSTRUCTOR")
-        @PostMapping ("/grades")
+        @RequestMapping ("/gradeslist")
         public String showGrades ( Model model,
                                    @RequestParam ("id") Instructor id,
-                                   @RequestParam ("subj") Subject subject )
+                                   @RequestParam ("subj") Subject subject)
         {
+                model.addAttribute( "grade", new Grade() );
                 model.addAttribute( "list", semestralGradeService.getSemestralGradesBySubject( subject ) );
                 return "semestralGradesPage";
+        }
+
+
+        @Secured ("ROLE_INSTRUCTOR")
+        @PostMapping ("/grades")
+        public String changeGrades ( @ModelAttribute ("grade") Grade grade,
+                                     @RequestParam ("grade") SemestralGrade semestralGrade,
+                                     @RequestParam("id") int id,
+                                     @RequestParam("subj") int subject)
+        {
+                semestralGrade.setFirstTerminGrade( grade.getFirstGrade() );
+                semestralGrade.setSecondTerminGrade( grade.getSecondGrade() );
+                semestralGrade.setTotalGrade( grade.getTotalGrade() );
+                semestralGradeService.changeGrades( semestralGrade );
+                return "redirect:/protocol/gradeslist?id=" + id +"&subj=" + subject;
         }
 
 

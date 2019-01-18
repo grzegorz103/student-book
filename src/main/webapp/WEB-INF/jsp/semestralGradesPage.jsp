@@ -27,23 +27,29 @@
             </tr>
 
             <c:forEach items="${list}" var="grade">
-             <tr>
-                <td>
-                        ${grade.subject.name}
-                </td>
-                <td>
-                        ${grade.student.name} ${grade.student.surname}
-                </td>
+                <tr>
+                    <form:form action="/protocol/grades?grade=${grade.id}&id=${param.id}&subj=${param.subj}"
+                               method="post" modelAttribute="grade">
 
-                <td>
-                        ${grade.firstTerminGrade}
-                </td>
+                        <td>
+                                ${grade.subject.name}
+                        </td>
+                        <td>
+                                ${grade.student.name} ${grade.student.surname}
+                        </td>
 
-                <td>
-                        ${grade.secondTerminGrade}
-                </td>
+                        <td><form:input path="firstGrade" value="${grade.firstTerminGrade}"/>
 
-                <td>${grade.totalGrade}</td>
+                        </td>
+
+                        <td><form:input path="secondGrade" value="${grade.secondTerminGrade}"/>
+                        </td>
+
+                        <td><form:input path="totalGrade" value="${grade.totalGrade}"/>
+                        </td>
+                        <td>
+                            <button type="submit" class="btn btn-raised btn-success">Zapisz</button></td>
+                    </form:form>
                 </tr>
             </c:forEach>
         </table>

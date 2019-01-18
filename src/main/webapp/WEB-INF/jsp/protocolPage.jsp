@@ -58,7 +58,7 @@
                     </td>
 
                     <td><c:if test="${protocol.status == 'PROTOCOLE_OPEN'}">
-                        <button formaction="/protocol/grades?id=${protocol.subject.instructor.id}&subj=${protocol.subject.id}"
+                        <button formaction="/protocol/gradeslist?id=${protocol.subject.instructor.id}&subj=${protocol.subject.id}"
                                 type="submit" class="btn btn-raised btn-primary">Do ocen
                         </button>
                     </c:if></td>
