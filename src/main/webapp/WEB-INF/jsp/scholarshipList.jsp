@@ -30,6 +30,7 @@
                 <table class="table table-bordered">
                     <tr class="bg-success">
                         <th>Typ stypendium</th>
+                        <th>Semestr</th>
                         <th>Ilość osób w rodzinie</th>
                         <th>Łączny przychód wszystkich członków rodziny</th>
                         <th>Średnia ocen</th>
@@ -53,6 +54,9 @@
                                         Nie dotyczy
                                     </c:otherwise>
                                 </c:choose>
+                            </td>
+                            <td>
+                                    ${scholarship.semester}
                             </td>
                             <td>
                                 <c:choose>
@@ -185,6 +189,7 @@
                         <th>id</th>
                         <th>Imię i nazwisko studenta</th>
                         <th>Typ stypendium</th>
+                        <th>Semestr</th>
                         <th>Ilość osób w rodzinie</th>
                         <th>Łączny przychód wszystkich członków rodziny</th>
                         <th>Średnia ocen</th>
@@ -216,6 +221,9 @@
                                         Nie dotyczy
                                     </c:otherwise>
                                 </c:choose>
+                            </td>
+                            <td>
+                                    ${scholarship.semester}
                             </td>
                             <td>
                                 <c:choose>

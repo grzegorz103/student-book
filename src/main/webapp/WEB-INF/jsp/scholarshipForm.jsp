@@ -36,7 +36,7 @@
                             <form:errors path="peopleNumber" cssClass="alert-danger"/>
                             <form:input path="peopleNumber" cssClass="form-control col-md-1 mr-auto"
                                         cssErrorClass="form-control is-invalid"
-                                        placeholder="Minimum 1" required="true" min="1"/>
+                                        placeholder="Minimum 1" required="true" type="number" min="1"/>
                         </div>
                     </div>
                     <div class="mb-3">
@@ -46,7 +46,7 @@
                             <form:errors path="allMembersIncome" cssClass="alert-danger"/>
                             <form:input path="allMembersIncome" cssClass="form-control col-md-1 mr-auto"
                                         cssErrorClass="form-control is-invalid"
-                                        placeholder="0.00 zł" required="true" min="0"/>
+                                        placeholder="0.00 zł" required="true" type="number" step="0.01" min="0"/>
                         </div>
                     </div>
                 </c:when>

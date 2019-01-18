@@ -21,6 +21,10 @@ public interface ScholarshipRepository extends JpaRepository< Scholarship, Long 
             " ORDER BY (CASE WHEN s.status = 'AWAITING' THEN '1' ELSE s.status END) ASC, s.submittingDate DESC, s.statusChangeDate DESC" )
     Page< Scholarship > findAllForDean ( Pageable pageable );
 
-    @Query ( "SELECT s FROM Scholarship s WHERE s.student.id = :id AND s.scholarshipType = :scholarshipType AND s.status <> 'REJECTED'" )
-    List< Scholarship > findAwaitingsByStudentAndScholarshipType ( @Param ( "id" ) Long id, @Param ( "scholarshipType" ) ScholarshipTypes scholarshipType );
+    @Query ( "SELECT s FROM Scholarship s WHERE" +
+            " s.student.id = :id" +
+            " AND s.scholarshipType = :scholarshipType" +
+            " AND s.status <> 'REJECTED'" +
+            " AND s.semester = :semester" )
+    List< Scholarship > findAwaitingsByStudentAndScholarshipType ( @Param ( "id" ) Long id, @Param ( "semester" ) Long semester, @Param ( "scholarshipType" ) ScholarshipTypes scholarshipType );
 }

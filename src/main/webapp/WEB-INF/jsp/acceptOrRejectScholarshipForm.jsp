@@ -50,6 +50,9 @@
                 <c:when test="${scholarship.scholarshipType.name() == 'SOCIAL'}">
                     <h3>Dane stypendium socjalnego</h3>
                     <div class="mb-3">
+                        <label>Semestr: ${scholarship.semester}</label><br>
+                    </div>
+                    <div class="mb-3">
                         <label>Ilość osób w rodzinie (z wnioskodawcą): ${scholarship.peopleNumber}</label><br>
                     </div>
                     <div class="mb-3">
@@ -63,6 +66,9 @@
                 </c:when>
                 <c:otherwise>
                     <h3>Dane stypendium naukowego</h3>
+                    <div class="mb-3">
+                        <label>Semestr: ${scholarship.semester}</label><br>
+                    </div>
                     <div class="mb-3">
                         <label>Średnia ocen podana przez studenta: ${scholarship.averageGrade}</label><br>
                         <label>Średnia ocen wyliczona przez system: ${avgGrade}</label><br>
@@ -80,7 +86,7 @@
                     <form:errors path="amount" cssClass="alert-danger"/>
                     <form:input path="amount" cssClass="form-control col-md-1 mr-auto"
                                 cssErrorClass="form-control is-invalid"
-                                placeholder="0.00 zł" required="true" min="1" value=""/>
+                                placeholder="0.00 zł" required="true" min="1" type="number" step="0.01"/>
                 </div>
             </div>
             <button type="submit" class="btn btn-raised btn-success">Przyznaj stypendium</button>

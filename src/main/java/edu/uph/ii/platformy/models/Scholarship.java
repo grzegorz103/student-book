@@ -38,6 +38,8 @@ public class Scholarship
     @Column ( name = "average_grade" )
     private double averageGrade = 0.0d; //średnia ocen z poprzedniego roku (tylko stypendium naukowe)
 
+    private Long semester;
+
     @Column ( name = "submitting_date" )
     @Temporal ( TemporalType.TIMESTAMP )
     private Date submittingDate;

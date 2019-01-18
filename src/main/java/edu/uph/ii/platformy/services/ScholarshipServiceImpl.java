@@ -105,7 +105,7 @@ public class ScholarshipServiceImpl implements ScholarshipService
     }
 
     @Override
-    public boolean hasStudentAwaitingScholarship ( ScholarshipTypes scholarshipTypes )
+    public boolean hasStudentAwaitingScholarship ( ScholarshipTypes scholarshipType )
     {
         org.springframework.security.core.userdetails.User user = ( org.springframework.security.core.userdetails.User ) SecurityContextHolder.getContext ()
                 .getAuthentication ()
@@ -113,8 +113,21 @@ public class ScholarshipServiceImpl implements ScholarshipService
 
         User myUser = accountRepository.findByMail ( user.getUsername () );
 
+        for ( Role role : myUser.getRoles () )
+        {
+            if ( role.getUserType () != Role.UserTypes.ROLE_STUDENT )
+            {
+                return true;
+            }
+        }
+
+        if ( scholarshipType == ScholarshipTypes.SCIENTIFIC && ( ( Student ) myUser.getPerson () ).getSemester () <= 1 )
+        {
+            return true;
+        }
+
         return ( !this.scholarshipRepository.findAwaitingsByStudentAndScholarshipType ( myUser.getPerson ()
-                .getId (), scholarshipTypes )
+                .getId (), ( ( Student ) myUser.getPerson () ).getSemester (), scholarshipType )
                 .isEmpty () );
     }
 
@@ -128,6 +141,7 @@ public class ScholarshipServiceImpl implements ScholarshipService
         User myUser = accountRepository.findByMail ( user.getUsername () );
 
         scholarship.setStudent ( ( Student ) myUser.getPerson () );
+        scholarship.setSemester ( ( ( Student ) myUser.getPerson () ).getSemester () );
         scholarship.setSubmittingDate ( new Date () );
         scholarship.setStatus ( Statuses.AWAITING );
         scholarship.setId ( null );
