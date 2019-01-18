@@ -95,6 +95,13 @@ public class CourseChangeServiceImpl implements CourseChangeService
 
         User myUser = accountRepository.findByMail ( user.getUsername () );
 
+        if ( courseChange.getId () != null )
+        {
+            this.courseChangeRepository.findById ( courseChange.getId () )
+                    .ifPresent ( tmp -> courseChange.setCourseRejectionJustification ( tmp.getCourseRejectionJustification ()
+                            .trim () ) );
+        }
+
         courseChange.setStudent ( ( Student ) myUser.getPerson () );
         courseChange.setSubmittingDate ( new Date () );
         courseChange.setStatus ( Statuses.AWAITING );
@@ -118,6 +125,12 @@ public class CourseChangeServiceImpl implements CourseChangeService
             courseChange.getStudent ()
                     .setCourse ( courseChange.getNewCourse () );
 
+            courseChange.getStudent ()
+                    .setSpecChosen ( false );
+
+            courseChange.getStudent ()
+                    .setSpecialization ( null );
+
             if ( !utilsRepository.getOne ( 1L )
                     .getSpecialization_enabled () )
             {
@@ -127,6 +140,8 @@ public class CourseChangeServiceImpl implements CourseChangeService
                     courseChange.getStudent ()
                             .setSpecialization ( this.specializationService.getSpecialization ( courseChange.getStudent ()
                                     .getCourse () ) );
+                    courseChange.getStudent ()
+                            .setSpecChosen ( true );
                 }
             }
 

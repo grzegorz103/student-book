@@ -22,7 +22,7 @@
 
     <security:authorize access="hasRole('STUDENT')">
         <c:if test="${!isOpen}">
-            <h3 class="text-warning">Możliwość składania podań o stypendium jest zamknięta</h3>
+            <h3 class="text-warning">Możliwość składania wniosków o stypendium jest zamknięta</h3>
         </c:if>
 
         <c:choose>
@@ -39,14 +39,14 @@
                         <th>Status wniosku</th>
                         <th>Opcje</th>
                     </tr>
-                    <c:forEach items="${scholarshipList.content}" var="courseChange">
+                    <c:forEach items="${scholarshipList.content}" var="scholarship">
                         <tr>
                             <td>
                                 <c:choose>
-                                    <c:when test="${courseChange.scholarshipType == 'SOCIAL'}">
+                                    <c:when test="${scholarship.scholarshipType == 'SOCIAL'}">
                                         Socjalne
                                     </c:when>
-                                    <c:when test="${courseChange.scholarshipType == 'SCIENTIFIC'}">
+                                    <c:when test="${scholarship.scholarshipType == 'SCIENTIFIC'}">
                                         Naukowe
                                     </c:when>
                                     <c:otherwise>
@@ -56,8 +56,8 @@
                             </td>
                             <td>
                                 <c:choose>
-                                    <c:when test="${courseChange.scholarshipType == 'SOCIAL'}">
-                                        ${courseChange.peopleNumber}
+                                    <c:when test="${scholarship.scholarshipType == 'SOCIAL'}">
+                                        ${scholarship.peopleNumber}
                                     </c:when>
                                     <c:otherwise>
                                         Nie dotyczy
@@ -66,8 +66,8 @@
                             </td>
                             <td>
                                 <c:choose>
-                                    <c:when test="${courseChange.scholarshipType == 'SOCIAL'}">
-                                        ${courseChange.allMembersIncome}
+                                    <c:when test="${scholarship.scholarshipType == 'SOCIAL'}">
+                                        ${scholarship.allMembersIncome}
                                     </c:when>
                                     <c:otherwise>
                                         Nie dotyczy
@@ -76,8 +76,8 @@
                             </td>
                             <td>
                                 <c:choose>
-                                    <c:when test="${courseChange.scholarshipType == 'SCIENTIFIC'}">
-                                        ${courseChange.averageGrade}
+                                    <c:when test="${scholarship.scholarshipType == 'SCIENTIFIC'}">
+                                        ${scholarship.averageGrade}
                                     </c:when>
                                     <c:otherwise>
                                         Nie dotyczy
@@ -86,8 +86,8 @@
                             </td>
                             <td>
                                 <c:choose>
-                                    <c:when test="${courseChange.amount != null && courseChange.amount > 0}">
-                                        ${courseChange.amount}
+                                    <c:when test="${scholarship.amount != null && scholarship.amount > 0}">
+                                        ${scholarship.amount}
                                     </c:when>
                                     <c:otherwise>
                                         Nie ustalono
@@ -95,12 +95,12 @@
                                 </c:choose>
                             </td>
                             <td>
-                                <fmt:formatDate value="${courseChange.submittingDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                <fmt:formatDate value="${scholarship.submittingDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
                             </td>
                             <td>
                                 <c:choose>
-                                    <c:when test="${courseChange.statusChangeDate != null}">
-                                        <fmt:formatDate value="${courseChange.statusChangeDate}"
+                                    <c:when test="${scholarship.statusChangeDate != null}">
+                                        <fmt:formatDate value="${scholarship.statusChangeDate}"
                                                         pattern="yyyy-MM-dd HH:mm:ss"/>
                                     </c:when>
                                     <c:otherwise>
@@ -110,31 +110,31 @@
                             </td>
 
                             <c:choose>
-                                <c:when test="${courseChange.status == 'AWAITING'}">
+                                <c:when test="${scholarship.status == 'AWAITING'}">
                                     <td class="text-info">
                                         Oczekujące
                                     </td>
                                 </c:when>
-                                <c:when test="${courseChange.status == 'ACCEPTED'}">
+                                <c:when test="${scholarship.status == 'ACCEPTED'}">
                                     <td class="text-success">
                                         Przyznane
                                     </td>
                                 </c:when>
-                                <c:when test="${courseChange.status == 'REJECTED'}">
+                                <c:when test="${scholarship.status == 'REJECTED'}">
                                     <td class="text-danger">
                                         Odrzucone
                                     </td>
                                 </c:when>
                             </c:choose>
                             <td>
-                                <c:if test="${courseChange.status == 'REJECTED' && isOpen}">
+                                <c:if test="${scholarship.status == 'REJECTED' && isOpen}">
                                     <c:choose>
-                                        <c:when test="${courseChange.scholarshipType == 'SOCIAL' && !hasAwaitingSocial}">
-                                            <a href="/scholarships/edit/social/${courseChange.id}"
+                                        <c:when test="${scholarship.scholarshipType == 'SOCIAL' && !hasAwaitingSocial}">
+                                            <a href="/scholarships/edit/social/${scholarship.id}"
                                                class="btn btn-raised btn-success">Wyślij ponownie</a>
                                         </c:when>
-                                        <c:when test="${courseChange.scholarshipType == 'SCIENTIFIC' && !hasAwaitingScientific}">
-                                            <a href="/scholarships/edit/scientific/${courseChange.id}"
+                                        <c:when test="${scholarship.scholarshipType == 'SCIENTIFIC' && !hasAwaitingScientific}">
+                                            <a href="/scholarships/edit/scientific/${scholarship.id}"
                                                class="btn btn-raised btn-success">Wyślij ponownie</a>
                                         </c:when>
                                     </c:choose>
@@ -154,12 +154,12 @@
         </c:choose>
         <c:if test="${isOpen}">
             <c:if test="${!hasAwaitingSocial}">
-                <a class="btn btn-raised btn-success" href="/scholarships/add/social">Nowe
-                    podanie o stypendium socjalne</a>
+                <a class="btn btn-raised btn-success" href="/scholarships/add/social">Nowy
+                    wniosek o stypendium socjalne</a>
             </c:if>
             <c:if test="${!hasAwaitingScientific}">
-                <a class="btn btn-raised btn-success" href="/scholarships/add/scientific">Nowe
-                    podanie o stypendium naukowe</a>
+                <a class="btn btn-raised btn-success" href="/scholarships/add/scientific">Nowy
+                    wniosek o stypendium naukowe</a>
             </c:if>
         </c:if><br><br><br>
 
@@ -170,11 +170,11 @@
         <c:choose>
             <c:when test="${isOpen}">
                 <a href="/scholarships/close"
-                   class="btn btn-raised btn-warning">Zamknij możliwość składania podań o stypendium</a>
+                   class="btn btn-raised btn-warning">Zamknij możliwość składania wniosków o stypendium</a>
             </c:when>
             <c:otherwise>
                 <a href="/scholarships/open"
-                   class="btn btn-raised btn-success">Otwórz możliwość składania podań o stypendium</a>
+                   class="btn btn-raised btn-success">Otwórz możliwość składania wniosków o stypendium</a>
             </c:otherwise>
         </c:choose>
 
@@ -194,22 +194,22 @@
                         <th>Status wniosku</th>
                         <th>Opcje</th>
                     </tr>
-                    <c:forEach items="${scholarshipList.content}" var="courseChange">
+                    <c:forEach items="${scholarshipList.content}" var="scholarship">
                         <tr>
                             <td>
-                                    ${courseChange.id}
+                                    ${scholarship.id}
                             </td>
 
                             <td>
-                                    ${courseChange.student.name} ${courseChange.student.surname}
+                                    ${scholarship.student.name} ${scholarship.student.surname}
                             </td>
 
                             <td>
                                 <c:choose>
-                                    <c:when test="${courseChange.scholarshipType == 'SOCIAL'}">
+                                    <c:when test="${scholarship.scholarshipType == 'SOCIAL'}">
                                         Socjalne
                                     </c:when>
-                                    <c:when test="${courseChange.scholarshipType == 'SCIENTIFIC'}">
+                                    <c:when test="${scholarship.scholarshipType == 'SCIENTIFIC'}">
                                         Naukowe
                                     </c:when>
                                     <c:otherwise>
@@ -219,8 +219,8 @@
                             </td>
                             <td>
                                 <c:choose>
-                                    <c:when test="${courseChange.scholarshipType == 'SOCIAL'}">
-                                        ${courseChange.peopleNumber}
+                                    <c:when test="${scholarship.scholarshipType == 'SOCIAL'}">
+                                        ${scholarship.peopleNumber}
                                     </c:when>
                                     <c:otherwise>
                                         Nie dotyczy
@@ -229,8 +229,8 @@
                             </td>
                             <td>
                                 <c:choose>
-                                    <c:when test="${courseChange.scholarshipType == 'SOCIAL'}">
-                                        ${courseChange.allMembersIncome}
+                                    <c:when test="${scholarship.scholarshipType == 'SOCIAL'}">
+                                        ${scholarship.allMembersIncome}
                                     </c:when>
                                     <c:otherwise>
                                         Nie dotyczy
@@ -239,8 +239,8 @@
                             </td>
                             <td>
                                 <c:choose>
-                                    <c:when test="${courseChange.scholarshipType == 'SCIENTIFIC'}">
-                                        ${courseChange.averageGrade}
+                                    <c:when test="${scholarship.scholarshipType == 'SCIENTIFIC'}">
+                                        ${scholarship.averageGrade}
                                     </c:when>
                                     <c:otherwise>
                                         Nie dotyczy
@@ -249,8 +249,8 @@
                             </td>
                             <td>
                                 <c:choose>
-                                    <c:when test="${courseChange.amount != null && courseChange.amount > 0}">
-                                        ${courseChange.amount}
+                                    <c:when test="${scholarship.amount != null && scholarship.amount > 0}">
+                                        ${scholarship.amount}
                                     </c:when>
                                     <c:otherwise>
                                         Nie ustalono
@@ -258,12 +258,12 @@
                                 </c:choose>
                             </td>
                             <td>
-                                <fmt:formatDate value="${courseChange.submittingDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                <fmt:formatDate value="${scholarship.submittingDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
                             </td>
                             <td>
                                 <c:choose>
-                                    <c:when test="${courseChange.statusChangeDate != null}">
-                                        <fmt:formatDate value="${courseChange.statusChangeDate}"
+                                    <c:when test="${scholarship.statusChangeDate != null}">
+                                        <fmt:formatDate value="${scholarship.statusChangeDate}"
                                                         pattern="yyyy-MM-dd HH:mm:ss"/>
                                     </c:when>
                                     <c:otherwise>
@@ -272,25 +272,25 @@
                                 </c:choose>
                             </td>
                             <c:choose>
-                                <c:when test="${courseChange.status == 'AWAITING'}">
+                                <c:when test="${scholarship.status == 'AWAITING'}">
                                     <td class="text-info">
                                         Oczekujące
                                     </td>
                                 </c:when>
-                                <c:when test="${courseChange.status == 'ACCEPTED'}">
+                                <c:when test="${scholarship.status == 'ACCEPTED'}">
                                     <td class="text-success">
                                         Przyznane
                                     </td>
                                 </c:when>
-                                <c:when test="${courseChange.status == 'REJECTED'}">
+                                <c:when test="${scholarship.status == 'REJECTED'}">
                                     <td class="text-danger">
                                         Odrzucone
                                     </td>
                                 </c:when>
                             </c:choose>
                             <td>
-                                <c:if test="${courseChange.status == 'AWAITING'}">
-                                    <a href="/scholarships/list/more/${courseChange.id}"
+                                <c:if test="${scholarship.status == 'AWAITING'}">
+                                    <a href="/scholarships/list/more/${scholarship.id}"
                                        class="btn btn-raised btn-success">Więcej</a>
                                 </c:if>
                             </td>

@@ -62,7 +62,7 @@ public class RepositoriesInitializer
             if ( this.utilsRepository.findAll ()
                     .isEmpty () )
             {
-                this.utilsRepository.save ( new Utils ( 1L, true, false ) );
+                this.utilsRepository.save ( new Utils ( 1L, true, true, true ) );
             }
             if ( this.courseRepository.findAll ()
                     .isEmpty () )

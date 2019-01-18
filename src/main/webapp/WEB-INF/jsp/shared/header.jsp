@@ -1,12 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
+    <title>Header</title>
     <link rel="stylesheet"
           href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css">
-    <link rel="stylesheet" type="text/css" href="/statics/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="/resources/css/main.css"/>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -72,7 +73,7 @@
                                 <a class="dropdown-item ${param['name'] == 'bankAccount' ? ' active':''}"
                                    href="/bankAccountNumber/show">Konto w banku</a>
                                 <a class="dropdown-item ${param['name'] == 'condition' ? ' active':''}"
-                                   href="#">Warunki</a>
+                                   href="/conditions/list">Warunki</a>
                                 <a class="dropdown-item ${param['name'] == 'courseChange' ? ' active':''}"
                                    href="/courseChange/list">Kierunek studiów</a>
                             </div>
@@ -90,7 +91,7 @@
 
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkForInstructor">
                                 <a class="dropdown-item ${param['name'] == 'condition' ? ' active':''}"
-                                   href="#">Warunki</a>
+                                   href="/conditions/list">Warunki</a>
                             </div>
                         </div>
                     </li>
@@ -108,7 +109,7 @@
                                 <a class="dropdown-item ${param['name'] == 'scholarship' ? ' active':''}"
                                    href="/scholarships/list">Stypendia</a>
                                 <a class="dropdown-item ${param['name'] == 'condition' ? ' active':''}"
-                                   href="#">Warunki</a>
+                                   href="/conditions/list">Warunki</a>
                                 <a class="dropdown-item ${param['name'] == 'courseChange' ? ' active':''}"
                                    href="/courseChange/list">Zmiana kierunku</a>
                             </div>

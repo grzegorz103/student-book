@@ -13,63 +13,61 @@
 
 <html>
 <c:import url="shared/header.jsp">
-    <c:param name="name" value="courseChange"/>
+    <c:param name="name" value="condition"/>
 </c:import>
 <head>
-    <title>Szczegóły podania o zmianę kierunku</title>
+    <title>Szczegóły podania o warunek</title>
 </head>
 <body>
 <div class="container text-center">
     <div class="order-md-1">
-        <h2 class="mb-3">Szczegóły podania o zmianę kierunku</h2>
+        <h2 class="mb-3">Szczegóły podania o warunek</h2>
 
-        <form:form modelAttribute="courseChange" action="/courseChange/list/reject">
+        <form:form modelAttribute="condition" action="/conditions/list/reject">
             <form:input path="id" cssClass="invisible disabled"/>
             <h3>Dane studenta</h3>
             <div class="mb-3">
-                <label>Identyfikator: ${courseChange.student.id}</label><br>
+                <label>Identyfikator: ${condition.student.id}</label><br>
             </div>
             <div class="mb-3">
                 <label>Imię i
-                    nazwisko: ${courseChange.student.name} ${courseChange.student.surname}</label><br>
+                    nazwisko: ${condition.student.name} ${condition.student.surname}</label><br>
             </div>
             <div class="mb-3">
-                <label>Pesel: ${courseChange.student.pesel}</label><br>
+                <label>Pesel: ${condition.student.pesel}</label><br>
             </div>
             <div class="mb-3">
-                <label>Semestr: ${courseChange.student.semester}</label><br>
+                <label>Semestr: ${condition.student.semester}</label><br>
             </div>
             <div class="mb-3">
-                <label>Aktualny kierunek: ${courseChange.student.course.name}</label><br>
-            </div>
-            <div class="mb-3">
-                <label>Nowy kierunek: ${courseChange.newCourse.name}</label><br>
+                <label>Kierunek: ${condition.student.course.name}</label><br>
             </div>
             <div class="mb-3">
                 <label>Uzasadnienie podania:</label><br>
-                <p>${courseChange.courseChangeJustification}</p>
+                <p>${condition.conditionJustification}</p>
             </div>
             <hr>
             <div class="mb-3">
                 <label>
-                    Data złożenia podania: <fmt:formatDate value="${courseChange.submittingDate}"
+                    Data złożenia podania: <fmt:formatDate value="${condition.submittingDate}"
                                                            pattern="yyyy-MM-dd HH:mm:ss"/>
                 </label><br>
             </div>
             <div class="mb-3">
-                <label for="courseRejectionJustification" class="required mr-3 ml-auto">
+                <label for="conditionRejectionJustification" class="required mr-3 ml-auto">
                     Powód odrzucenia podania
                 </label>
                 <div class="input-group">
-                    <form:errors path="courseRejectionJustification" cssClass="alert-danger"/>
-                    <form:textarea path="courseRejectionJustification" cssClass="form-control col-md-4 ml-auto mr-auto"
+                    <form:errors path="conditionRejectionJustification" cssClass="alert-danger"/>
+                    <form:textarea path="conditionRejectionJustification"
+                                   cssClass="form-control col-md-4 ml-auto mr-auto"
                                    cssErrorClass="form-control is-invalid"
                                    placeholder="Powód" required="true" rows="5"/>
                 </div>
             </div>
-            <a href="/courseChange/list/accept/${courseChange.id}"
-               class="btn btn-raised btn-warning">Zatwierdź zmianę kierunku</a>
-            <button type="submit" class="btn btn-raised btn-success">Odrzuć zmianę kierunku</button>
+            <a href="/conditions/list/accept/${condition.id}"
+               class="btn btn-raised btn-warning">Przyznaj warunek</a>
+            <button type="submit" class="btn btn-raised btn-success">Odrzuć warunek</button>
 
         </form:form>
     </div>

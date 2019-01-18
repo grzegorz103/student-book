@@ -14,5 +14,12 @@ public interface SemestralGradesRepository extends JpaRepository< SemestralGrade
 
     @Query ( "SELECT s FROM SemestralGrade s WHERE (s.student.id = :id AND s.subject.semester = :semester)" )
     List< SemestralGrade > findSemestralGradesByStudentAndSemester ( @Param ( "id" ) Long id, @Param ( "semester" ) Long semester );
+
+    @Query ( "SELECT s FROM SemestralGrade s WHERE (" +
+            " s.student.id = :id" +
+            " AND s.subject.semester <= :semester" +
+            " AND (s.totalGrade = null OR s.totalGrade < 3)" +
+            " AND s.subject.course.id = :course)" )
+    List< SemestralGrade > findSemestralGradesByStudentForCondition ( @Param ( "id" ) Long id, @Param ( "semester" ) Long semester, @Param ( "course" ) Long course );
 }
 

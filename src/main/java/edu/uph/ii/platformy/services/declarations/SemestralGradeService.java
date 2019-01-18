@@ -11,4 +11,6 @@ public interface SemestralGradeService
     List< SemestralGrade > getSemestralGradesBySubject ( Subject subject );
 
     List< SemestralGrade > getSemestralGradesByStudentAndSemester ( Student student );
+
+    List< SemestralGrade > getSemestralGradesByStudentForCondition ( Student student );
 }

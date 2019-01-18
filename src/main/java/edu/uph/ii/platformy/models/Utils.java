@@ -23,4 +23,7 @@ public class Utils
 
     @Column ( name = "scholarship_enabled" )
     private Boolean scholarshipEnabled;
+
+    @Column ( name = "condition_enabled" )
+    private Boolean ConditionEnabled;
 }

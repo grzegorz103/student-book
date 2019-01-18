@@ -5,7 +5,7 @@
   Time: 13:21
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
@@ -38,6 +38,9 @@
             </div>
             <div class="mb-3">
                 <label>Semestr: ${scholarship.student.semester}</label><br>
+            </div>
+            <div class="mb-3">
+                <label>Kierunek: ${scholarship.student.course.name}</label><br>
             </div>
             <div class="mb-3">
                 <label>Numer konta bankowego: ${scholarship.student.bankAccountNumber}</label><br>

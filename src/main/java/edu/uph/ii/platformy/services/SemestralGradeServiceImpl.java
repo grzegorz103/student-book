@@ -32,4 +32,11 @@ public class SemestralGradeServiceImpl implements SemestralGradeService
     {
         return this.semestralGradesRepository.findSemestralGradesByStudentAndSemester ( student.getId (), ( student.getSemester () > 1 ) ? ( student.getSemester () - 1 ) : student.getSemester () );
     }
+
+    @Override
+    public List< SemestralGrade > getSemestralGradesByStudentForCondition ( Student student )
+    {
+        return this.semestralGradesRepository.findSemestralGradesByStudentForCondition ( student.getId (), student.getSemester (), student.getCourse ()
+                .getId () );
+    }
 }

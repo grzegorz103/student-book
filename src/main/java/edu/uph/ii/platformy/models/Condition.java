@@ -22,18 +22,18 @@ public class Condition
 
     @Column ( name = "condition_type" )
     @Enumerated ( EnumType.STRING )
-    private ConditionTypes conditionTypes;
+    private ConditionTypes conditionType;
 
     @ManyToOne ( fetch = FetchType.EAGER )
     @JoinColumn ( name = "subject_id" )
     private Subject subject;
 
     @Column ( name = "submitting_date" )
-    @Temporal ( TemporalType.DATE )
+    @Temporal ( TemporalType.TIMESTAMP )
     private Date submittingDate;
 
     @Column ( name = "status_change_date" )
-    @Temporal ( TemporalType.DATE )
+    @Temporal ( TemporalType.TIMESTAMP )
     private Date statusChangeDate;
 
     @Enumerated ( EnumType.STRING )
@@ -41,6 +41,9 @@ public class Condition
 
     @Column ( name = "condition_justification", columnDefinition = "TEXT" )
     private String conditionJustification; //Uzasadnienie podania
+
+    @Column ( name = "condition_rejection_justification", columnDefinition = "TEXT" )
+    private String conditionRejectionJustification; //Uzasadnienie odrzucenia podania
 
     @ManyToOne ( fetch = FetchType.EAGER )
     @JoinColumn ( name = "student_id" )
