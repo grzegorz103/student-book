@@ -114,7 +114,9 @@
         Brak opinii na temat tego wykładowcy.
     </c:if>
 
-    <br><a class="btn btn-raised btn-success" href="/instructors/${id}/opinions/add">Dodaj opinię</a><br><br><br>
+    <security:authorize access="hasRole('STUDENT')">
+        <br><a class="btn btn-raised btn-success" href="/instructors/${id}/opinions/add">Dodaj opinię</a><br><br><br>
+    </security:authorize>
 
 </div>
 <jsp:include page="shared/footer.jsp"/>
