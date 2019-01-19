@@ -20,8 +20,7 @@
         test="${!state}">wylaczone</c:if>
     <br/>Aby zmienić naciśnij przycisk<br/>
     <div class="col-xs-6 col-sm-6 col-md-6">
-        <button type="submit" onclick="location.href='/sp/edit/state'" class="btn btn-raised btn-success">Wyślij
-            wiadomość!
+        <button type="submit" onclick="location.href='/sp/edit/state'" class="btn btn-raised btn-success">Zmień!
         </button>
     </div>
     <hr>

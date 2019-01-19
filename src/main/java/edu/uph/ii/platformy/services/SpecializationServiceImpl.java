@@ -125,8 +125,8 @@ public class SpecializationServiceImpl implements SpecializationService
         {
                 Information information = new Information();
                 information.setDate( new Date() );
-                final String[] a = {"Wyniki wyborów specjalizacji: \r\n"};
-                students.forEach( e -> a[0] += e.getPesel() + " " + e.getSpecialization().getName() + "\r\n" );
+                final String[] a = {"Wyniki wyborów specjalizacji: <br>\n"};
+                students.forEach( e -> a[0] += e.getPesel() + " " + e.getSpecialization().getName() + "<br>\n" );
                 information.setTitle( "Wyniki wyborów specjalizacji" );
                 information.setText( a[0] );
                 information.setAuthor( "Dziekan" );

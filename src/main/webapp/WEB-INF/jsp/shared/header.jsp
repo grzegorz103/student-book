@@ -81,6 +81,8 @@
                                        href="/conditions/list">Warunki</a>
                                     <a class="dropdown-item ${param['name'] == 'courseChange' ? ' active':''}"
                                        href="/courseChange/list">Kierunek studiów</a>
+                                    <a class="dropdown-item ${param['name'] == 'courseChange' ? ' active':''}"
+                                       href="/sp/choose">Specjalizacje</a>
                                 </div>
                             </div>
                         </li>
