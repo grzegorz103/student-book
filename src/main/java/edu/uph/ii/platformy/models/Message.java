@@ -34,4 +34,7 @@ public class Message
         @Enumerated (EnumType.STRING)
         @Column (name = "status")
         private Statuses status;
+
+        @Column (name = "deleted")
+        private Boolean deleted;
 }

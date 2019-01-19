@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service ("messageService")
 public class MessageServiceImpl implements MessageService
@@ -36,6 +37,7 @@ public class MessageServiceImpl implements MessageService
                         message.setReceiver( accountRepository.findByMail( message.getReceiver().getMail() ) );
                 org.springframework.security.core.userdetails.User user = ( org.springframework.security.core.userdetails.User ) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                 message.setDate( new Date() );
+                message.setDeleted( false );
                 message.setSender( accountRepository.findByMail( user.getUsername() ) );
                 message.setStatus( Statuses.MESSAGE_UNREAD );
                 if ( message.getReceiver() != null )
@@ -65,11 +67,20 @@ public class MessageServiceImpl implements MessageService
                 return messageRepository.findAllBySender( u );
         }
 
+        @Override
+        public void delete ( Message message )
+        {
+                message.setDeleted( true );
+                messageRepository.save( message );
+        }
+
 
         private List<Message> changeStatus ( List<Message> list )
         {
                 list.forEach( e -> e.setStatus( Statuses.MESSAGE_READ ) );
                 messageRepository.saveAll( list );
-                return list;
+                return list.stream()
+                        .filter( e -> !e.getDeleted() )
+                        .collect( Collectors.toList() );
         }
 }

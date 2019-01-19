@@ -25,6 +25,7 @@
                 <th>Treść</th>
                 <th>Data</th>
                 <th>Odpowiedz</th>
+                <th>Usuń</th>
 
             </tr>
 
@@ -40,6 +41,7 @@
                     <td>${message.date}</td>
 
                     <td><a href="/msg/reply/${message.sender.id}">Odpowiedz</a></td>
+                    <td><a href="/msg/delete/${message.id}">Usuń</a></td>
                 </tr>
             </c:forEach>
         </table>

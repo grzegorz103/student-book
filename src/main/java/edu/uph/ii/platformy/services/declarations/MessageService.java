@@ -11,4 +11,6 @@ public interface MessageService
         List<Message> getMessages ();
 
         List<Message> getUserMessages ();
+
+        void delete ( Message message );
 }

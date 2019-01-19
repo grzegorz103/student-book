@@ -73,4 +73,10 @@ public class MessageController
                 model.addAttribute( "list", messageService.getUserMessages() );
                 return "sentMessagesPage";
         }
+
+        @GetMapping("/delete/{id}")
+        public String deleteMessage(@PathVariable("id") Message message){
+                messageService.delete(message);
+                return "redirect:/msg/list";
+        }
 }
