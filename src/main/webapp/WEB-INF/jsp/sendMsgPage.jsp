@@ -11,12 +11,12 @@
     <form:form modelAttribute="message" action="/msg/send">
 
         <div class="form-group">
-            <form:input path="receiver.mail" cssClass="form-control" placeholder="Mail odbiorcy"
+            <form:input path="receiver.mail" required="true" cssClass="form-control" placeholder="Mail odbiorcy"
                         autofocus="true" cssErrorClass="form-control is-invalid"/>
         </div>
 
         <div class="form-group">
-            <form:textarea rows="7" path="text" cssClass="form-control"
+            <form:textarea rows="7" path="text" cssClass="form-control" required="true"
                         placeholder="Treść" cssErrorClass="form-control is-invalid"/>
         </div>
 
