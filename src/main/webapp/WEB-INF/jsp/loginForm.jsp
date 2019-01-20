@@ -28,11 +28,11 @@
                 </c:if>
                 <div class="form-group">
                     <label for="username">Nazwa użytkownika:</label>
-                    <input type="text" id="username" name="username" class="form-control"/>
+                    <input type="text" id="username" name="username" class="form-control" required/>
                 </div>
                 <div class="form-group">
                     <label for="password">Hasło:</label>
-                    <input type="password" id="password" name="password" class="form-control"/>
+                    <input type="password" id="password" name="password" class="form-control" required/>
                 </div>
                 <div class="form-group">
                     <security:csrfInput/>
