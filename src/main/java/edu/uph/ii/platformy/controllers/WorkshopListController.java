@@ -36,7 +36,7 @@ public class WorkshopListController
                                              @PathVariable ("std") Student student)
         {
                 workshopService.deleteStudentFromWorkshop(student,workshop);
-                return "redirect:/workshops/list";
+                return "redirect:/workshops/"+workshop.getId()+"/students";
         }
 
         @GetMapping("/{wks}/join/{std}")

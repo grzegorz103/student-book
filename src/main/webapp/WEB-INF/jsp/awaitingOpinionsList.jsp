@@ -49,7 +49,7 @@
                                 <td>
                                     <c:choose>
                                         <c:when test="${empty opn.instructor}">Brak danych</c:when>
-                                        <c:otherwise>${opn.instructor.name} ${opn.student.surname}</c:otherwise>
+                                        <c:otherwise>${opn.instructor.name} ${opn.instructor.surname}</c:otherwise>
                                     </c:choose>
                                 </td>
 

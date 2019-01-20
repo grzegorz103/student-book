@@ -9,10 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashSet;
+import java.util.*;
 
 @Configuration
 public class RepositoriesInitializer
@@ -24,14 +21,18 @@ public class RepositoriesInitializer
     private final CourseRepository courseRepository;
     private final SpecializationRepository specializationRepository;
     private final AccountRepository accountRepository;
+    private final AttendanceRepository attendanceRepository;
+    private final LessonRepository lessonRepository;
+    private final OpinionRepository opinionRepository;
     private final SubjectRepository subjectRepository;
     private final PasswordEncoder passwordEncoder;
     private final ScholarshipRepository scholarshipRepository;
     private final SemestralGradesRepository semestralGradesRepository;
     private final UtilsRepository utilsRepository;
+    private final WorkshopRepository workshopRepository;
 
     @Autowired
-    public RepositoriesInitializer ( InstructorRepository instructorRepository, DeanRepository deanRepository, StudentRepository studentRepository, RoleRepository roleRepository, CourseRepository courseRepository, SpecializationRepository specializationRepository, AccountRepository accountRepository, SubjectRepository subjectRepository, PasswordEncoder passwordEncoder, ScholarshipRepository scholarshipRepository, UtilsRepository utilsRepository, SemestralGradesRepository semestralGradesRepository )
+    public RepositoriesInitializer ( InstructorRepository instructorRepository, DeanRepository deanRepository, StudentRepository studentRepository, RoleRepository roleRepository, CourseRepository courseRepository, SpecializationRepository specializationRepository, AccountRepository accountRepository, SubjectRepository subjectRepository, PasswordEncoder passwordEncoder, ScholarshipRepository scholarshipRepository, UtilsRepository utilsRepository, SemestralGradesRepository semestralGradesRepository, LessonRepository lessonRepository, AttendanceRepository attendanceRepository, OpinionRepository opinionRepository, WorkshopRepository workshopRepository )
     {
         this.instructorRepository = instructorRepository;
         this.deanRepository = deanRepository;
@@ -40,11 +41,15 @@ public class RepositoriesInitializer
         this.courseRepository = courseRepository;
         this.specializationRepository = specializationRepository;
         this.accountRepository = accountRepository;
+        this.lessonRepository = lessonRepository;
+        this.opinionRepository = opinionRepository;
+        this.attendanceRepository = attendanceRepository;
         this.subjectRepository = subjectRepository;
         this.passwordEncoder = passwordEncoder;
         this.scholarshipRepository = scholarshipRepository;
         this.utilsRepository = utilsRepository;
         this.semestralGradesRepository = semestralGradesRepository;
+        this.workshopRepository = workshopRepository;
     }
 
     @Bean
@@ -107,56 +112,56 @@ public class RepositoriesInitializer
                 instructor.setRoles ( new HashSet<> ( Collections.singletonList ( roleInstructor ) ) );
                 instructor.setPassword ( this.passwordEncoder.encode ( "instructor" ) );
                 instructor.setPasswordConfirm ( instructor.getPassword () );
-                Instructor instructorPerson = this.instructorRepository.save ( new Instructor ( 2L, "Instructor", "Jeden", true, 23456789012L ) );
+                Instructor instructorPerson = this.instructorRepository.save ( new Instructor ( 2L, "Jan", "Kowalski", true, 23456789012L ) );
                 instructor.setPerson ( instructorPerson );
 
                 User instructor2 = new User ( 3L, "instructor2@instructor2.pl" );
                 instructor2.setRoles ( new HashSet<> ( Collections.singletonList ( roleInstructor ) ) );
                 instructor2.setPassword ( this.passwordEncoder.encode ( "instructor2" ) );
                 instructor2.setPasswordConfirm ( instructor2.getPassword () );
-                Instructor instructorPerson2 = this.instructorRepository.save ( new Instructor ( 3L, "Instructor", "Dwa", true, 32345238902L ) );
+                Instructor instructorPerson2 = this.instructorRepository.save ( new Instructor ( 3L, "Przemysław", "Nowak", true, 32345238902L ) );
                 instructor2.setPerson ( instructorPerson2 );
 
                 User instructor3 = new User ( 4L, "instructor3@instructor3.pl" );
                 instructor3.setRoles ( new HashSet<> ( Collections.singletonList ( roleInstructor ) ) );
                 instructor3.setPassword ( this.passwordEncoder.encode ( "instructor3" ) );
                 instructor3.setPasswordConfirm ( instructor3.getPassword () );
-                Instructor instructorPerson3 = this.instructorRepository.save ( new Instructor ( 4L, "Instructor", "Trzy", true, 23456789012L ) );
+                Instructor instructorPerson3 = this.instructorRepository.save ( new Instructor ( 4L, "Marek", "Knap", true, 23456789012L ) );
                 instructor3.setPerson ( instructorPerson3 );
 
                 User instructor4 = new User ( 5L, "instructor4@instructor4.pl" );
                 instructor4.setRoles ( new HashSet<> ( Arrays.asList ( roleInstructor ) ) );
                 instructor4.setPassword ( this.passwordEncoder.encode ( "instructor4" ) );
                 instructor4.setPasswordConfirm ( instructor4.getPassword () );
-                Instructor instructorPerson4 = this.instructorRepository.save ( new Instructor ( 5L, "Instructor", "Cztery", true, 23456789012L ) );
+                Instructor instructorPerson4 = this.instructorRepository.save ( new Instructor ( 5L, "Wojciech", "Bendyk", true, 23456789012L ) );
                 instructor4.setPerson ( instructorPerson4 );
 
                 User instructor5 = new User ( 6L, "instructor5@instructor5.pl" );
                 instructor5.setRoles ( new HashSet<> ( Collections.singletonList ( roleStudent ) ) );
                 instructor5.setPassword ( this.passwordEncoder.encode ( "instructor5" ) );
                 instructor5.setPasswordConfirm ( instructor5.getPassword () );
-                Instructor instructorPerson5 = this.instructorRepository.save ( new Instructor ( 6L, "Instructor", "Pięć", true, 23456789200L ) );
+                Instructor instructorPerson5 = this.instructorRepository.save ( new Instructor ( 6L, "Janusz", "Wójcik", true, 23456789200L ) );
                 instructor5.setPerson ( instructorPerson5 );
 
                 User instructor6 = new User ( 7L, "instructor6@instructor6.pl" );
                 instructor6.setRoles ( new HashSet<> ( Collections.singletonList ( roleStudent ) ) );
                 instructor6.setPassword ( this.passwordEncoder.encode ( "instructor6" ) );
                 instructor6.setPasswordConfirm ( instructor6.getPassword () );
-                Instructor instructorPerson6 = this.instructorRepository.save ( new Instructor ( 7L, "Instructor", "Sześć", true, 23456789200L ) );
+                Instructor instructorPerson6 = this.instructorRepository.save ( new Instructor ( 7L, "Anna", "Jaworska", true, 23456789200L ) );
                 instructor6.setPerson ( instructorPerson6 );
 
                 User instructor7 = new User ( 8L, "instructor7@instructor7.pl" );
                 instructor7.setRoles ( new HashSet<> ( Collections.singletonList ( roleStudent ) ) );
                 instructor7.setPassword ( this.passwordEncoder.encode ( "instructor7" ) );
                 instructor7.setPasswordConfirm ( instructor7.getPassword () );
-                Instructor instructorPerson7 = this.instructorRepository.save ( new Instructor ( 8L, "Instructor", "Siedem", true, 23456789200L ) );
+                Instructor instructorPerson7 = this.instructorRepository.save ( new Instructor ( 8L, "Edyta", "Wasilewska", true, 23456789200L ) );
                 instructor7.setPerson ( instructorPerson7 );
 
                 User instructor8 = new User ( 9L, "instructor8@instructor8.pl" );
                 instructor8.setRoles ( new HashSet<> ( Collections.singletonList ( roleStudent ) ) );
                 instructor8.setPassword ( this.passwordEncoder.encode ( "instructor8" ) );
                 instructor8.setPasswordConfirm ( instructor8.getPassword () );
-                Instructor instructorPerson8 = this.instructorRepository.save ( new Instructor ( 9L, "Instructor", "Osiem", true, 23456789200L ) );
+                Instructor instructorPerson8 = this.instructorRepository.save ( new Instructor ( 9L, "Maria", "Szymkowiak", true, 23456789200L ) );
                 instructor8.setPerson ( instructorPerson8 );
 
                 //STUDENCI
@@ -164,12 +169,12 @@ public class RepositoriesInitializer
                 student.setRoles ( new HashSet<> ( Collections.singletonList ( roleStudent ) ) );
                 student.setPassword ( this.passwordEncoder.encode ( "student" ) );
                 student.setPasswordConfirm ( student.getPassword () );
-                Student studentPerson = new Student ( 10L, "Student", "Jeden", true, 34567890123L );
+                Student studentPerson = new Student ( 10L, "Arkadiusz", "Celiński", true, 34567890123L );
                 studentPerson.setAge ( 20 );
                 studentPerson.setCourse ( this.courseRepository.getOne ( 1L ) );
                 studentPerson.setSpecialization ( this.specializationRepository.getOne ( 1L ) );
                 studentPerson.setSpecChosen ( studentPerson.getSpecialization () != null );
-                studentPerson.setSemester ( 3L );
+                studentPerson.setSemester ( 1L );
                 studentPerson.setBankAccountNumber ( "12345678901234567890123456" );
                 student.setPerson ( this.studentRepository.save ( studentPerson ) );
 
@@ -177,7 +182,7 @@ public class RepositoriesInitializer
                 student2.setRoles ( new HashSet<> ( Collections.singletonList ( roleStudent ) ) );
                 student2.setPassword ( this.passwordEncoder.encode ( "student2" ) );
                 student2.setPasswordConfirm ( student.getPassword () );
-                Student studentPerson2 = new Student ( 11L, "Student", "Dwa", true, 45678901234L );
+                Student studentPerson2 = new Student ( 11L, "Mariusz", "Koziński", true, 45678901234L );
                 studentPerson2.setAge ( 19 );
                 studentPerson2.setCourse ( this.courseRepository.getOne ( 2L ) );
                 studentPerson2.setSpecialization ( this.specializationRepository.getOne ( 4L ) );
@@ -190,7 +195,7 @@ public class RepositoriesInitializer
                 student3.setRoles ( new HashSet<> ( Collections.singletonList ( roleStudent ) ) );
                 student3.setPassword ( this.passwordEncoder.encode ( "student3" ) );
                 student3.setPasswordConfirm ( student.getPassword () );
-                Student studentPerson3 = new Student ( 12L, "Student", "Trzy", true, 56789012345L );
+                Student studentPerson3 = new Student ( 12L, "Patryk", "Siński", true, 56789012345L );
                 studentPerson3.setAge ( 18 );
                 studentPerson3.setCourse ( this.courseRepository.getOne ( 3L ) );
                 studentPerson3.setSpecialization ( null );
@@ -203,7 +208,7 @@ public class RepositoriesInitializer
                 student4.setRoles ( new HashSet<> ( Collections.singletonList ( roleStudent ) ) );
                 student4.setPassword ( this.passwordEncoder.encode ( "student4" ) );
                 student4.setPasswordConfirm ( student.getPassword () );
-                Student studentPerson4 = new Student ( 13L, "Student", "Cztery", true, 67890123456L );
+                Student studentPerson4 = new Student ( 13L, "Piotr", "Krawczyk", true, 67890123456L );
                 studentPerson4.setAge ( 21 );
                 studentPerson4.setCourse ( this.courseRepository.getOne ( 4L ) );
                 studentPerson4.setSpecialization ( this.specializationRepository.getOne ( 10L ) );
@@ -216,7 +221,7 @@ public class RepositoriesInitializer
                 student5.setRoles ( new HashSet<> ( Collections.singletonList ( roleStudent ) ) );
                 student5.setPassword ( this.passwordEncoder.encode ( "student5" ) );
                 student5.setPasswordConfirm ( student.getPassword () );
-                Student studentPerson5 = new Student ( 14L, "Student", "Pięć", true, 43567890123L );
+                Student studentPerson5 = new Student ( 14L, "Magdalena", "Janota", true, 43567890123L );
                 studentPerson5.setAge ( 22 );
                 studentPerson5.setCourse ( this.courseRepository.getOne ( 1L ) );
                 studentPerson5.setSpecialization ( null );
@@ -238,6 +243,71 @@ public class RepositoriesInitializer
                 studentPerson6.setBankAccountNumber ( "22345678901234569012345616" );
                 student6.setPerson ( this.studentRepository.save ( studentPerson6 ) );
 
+                User student7 = new User ( 16L, "student7@student7.pl" );
+                student7.setRoles ( new HashSet<> ( Collections.singletonList ( roleStudent ) ) );
+                student7.setPassword ( this.passwordEncoder.encode ( "student7" ) );
+                student7.setPasswordConfirm ( student.getPassword () );
+                Student studentPerson7 = new Student ( 16L, "Ola", "Dąbrowska", true, 43567890123L );
+                studentPerson7.setAge ( 23 );
+                studentPerson7.setCourse ( this.courseRepository.getOne ( 1L ) );
+                studentPerson7.setSpecialization ( null );
+                studentPerson7.setSpecChosen ( studentPerson.getSpecialization () != null );
+                studentPerson7.setSemester ( 1L );
+                studentPerson7.setBankAccountNumber ( "22345678901234569012345616" );
+                student7.setPerson ( this.studentRepository.save ( studentPerson7 ) );
+
+                User student8 = new User ( 17L, "student8@student8.pl" );
+                student8.setRoles ( new HashSet<> ( Collections.singletonList ( roleStudent ) ) );
+                student8.setPassword ( this.passwordEncoder.encode ( "student8" ) );
+                student8.setPasswordConfirm ( student.getPassword () );
+                Student studentPerson8 = new Student ( 17L, "Maciej", "Jesion", true, 43567890123L );
+                studentPerson8.setAge ( 23 );
+                studentPerson8.setCourse ( this.courseRepository.getOne ( 1L ) );
+                studentPerson8.setSpecialization ( null );
+                studentPerson8.setSpecChosen ( studentPerson.getSpecialization () != null );
+                studentPerson8.setSemester ( 1L );
+                studentPerson8.setBankAccountNumber ( "22345678901234569012345616" );
+                student8.setPerson ( this.studentRepository.save ( studentPerson8 ) );
+
+                User student9 = new User ( 18L, "student9@student9.pl" );
+                student9.setRoles ( new HashSet<> ( Collections.singletonList ( roleStudent ) ) );
+                student9.setPassword ( this.passwordEncoder.encode ( "student9" ) );
+                student9.setPasswordConfirm ( student.getPassword () );
+                Student studentPerson9 = new Student ( 18L, "Filip", "Kamiński", true, 43567890123L );
+                studentPerson9.setAge ( 23 );
+                studentPerson9.setCourse ( this.courseRepository.getOne ( 1L ) );
+                studentPerson9.setSpecialization ( null );
+                studentPerson9.setSpecChosen ( studentPerson.getSpecialization () != null );
+                studentPerson9.setSemester ( 1L );
+                studentPerson9.setBankAccountNumber ( "22345678901234569012345616" );
+                student9.setPerson ( this.studentRepository.save ( studentPerson9 ) );
+
+                User student10 = new User ( 19L, "student10@student10.pl" );
+                student10.setRoles ( new HashSet<> ( Collections.singletonList ( roleStudent ) ) );
+                student10.setPassword ( this.passwordEncoder.encode ( "student10" ) );
+                student10.setPasswordConfirm ( student.getPassword () );
+                Student studentPerson10 = new Student ( 19L, "Kasia", "Moniuszko", true, 43567890123L );
+                studentPerson10.setAge ( 23 );
+                studentPerson10.setCourse ( this.courseRepository.getOne ( 1L ) );
+                studentPerson10.setSpecialization ( null );
+                studentPerson10.setSpecChosen ( studentPerson.getSpecialization () != null );
+                studentPerson10.setSemester ( 1L );
+                studentPerson10.setBankAccountNumber ( "22345678901234569012345616" );
+                student10.setPerson ( this.studentRepository.save ( studentPerson10 ) );
+
+                User student11 = new User ( 20L, "student11@student11.pl" );
+                student11.setRoles ( new HashSet<> ( Collections.singletonList ( roleStudent ) ) );
+                student11.setPassword ( this.passwordEncoder.encode ( "student11" ) );
+                student11.setPasswordConfirm ( student.getPassword () );
+                Student studentPerson11 = new Student ( 20L, "Leszek", "Olbracht", true, 43567890123L );
+                studentPerson11.setAge ( 23 );
+                studentPerson11.setCourse ( this.courseRepository.getOne ( 1L ) );
+                studentPerson11.setSpecialization ( null );
+                studentPerson11.setSpecChosen ( studentPerson.getSpecialization () != null );
+                studentPerson11.setSemester ( 1L );
+                studentPerson11.setBankAccountNumber ( "22345678901234569012345616" );
+                student11.setPerson ( this.studentRepository.save ( studentPerson11 ) );
+
                 this.accountRepository.save ( dean );
                 this.accountRepository.save ( instructor );
                 this.accountRepository.save ( instructor2 );
@@ -253,6 +323,11 @@ public class RepositoriesInitializer
                 this.accountRepository.save ( student4 );
                 this.accountRepository.save ( student5 );
                 this.accountRepository.save ( student6 );
+                this.accountRepository.save ( student7 );
+                this.accountRepository.save ( student8 );
+                this.accountRepository.save ( student9 );
+                this.accountRepository.save ( student10 );
+                this.accountRepository.save ( student11 );
 
                 //PRZEDMIOTY
                 if ( this.subjectRepository.findAll ()
@@ -269,7 +344,7 @@ public class RepositoriesInitializer
                     this.subjectRepository.save ( new Subject ( 6L, "Platformy Programowania", 3L, this.courseRepository.getOne ( 1L ), instructorPerson ) );
                     //informatyka sem 4
                     this.subjectRepository.save ( new Subject ( 7L, "Systemy Wbudowane", 4L, this.courseRepository.getOne ( 1L ), instructorPerson3 ) );
-                    this.subjectRepository.save ( new Subject ( 8L, "Algebra", 4L, this.courseRepository.getOne ( 1L ), instructorPerson2 ) );
+                    this.subjectRepository.save ( new Subject ( 8L, "Algebra", 4L, this.courseRepository.getOne ( 1L ), instructorPerson4 ) );
                     //informatyka sem 5
                     this.subjectRepository.save ( new Subject ( 9L, "Programowanie niskopoziomowe", 5L, this.courseRepository.getOne ( 1L ), instructorPerson3 ) );
                     this.subjectRepository.save ( new Subject ( 10L, "Systemy operacyjne", 5L, this.courseRepository.getOne ( 1L ), instructorPerson8 ) );
@@ -278,7 +353,7 @@ public class RepositoriesInitializer
                     this.subjectRepository.save ( new Subject ( 12L, "Grafika komputerowa i wizualizacja", 6L, this.courseRepository.getOne ( 1L ), instructorPerson8 ) );
 
                     //matematyka sem 1
-                    this.subjectRepository.save ( new Subject ( 13L, "Analiza matematyczna", 1L, this.courseRepository.getOne ( 2L ), instructorPerson2 ) );
+                    this.subjectRepository.save ( new Subject ( 13L, "Analiza matematyczna", 1L, this.courseRepository.getOne ( 2L ), instructorPerson4 ) );
                     this.subjectRepository.save ( new Subject ( 14L, "Rachunek prawdopodobieństwa", 1L, this.courseRepository.getOne ( 2L ), instructorPerson6 ) );
                     //matematyka sem 2
                     this.subjectRepository.save ( new Subject ( 15L, "Algebra", 2L, this.courseRepository.getOne ( 2L ), instructorPerson2 ) );
@@ -320,20 +395,123 @@ public class RepositoriesInitializer
                     this.subjectRepository.save ( new Subject ( 38L, "Matematyka", 1L, this.courseRepository.getOne ( 4L ), instructorPerson7 ) );
                     //fizyka sem 2
                     this.subjectRepository.save ( new Subject ( 39L, "Analiza niepewności pomiarowych i pracownia wstępna", 2L, this.courseRepository.getOne ( 4L ), instructorPerson8 ) );
-                    this.subjectRepository.save ( new Subject ( 40L, "Mechanika klasyczna", 2L, this.courseRepository.getOne ( 4L ), instructorPerson2 ) );
+                    this.subjectRepository.save ( new Subject ( 40L, "Mechanika klasyczna", 2L, this.courseRepository.getOne ( 4L ), instructorPerson4 ) );
                     //fizyka sem 3
-                    this.subjectRepository.save ( new Subject ( 41L, "Pracownia technik pomiarowych", 3L, this.courseRepository.getOne ( 4L ), instructorPerson ) );
+                    this.subjectRepository.save ( new Subject ( 41L, "Pracownia technik pomiarowych", 3L, this.courseRepository.getOne ( 4L ), instructorPerson5 ) );
                     this.subjectRepository.save ( new Subject ( 42L, "Elektrodynamika", 3L, this.courseRepository.getOne ( 4L ), instructorPerson3 ) );
                     //fizyka sem 4
                     this.subjectRepository.save ( new Subject ( 43L, "Pracownia fizyczna dla zaawansowanych", 4L, this.courseRepository.getOne ( 4L ), instructorPerson6 ) );
                     this.subjectRepository.save ( new Subject ( 44L, "Indywidualna pracownia", 4L, this.courseRepository.getOne ( 4L ), instructorPerson5 ) );
                     //fizyka sem 5
-                    this.subjectRepository.save ( new Subject ( 45L, "Wstęp do fizyki subatomowej", 5L, this.courseRepository.getOne ( 4L ), instructorPerson2 ) );
-                    this.subjectRepository.save ( new Subject ( 46L, "Wstęp do optyki i fizyki materii skondensowanej", 5L, this.courseRepository.getOne ( 4L ), instructorPerson ) );
+                    this.subjectRepository.save ( new Subject ( 45L, "Wstęp do fizyki subatomowej", 5L, this.courseRepository.getOne ( 4L ), instructorPerson4 ) );
+                    this.subjectRepository.save ( new Subject ( 46L, "Wstęp do optyki i fizyki materii skondensowanej", 5L, this.courseRepository.getOne ( 4L ), instructorPerson5 ) );
                     //fizyka sem 6
                     this.subjectRepository.save ( new Subject ( 47L, "Indywidualna pracownia", 6L, this.courseRepository.getOne ( 4L ), instructorPerson7 ) );
                     this.subjectRepository.save ( new Subject ( 48L, "Indywidualna praca w laboratorium badawczym", 6L, this.courseRepository.getOne ( 4L ), instructorPerson8 ) );
                 }
+
+                //LEKCJE
+                if ( this.lessonRepository.findAll ()
+                        .isEmpty () ) {
+
+                    //Wstęp do programowania
+                    this.lessonRepository.save(new Lesson(1L, new java.sql.Date(118, 10, 3), this.subjectRepository.getOne(1L)));
+                    this.lessonRepository.save(new Lesson(2L, new java.sql.Date(118, 10, 10), this.subjectRepository.getOne(1L)));
+                    this.lessonRepository.save(new Lesson(3L, new java.sql.Date(118, 10, 17), this.subjectRepository.getOne(1L)));
+                    this.lessonRepository.save(new Lesson(4L, new java.sql.Date(118, 10, 24), this.subjectRepository.getOne(1L)));
+                }
+
+                //OBECNOŚCI
+                if ( this.attendanceRepository.findAll ()
+                        .isEmpty () ) {
+
+                    //Wstęp do programowania L1
+                    this.attendanceRepository.save(new Attendance(1L, ( Student ) this.accountRepository.findByMail( "student@student.pl" ).getPerson (), this.lessonRepository.getOne(1L), true));
+                    this.attendanceRepository.save(new Attendance(2L, ( Student ) this.accountRepository.findByMail( "student7@student7.pl" ).getPerson (), this.lessonRepository.getOne(1L), true));
+                    this.attendanceRepository.save(new Attendance(3L, ( Student ) this.accountRepository.findByMail( "student8@student8.pl" ).getPerson (), this.lessonRepository.getOne(1L), true));
+                    this.attendanceRepository.save(new Attendance(4L, ( Student ) this.accountRepository.findByMail( "student9@student9.pl" ).getPerson (), this.lessonRepository.getOne(1L), true));
+                    this.attendanceRepository.save(new Attendance(5L, ( Student ) this.accountRepository.findByMail( "student10@student10.pl" ).getPerson (), this.lessonRepository.getOne(1L), true));
+                    this.attendanceRepository.save(new Attendance(6L, ( Student ) this.accountRepository.findByMail( "student11@student11.pl" ).getPerson (), this.lessonRepository.getOne(1L), false));
+
+                }
+
+                //OPINIE
+                if ( this.opinionRepository.findAll ()
+                        .isEmpty () ) {
+
+                    //Jan Kowalski
+                    this.opinionRepository.save(new Opinion(1L, ( Instructor ) this.accountRepository.findByMail( "instructor@instructor.pl" ).getPerson (), this.subjectRepository.getOne(1L), ( Student ) this.accountRepository.findByMail( "student@student.pl" ).getPerson (), Statuses.ACCEPTED, "Super wykładowca, dzięki niemu mam 5 z egzaminu!!!"));
+                    this.opinionRepository.save(new Opinion(2L, ( Instructor ) this.accountRepository.findByMail( "instructor@instructor.pl" ).getPerson (), this.subjectRepository.getOne(6L), ( Student ) this.accountRepository.findByMail( "student7@student7.pl" ).getPerson (), Statuses.ACCEPTED, "Prowadzone przez tego pana wykłady z platform programowania są bardzo nudne i męczące. Nie polecam!"));
+
+                    //Przemysław Nowak
+                    this.opinionRepository.save(new Opinion(3L, ( Instructor ) this.accountRepository.findByMail( "instructor2@instructor2.pl" ).getPerson (), this.subjectRepository.getOne(2L), ( Student ) this.accountRepository.findByMail( "student8@student8.pl" ).getPerson (), Statuses.REJECTED, "Ale dzban xDDDD"));
+                    this.opinionRepository.save(new Opinion(4L, ( Instructor ) this.accountRepository.findByMail( "instructor2@instructor2.pl" ).getPerson (), this.subjectRepository.getOne(2L), ( Student ) this.accountRepository.findByMail( "student9@student9.pl" ).getPerson (), Statuses.AWAITING, "Często się zdarza, że nie odpisuje wcale na maile i nie ma z nim żadnego kontaktu..."));
+                }
+
+                //WARSZTATY
+                if ( this.workshopRepository.findAll ()
+                        .isEmpty () ) {
+
+                    //Spring Boot
+                    Workshop warsztat1 = new Workshop();
+
+                    warsztat1.setId(1L);
+                    warsztat1.setName("Kurs Spring Boot");
+                    warsztat1.setLimit(10L);
+                    warsztat1.setInstructor(( Instructor ) this.accountRepository.findByMail( "instructor@instructor.pl" ).getPerson ());
+
+                    warsztat1.setStudents(new HashSet<>());
+                    warsztat1.getStudents().add(( Student ) this.accountRepository.findByMail( "student@student.pl" ).getPerson ());
+                    warsztat1.getStudents().add(( Student ) this.accountRepository.findByMail( "student2@student2.pl" ).getPerson ());
+                    warsztat1.getStudents().add(( Student ) this.accountRepository.findByMail( "student3@student3.pl" ).getPerson ());
+                    warsztat1.getStudents().add(( Student ) this.accountRepository.findByMail( "student4@student4.pl" ).getPerson ());
+                    warsztat1.getStudents().add(( Student ) this.accountRepository.findByMail( "student5@student5.pl" ).getPerson ());
+
+                    warsztat1.setUnits(new HashSet<>());
+                    warsztat1.getUnits().add(new Unit(1L, "Lekcja 1 - Początki", warsztat1, "Wprowadzenie do Spring Framework i Spring MVC", "https://mirek.ii.uph.edu.pl/m3d/lab4n.doc"));
+                    warsztat1.getUnits().add(new Unit(2L, "Lekcja 2 - Maven", warsztat1, "Wprowadzenie do Maven’a i praca ze statycznymi zasobami", "https://mirek.ii.uph.edu.pl/m3d/lab4n.doc"));
+                    warsztat1.getUnits().add(new Unit(3L, "Lekcja 3 - Formularze", warsztat1, "Obsługa formularzy – zależności formularza i walidacja danych", "https://mirek.ii.uph.edu.pl/m3d/lab4n.doc"));
+
+                    this.workshopRepository.save(warsztat1);
+
+                    //GIT
+                    Workshop warsztat2 = new Workshop();
+
+                    warsztat2.setId(2L);
+                    warsztat2.setName("Kurs GITa");
+                    warsztat2.setLimit(10L);
+                    warsztat2.setInstructor(( Instructor ) this.accountRepository.findByMail( "instructor@instructor.pl" ).getPerson ());
+
+                    warsztat2.setStudents(new HashSet<>());
+                    warsztat2.getStudents().add(( Student ) this.accountRepository.findByMail( "student2@student2.pl" ).getPerson ());
+                    warsztat2.getStudents().add(( Student ) this.accountRepository.findByMail( "student3@student3.pl" ).getPerson ());
+                    warsztat2.getStudents().add(( Student ) this.accountRepository.findByMail( "student4@student4.pl" ).getPerson ());
+                    warsztat2.getStudents().add(( Student ) this.accountRepository.findByMail( "student5@student5.pl" ).getPerson ());
+                    warsztat2.getStudents().add(( Student ) this.accountRepository.findByMail( "student6@student6.pl" ).getPerson ());
+                    warsztat2.getStudents().add(( Student ) this.accountRepository.findByMail( "student7@student7.pl" ).getPerson ());
+                    warsztat2.getStudents().add(( Student ) this.accountRepository.findByMail( "student8@student8.pl" ).getPerson ());
+                    warsztat2.getStudents().add(( Student ) this.accountRepository.findByMail( "student9@student9.pl" ).getPerson ());
+                    warsztat2.getStudents().add(( Student ) this.accountRepository.findByMail( "student10@student10.pl" ).getPerson ());
+                    warsztat2.getStudents().add(( Student ) this.accountRepository.findByMail( "student11@student11.pl" ).getPerson ());
+
+                    warsztat2.setUnits(new HashSet<>());
+
+                    this.workshopRepository.save(warsztat2);
+
+                    //Arduino
+                    Workshop warsztat3 = new Workshop();
+
+                    warsztat3.setId(3L);
+                    warsztat3.setName("Kurs Arduino");
+                    warsztat3.setLimit(15L);
+                    warsztat3.setInstructor(( Instructor ) this.accountRepository.findByMail( "instructor@instructor.pl" ).getPerson ());
+                    warsztat3.setStudents(new HashSet<>());
+                    warsztat3.setUnits(new HashSet<>());
+
+                    this.workshopRepository.save(warsztat3);
+
+                }
+
 
                 //OCENY
                 if ( this.semestralGradesRepository.findAll ()
