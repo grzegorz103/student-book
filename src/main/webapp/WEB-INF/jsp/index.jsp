@@ -10,14 +10,14 @@
 <body>
 <jsp:include page="shared/header.jsp"/>
 <div class="container">
-
+<h2>Witamy na stronie głównej</h2>
     <c:if test="${!empty list.content}">
         <table class="table table-hover">
 
             <tr>
-                <th>Text</th>
-                <th>Date</th>
-                <th>Author</th>
+                <th>Tekst</th>
+                <th>Data</th>
+                <th>Autor</th>
             </tr>
             <c:forEach items="${list.content}" var="info">
 

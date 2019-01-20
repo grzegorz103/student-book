@@ -4,12 +4,14 @@
 <html>
 <body>
 <div id="footer">
+    <div class="container">
     <footer class="blockquote-footer">
-        <br>© 2018 Platformy programowania
+        <br>© 2019 Inżynieria oprogramowania
         <sec:authorize access="isAuthenticated()">
             <sec:authentication property="principal.authorities"/>
         </sec:authorize>
     </footer>
+    </div>
 </div>
 </body>
 </html>

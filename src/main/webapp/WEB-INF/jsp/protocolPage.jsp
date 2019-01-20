@@ -97,7 +97,7 @@
     </c:if>
 
     <c:if test="${empty list}">
-        Brak
+        Brak otwartych protokołów
     </c:if>
 </div>
 <jsp:include page="shared/footer.jsp"/>
