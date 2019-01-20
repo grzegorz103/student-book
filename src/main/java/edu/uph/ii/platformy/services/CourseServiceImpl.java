@@ -63,4 +63,10 @@ public class CourseServiceImpl implements CourseService
                 .getId () )
                 .getCourse ();
     }
+
+    @Override
+    public List< Course > getAllCourses ()
+    {
+        return this.courseRepository.findAll ();
+    }
 }
