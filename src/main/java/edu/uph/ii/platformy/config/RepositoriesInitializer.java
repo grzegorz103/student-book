@@ -325,23 +325,23 @@ public class RepositoriesInitializer
                     this.subjectRepository.save ( new Subject ( 36L, "Technologia chemiczna", 6L, this.courseRepository.getOne ( 3L ), instructorPerson8 ) );
 
                     //fizyka sem 1
-                    this.subjectRepository.save ( new Subject ( 37L, "Fizyka", 1L, this.courseRepository.getOne ( 3L ), instructorPerson2 ) );
-                    this.subjectRepository.save ( new Subject ( 38L, "Matematyka", 1L, this.courseRepository.getOne ( 3L ), instructorPerson5 ) );
+                    this.subjectRepository.save ( new Subject ( 37L, "Fizyka", 1L, this.courseRepository.getOne ( 4L ), instructorPerson4 ) );
+                    this.subjectRepository.save ( new Subject ( 38L, "Matematyka", 1L, this.courseRepository.getOne ( 4L ), instructorPerson7 ) );
                     //fizyka sem 2
-                    this.subjectRepository.save ( new Subject ( 39L, "Analiza niepewności pomiarowych i pracownia wstępna", 2L, this.courseRepository.getOne ( 3L ), instructorPerson6 ) );
-                    this.subjectRepository.save ( new Subject ( 40L, "Mechanika klasyczna", 2L, this.courseRepository.getOne ( 3L ), instructorPerson7 ) );
+                    this.subjectRepository.save ( new Subject ( 39L, "Analiza niepewności pomiarowych i pracownia wstępna", 2L, this.courseRepository.getOne ( 4L ), instructorPerson8 ) );
+                    this.subjectRepository.save ( new Subject ( 40L, "Mechanika klasyczna", 2L, this.courseRepository.getOne ( 4L ), instructorPerson2 ) );
                     //fizyka sem 3
-                    this.subjectRepository.save ( new Subject ( 41L, "Pracownia technik pomiarowych", 3L, this.courseRepository.getOne ( 3L ), instructorPerson6 ) );
-                    this.subjectRepository.save ( new Subject ( 42L, "Elektrodynamika", 3L, this.courseRepository.getOne ( 3L ), instructorPerson7 ) );
+                    this.subjectRepository.save ( new Subject ( 41L, "Pracownia technik pomiarowych", 3L, this.courseRepository.getOne ( 4L ), instructorPerson ) );
+                    this.subjectRepository.save ( new Subject ( 42L, "Elektrodynamika", 3L, this.courseRepository.getOne ( 4L ), instructorPerson3 ) );
                     //fizyka sem 4
-                    this.subjectRepository.save ( new Subject ( 43L, "Pracownia fizyczna dla zaawansowanych", 4L, this.courseRepository.getOne ( 3L ), instructorPerson6 ) );
-                    this.subjectRepository.save ( new Subject ( 44L, "Indywidualna pracownia", 4L, this.courseRepository.getOne ( 3L ), instructorPerson8 ) );
+                    this.subjectRepository.save ( new Subject ( 43L, "Pracownia fizyczna dla zaawansowanych", 4L, this.courseRepository.getOne ( 4L ), instructorPerson6 ) );
+                    this.subjectRepository.save ( new Subject ( 44L, "Indywidualna pracownia", 4L, this.courseRepository.getOne ( 4L ), instructorPerson5 ) );
                     //fizyka sem 5
-                    this.subjectRepository.save ( new Subject ( 45L, "Wstęp do fizyki subatomowej", 5L, this.courseRepository.getOne ( 3L ), instructorPerson6 ) );
-                    this.subjectRepository.save ( new Subject ( 46L, "Wstęp do optyki i fizyki materii skondensowanej", 5L, this.courseRepository.getOne ( 3L ), instructorPerson7 ) );
+                    this.subjectRepository.save ( new Subject ( 45L, "Wstęp do fizyki subatomowej", 5L, this.courseRepository.getOne ( 4L ), instructorPerson2 ) );
+                    this.subjectRepository.save ( new Subject ( 46L, "Wstęp do optyki i fizyki materii skondensowanej", 5L, this.courseRepository.getOne ( 4L ), instructorPerson ) );
                     //fizyka sem 6
-                    this.subjectRepository.save ( new Subject ( 47L, "Indywidualna pracownia", 6L, this.courseRepository.getOne ( 3L ), instructorPerson7 ) );
-                    this.subjectRepository.save ( new Subject ( 48L, "Indywidualna praca w laboratorium badawczym", 6L, this.courseRepository.getOne ( 3L ), instructorPerson8 ) );
+                    this.subjectRepository.save ( new Subject ( 47L, "Indywidualna pracownia", 6L, this.courseRepository.getOne ( 4L ), instructorPerson7 ) );
+                    this.subjectRepository.save ( new Subject ( 48L, "Indywidualna praca w laboratorium badawczym", 6L, this.courseRepository.getOne ( 4L ), instructorPerson8 ) );
                 }
 
                 if ( this.scholarshipRepository.findAll ()
