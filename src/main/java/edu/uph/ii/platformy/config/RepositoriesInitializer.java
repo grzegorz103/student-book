@@ -17,31 +17,21 @@ import java.util.HashSet;
 @Configuration
 public class RepositoriesInitializer
 {
-
     private final InstructorRepository instructorRepository;
-
     private final DeanRepository deanRepository;
-
     private final StudentRepository studentRepository;
-
     private final RoleRepository roleRepository;
-
     private final CourseRepository courseRepository;
-
     private final SpecializationRepository specializationRepository;
-
     private final AccountRepository accountRepository;
-
     private final SubjectRepository subjectRepository;
-
     private final PasswordEncoder passwordEncoder;
-
     private final ScholarshipRepository scholarshipRepository;
-
+    private final SemestralGradesRepository semestralGradesRepository;
     private final UtilsRepository utilsRepository;
 
     @Autowired
-    public RepositoriesInitializer ( InstructorRepository instructorRepository, DeanRepository deanRepository, StudentRepository studentRepository, RoleRepository roleRepository, CourseRepository courseRepository, SpecializationRepository specializationRepository, AccountRepository accountRepository, SubjectRepository subjectRepository, PasswordEncoder passwordEncoder, ScholarshipRepository scholarshipRepository, UtilsRepository utilsRepository )
+    public RepositoriesInitializer ( InstructorRepository instructorRepository, DeanRepository deanRepository, StudentRepository studentRepository, RoleRepository roleRepository, CourseRepository courseRepository, SpecializationRepository specializationRepository, AccountRepository accountRepository, SubjectRepository subjectRepository, PasswordEncoder passwordEncoder, ScholarshipRepository scholarshipRepository, UtilsRepository utilsRepository, SemestralGradesRepository semestralGradesRepository )
     {
         this.instructorRepository = instructorRepository;
         this.deanRepository = deanRepository;
@@ -54,6 +44,7 @@ public class RepositoriesInitializer
         this.passwordEncoder = passwordEncoder;
         this.scholarshipRepository = scholarshipRepository;
         this.utilsRepository = utilsRepository;
+        this.semestralGradesRepository = semestralGradesRepository;
     }
 
     @Bean
@@ -344,15 +335,101 @@ public class RepositoriesInitializer
                     this.subjectRepository.save ( new Subject ( 48L, "Indywidualna praca w laboratorium badawczym", 6L, this.courseRepository.getOne ( 4L ), instructorPerson8 ) );
                 }
 
-                if ( this.scholarshipRepository.findAll ()
+                //OCENY
+                if ( this.semestralGradesRepository.findAll ()
                         .isEmpty () )
                 {
-                    this.scholarshipRepository.save ( new Scholarship ( 1L, ScholarshipTypes.SOCIAL, 2, new BigDecimal ( 3000.00 ), new BigDecimal ( 0.00 ), 0.0d, 3L, new Date ( 119, 1, 12 ), null, Statuses.AWAITING, ( Student ) this.accountRepository.findByMail ( "student@student.pl" )
-                            .getPerson () ) );
-                    this.scholarshipRepository.save ( new Scholarship ( 2L, ScholarshipTypes.SOCIAL, 1, new BigDecimal ( 1000.00 ), new BigDecimal ( 500.00 ), 0.0d, 2L, new Date ( 119, 1, 13 ), new Date ( 119, 1, 14 ), Statuses.ACCEPTED, ( Student ) this.accountRepository.findByMail ( "student2@student2.pl" )
-                            .getPerson () ) );
+                    //student sem 1
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 1L, this.subjectRepository.getOne ( 1L ), ( Student ) this.accountRepository.findByMail ( "student@student.pl" )
+                            .getPerson (), 4L, null, 4L ) );
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 2L, this.subjectRepository.getOne ( 2L ), ( Student ) this.accountRepository.findByMail ( "student@student.pl" )
+                            .getPerson (), 5L, null, 5L ) );
+                    //student sem 2
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 3L, this.subjectRepository.getOne ( 3L ), ( Student ) this.accountRepository.findByMail ( "student@student.pl" )
+                            .getPerson (), 5L, null, 5L ) );
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 4L, this.subjectRepository.getOne ( 4L ), ( Student ) this.accountRepository.findByMail ( "student@student.pl" )
+                            .getPerson (), 3L, null, 3L ) );
+
+                    //student2 sem 1
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 5L, this.subjectRepository.getOne ( 13L ), ( Student ) this.accountRepository.findByMail ( "student2@student2.pl" )
+                            .getPerson (), 2L, 2L, 2L ) );
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 6L, this.subjectRepository.getOne ( 14L ), ( Student ) this.accountRepository.findByMail ( "student2@student2.pl" )
+                            .getPerson (), 2L, 4L, 4L ) );
+
+                    //student3 brak ocen (semestr 1)
+
+                    //student4 sem 1
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 7L, this.subjectRepository.getOne ( 37L ), ( Student ) this.accountRepository.findByMail ( "student4@student4.pl" )
+                            .getPerson (), 3L, null, 3L ) );
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 8L, this.subjectRepository.getOne ( 38L ), ( Student ) this.accountRepository.findByMail ( "student4@student4.pl" )
+                            .getPerson (), 5L, null, 5L ) );
+                    //student4 sem 2
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 9L, this.subjectRepository.getOne ( 39L ), ( Student ) this.accountRepository.findByMail ( "student4@student4.pl" )
+                            .getPerson (), 2L, 4L, 4L ) );
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 10L, this.subjectRepository.getOne ( 40L ), ( Student ) this.accountRepository.findByMail ( "student4@student4.pl" )
+                            .getPerson (), 3L, null, 3L ) );
+                    //student4 sem 3
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 11L, this.subjectRepository.getOne ( 41L ), ( Student ) this.accountRepository.findByMail ( "student4@student4.pl" )
+                            .getPerson (), 5L, null, 5L ) );
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 12L, this.subjectRepository.getOne ( 42L ), ( Student ) this.accountRepository.findByMail ( "student4@student4.pl" )
+                            .getPerson (), 2L, null, 2L ) );
+
+                    //student5 sem 1
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 13L, this.subjectRepository.getOne ( 1L ), ( Student ) this.accountRepository.findByMail ( "student5@student5.pl" )
+                            .getPerson (), 3L, null, 3L ) );
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 14L, this.subjectRepository.getOne ( 2L ), ( Student ) this.accountRepository.findByMail ( "student5@student5.pl" )
+                            .getPerson (), 4L, null, 4L ) );
+                    //student5 sem 2
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 15L, this.subjectRepository.getOne ( 3L ), ( Student ) this.accountRepository.findByMail ( "student5@student5.pl" )
+                            .getPerson (), 5L, null, 5L ) );
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 16L, this.subjectRepository.getOne ( 4L ), ( Student ) this.accountRepository.findByMail ( "student5@student5.pl" )
+                            .getPerson (), 4L, null, 4L ) );
+                    //student5 sem 3
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 17L, this.subjectRepository.getOne ( 5L ), ( Student ) this.accountRepository.findByMail ( "student5@student5.pl" )
+                            .getPerson (), 2L, 3L, 3L ) );
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 18L, this.subjectRepository.getOne ( 6L ), ( Student ) this.accountRepository.findByMail ( "student5@student5.pl" )
+                            .getPerson (), 3L, null, 3L ) );
+                    //student5 sem 4
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 19L, this.subjectRepository.getOne ( 7L ), ( Student ) this.accountRepository.findByMail ( "student5@student5.pl" )
+                            .getPerson (), 5L, null, 5L ) );
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 20L, this.subjectRepository.getOne ( 8L ), ( Student ) this.accountRepository.findByMail ( "student5@student5.pl" )
+                            .getPerson (), 3L, null, 3L ) );
+
+                    //student6 sem 1
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 21L, this.subjectRepository.getOne ( 13L ), ( Student ) this.accountRepository.findByMail ( "student6@student6.pl" )
+                            .getPerson (), 3L, null, 3L ) );
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 22L, this.subjectRepository.getOne ( 14L ), ( Student ) this.accountRepository.findByMail ( "student6@student6.pl" )
+                            .getPerson (), 5L, null, 5L ) );
+                    //student6 sem 2
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 23L, this.subjectRepository.getOne ( 15L ), ( Student ) this.accountRepository.findByMail ( "student6@student6.pl" )
+                            .getPerson (), 2L, 5L, 5L ) );
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 24L, this.subjectRepository.getOne ( 16L ), ( Student ) this.accountRepository.findByMail ( "student6@student6.pl" )
+                            .getPerson (), 4L, null, 4L ) );
+                    //student6 sem 3
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 25L, this.subjectRepository.getOne ( 17L ), ( Student ) this.accountRepository.findByMail ( "student6@student6.pl" )
+                            .getPerson (), 5L, null, 5L ) );
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 26L, this.subjectRepository.getOne ( 18L ), ( Student ) this.accountRepository.findByMail ( "student6@student6.pl" )
+                            .getPerson (), 5L, null, 5L ) );
+                    //student6 sem 4
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 27L, this.subjectRepository.getOne ( 19L ), ( Student ) this.accountRepository.findByMail ( "student6@student6.pl" )
+                            .getPerson (), 4L, null, 4L ) );
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 28L, this.subjectRepository.getOne ( 20L ), ( Student ) this.accountRepository.findByMail ( "student6@student6.pl" )
+                            .getPerson (), 3L, null, 3L ) );
+                    //student6 sem 5
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 29L, this.subjectRepository.getOne ( 21L ), ( Student ) this.accountRepository.findByMail ( "student6@student6.pl" )
+                            .getPerson (), 2L, null, 2L ) );
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 30L, this.subjectRepository.getOne ( 22L ), ( Student ) this.accountRepository.findByMail ( "student6@student6.pl" )
+                            .getPerson (), 2L, null, 2L ) );
                 }
-//TODO dodawanie oceny
+            }
+
+            if ( this.scholarshipRepository.findAll ()
+                    .isEmpty () )
+            {
+                this.scholarshipRepository.save ( new Scholarship ( 1L, ScholarshipTypes.SOCIAL, 2, new BigDecimal ( 3000.00 ), new BigDecimal ( 0.00 ), 0.0d, 3L, new Date ( 119, 1, 12 ), null, Statuses.AWAITING, ( Student ) this.accountRepository.findByMail ( "student@student.pl" )
+                        .getPerson () ) );
+                this.scholarshipRepository.save ( new Scholarship ( 2L, ScholarshipTypes.SOCIAL, 1, new BigDecimal ( 1000.00 ), new BigDecimal ( 500.00 ), 0.0d, 2L, new Date ( 119, 1, 13 ), new Date ( 119, 1, 14 ), Statuses.ACCEPTED, ( Student ) this.accountRepository.findByMail ( "student2@student2.pl" )
+                        .getPerson () ) );
             }
         };
     }
