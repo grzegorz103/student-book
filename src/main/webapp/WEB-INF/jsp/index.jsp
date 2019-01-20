@@ -35,57 +35,10 @@
                 </tr>
             </c:forEach>
         </table>
-
-        <c:url var="prevPageUrl" value="/?page=${list.number - 1}&size=${list.size}"/>
-        <c:url var="nextPageUrl" value="/?page=${list.number + 1}&size=${list.size}"/>
-
-        <c:url var="firstPageUrl" value="/?page=0&size=${list.size}"/>
-        <c:url var="lastPageUrl" value="/?page=${list.totalPages - 1}&size=${list.size}"/>
-
-        <nav aria-label="Page navigation example">
-            <ul class="pagination pg-blue">
-                <li ${list.first?'class="page-item disabled"':'page-item'}>
-                    <a href="${list.first?"#":firstPageUrl}" class="page-link">
-                        <span>First</span>
-                    </a>
-                </li>
-
-                <li ${list.first?'class="page-item disabled"':'page-item'}>
-                    <a href="${list.first?'#':prevPageUrl}" class="page-link">
-                        <span>&laquo;</span>
-                    </a>
-                </li>
-
-                <c:forEach var="pageIdx" begin="${0}" end="${list.totalPages-1}">
-                    <c:url var="pageUrl" value="/?page=${pageIdx}&size=${list.size}"/>
-                    <li ${pageIdx == list.number?'class="page-item active"':'page-item'}>
-                        <a href="${pageUrl}" class="page-link">${pageIdx+1}</a>
-                    </li>
-                </c:forEach>
-
-                <li ${list.last?'class="page-item disabled"':'page-item'}>
-                    <a href="${list.last?'#':nextPageUrl}" class="page-link">
-                        <span>&raquo;</span>
-                    </a>
-                </li>
-
-                <li ${list.last?'class="page-item disabled"':'page-item'}>
-                    <a href="${list.last?"#":lastPageUrl}" class="page-link">
-                        <span>Last</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
         <nav>
-            <ul class="pagination pg-blue">
-                <c:set var="pageSizes" value="${[10, 20, 30, 50]}"/>
-                <c:forEach var="size" items="${pageSizes}">
-                    <c:url var="pageUrl" value="/?page=${list.number}&size=${size}"/>
-                    <li class="page-item">
-                        <a href="${pageUrl}" class="page-link">${size}</a>
-                    </li>
-                </c:forEach>
-            </ul>
+            <c:set var="page" value="${list}" scope="request"/>
+            <c:set var="mainUrl" value="/" scope="request"/>
+            <c:import url="shared/pagination.jsp"/>
         </nav>
     </c:if>
 
