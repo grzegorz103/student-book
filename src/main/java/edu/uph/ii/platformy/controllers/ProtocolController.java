@@ -1,7 +1,7 @@
 package edu.uph.ii.platformy.controllers;
 
-import edu.uph.ii.platformy.models.*;
 import edu.uph.ii.platformy.models.Error;
+import edu.uph.ii.platformy.models.*;
 import edu.uph.ii.platformy.services.declarations.ProtocolService;
 import edu.uph.ii.platformy.services.declarations.SemestralGradeService;
 import org.springframework.beans.factory.annotation.Autowired;

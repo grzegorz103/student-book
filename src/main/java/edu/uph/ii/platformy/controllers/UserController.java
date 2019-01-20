@@ -5,7 +5,6 @@ import edu.uph.ii.platformy.models.Student;
 import edu.uph.ii.platformy.models.User;
 import edu.uph.ii.platformy.services.CourseService;
 import edu.uph.ii.platformy.services.UserService;
-import edu.uph.ii.platformy.services.declarations.SpecializationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

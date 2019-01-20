@@ -1,7 +1,9 @@
 package edu.uph.ii.platformy.services;
 
 import edu.uph.ii.platformy.models.*;
-import edu.uph.ii.platformy.repositories.*;
+import edu.uph.ii.platformy.repositories.AccountRepository;
+import edu.uph.ii.platformy.repositories.UnitRepository;
+import edu.uph.ii.platformy.repositories.WorkshopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
