@@ -10,4 +10,5 @@ public interface CourseService
 
     Course getActualStudentCourse ();
 
+    List< Course> getAllCourses ();
 }

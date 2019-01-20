@@ -9,11 +9,15 @@ import java.util.List;
 
 public interface SemestralGradeService
 {
-        List<SemestralGrade> getSemestralGradesBySubject ( Subject subject );
+    List< SemestralGrade > getSemestralGradesBySubject ( Subject subject );
 
-        List<SemestralGrade> getSemestralGradesByStudentAndSemester ( Student student );
+    List< SemestralGrade > getSemestralGradesByStudentAndSemester ( Student student );
 
-        List<SemestralGrade> getSemestralGradesByStudentForCondition ( Student student );
+    List< SemestralGrade > getSemestralGradesByStudentForCondition ( Student student );
 
-        void changeGrades ( SemestralGrade grade );
+    void changeGrades ( SemestralGrade grade );
+
+    List< SemestralGrade > getSemestralGradesByStudent ();
+
+    Double getActualAvgGradesForStudent ();
 }

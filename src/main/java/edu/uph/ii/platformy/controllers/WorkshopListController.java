@@ -1,6 +1,8 @@
 package edu.uph.ii.platformy.controllers;
 
-import edu.uph.ii.platformy.models.*;
+import edu.uph.ii.platformy.models.Student;
+import edu.uph.ii.platformy.models.Unit;
+import edu.uph.ii.platformy.models.Workshop;
 import edu.uph.ii.platformy.services.WorkshopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

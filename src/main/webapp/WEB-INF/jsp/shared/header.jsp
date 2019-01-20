@@ -83,6 +83,8 @@
                                        href="/courseChange/list">Kierunek studiów</a>
                                     <a class="dropdown-item ${param['name'] == 'courseChange' ? ' active':''}"
                                        href="/sp/choose">Specjalizacje</a>
+                                    <a class="dropdown-item ${param['name'] == 'grades' ? ' active':''}"
+                                       href="/grades/show">Oceny</a>
                                 </div>
                             </div>
                         </li>
