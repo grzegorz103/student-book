@@ -108,7 +108,7 @@
         Brak warsztatów w bazie.
     </c:if>
 
-    <security:authorize access="hasAnyRole('DEAN', 'INSTRUCTOR')">
+    <security:authorize access="hasRole('INSTRUCTOR')">
         <br><a class="btn btn-raised btn-success" href="/workshops/add">Dodaj warsztat</a><br><br><br>
     </security:authorize>
 

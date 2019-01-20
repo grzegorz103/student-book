@@ -43,9 +43,16 @@ public class InstructorServiceImpl implements InstructorService
     public void addOpinion ( Opinion opinion, Instructor instructor )
     {
 
+        org.springframework.security.core.userdetails.User user = ( org.springframework.security.core.userdetails.User ) SecurityContextHolder.getContext ()
+                .getAuthentication ()
+                .getPrincipal ();
+        edu.uph.ii.platformy.models.User u = accountRepository.findByMail ( user.getUsername () );
+        Student std = ( Student ) u.getPerson ();
+
         opinion.setId ( null );
         opinion.setStatus ( Statuses.AWAITING );
         opinion.setInstructor ( instructor );
+        opinion.setStudent(std);
 
         opinionRepository.save ( opinion );
     }
@@ -70,6 +77,11 @@ public class InstructorServiceImpl implements InstructorService
     public List< Subject > findSubjectsByInstructor ( Instructor instructor )
     {
         return subjectRepository.findAllByInstructor ( instructor );
+    }
+
+    @Override
+    public List<Opinion> findAllAwaitingOpinions() {
+        return opinionRepository.findAllByStatus(Statuses.AWAITING);
     }
 
     @Override

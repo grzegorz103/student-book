@@ -20,4 +20,5 @@ public interface InstructorService
 
         List <Subject> findSubjectsByInstructor(Instructor instructor);
 
+        List <Opinion> findAllAwaitingOpinions();
 }

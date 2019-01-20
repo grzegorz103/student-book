@@ -27,7 +27,7 @@ public class Subject
         @Column (name = "name")
         @NotBlank
         @NotEmpty
-        @Size (min = 2, max = 25)
+        //@Size (min = 2, max = 25)
         private String name;
 
         @Column(name = "semester")

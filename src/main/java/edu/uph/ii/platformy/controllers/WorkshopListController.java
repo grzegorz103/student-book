@@ -109,4 +109,12 @@ public class WorkshopListController
                return "redirect:/workshops/"+workshop.getId()+"/units";
         }
 
+        @GetMapping("/{wks}/students")
+        public String studentList (Model model, @PathVariable ("wks") Workshop workshop)
+        {
+                model.addAttribute ( "workshop", workshop );
+
+                return "workshopStudentList";
+        }
+
 }

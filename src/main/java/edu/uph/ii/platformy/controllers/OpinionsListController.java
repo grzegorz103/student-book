@@ -33,6 +33,14 @@ public class OpinionsListController
                 return "opinionList";
         }
 
+        @GetMapping ("/opinions/awaiting")
+        public String awaitingOpinions ( Model model )
+        {
+
+                model.addAttribute( "list", instructorService.findAllAwaitingOpinions() );
+                return "awaitingOpinionsList";
+        }
+
         @GetMapping("/{id}/opinions/add")
         public String showForm (Model model, @PathVariable ("id") Instructor instructor )
         {

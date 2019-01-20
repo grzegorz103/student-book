@@ -6,7 +6,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Lista pojazdów</title>
+    <title>Lista opinii</title>
 </head>
 <body>
 
@@ -114,7 +114,9 @@
         Brak opinii na temat tego wykładowcy.
     </c:if>
 
-    <br><a class="btn btn-raised btn-success" href="/instructors/${id}/opinions/add">Dodaj opinię</a><br><br><br>
+    <security:authorize access="hasRole('STUDENT')">
+        <br><a class="btn btn-raised btn-success" href="/instructors/${id}/opinions/add">Dodaj opinię</a><br><br><br>
+    </security:authorize>
 
 </div>
 <jsp:include page="shared/footer.jsp"/>

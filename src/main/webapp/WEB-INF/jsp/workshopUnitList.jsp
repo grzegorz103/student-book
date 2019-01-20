@@ -45,7 +45,7 @@
                         <td>
                             <c:choose>
                                 <c:when test="${empty unit.file}">Brak danych</c:when>
-                                <c:otherwise>${unit.file}</c:otherwise>
+                                <c:otherwise><a class="btn btn-raised btn-warning" href="${unit.file}">Pobierz</a></c:otherwise>
                             </c:choose>
                         </td>
 
@@ -65,8 +65,9 @@
         Do tego warsztatu nie dodano jeszcze żadnych materiałów.
     </c:if>
 
-    <br><a class="btn btn-raised btn-success" href="/workshops/${workshop.id}/units/add">Dodaj materiały</a><br><br><br>
-
+    <security:authorize access="hasRole('INSTRUCTOR')">
+        <br><a class="btn btn-raised btn-success" href="/workshops/${workshop.id}/units/add">Dodaj materiały</a><br><br><br>
+    </security:authorize>
 
 </div>
 <jsp:include page="shared/footer.jsp"/>

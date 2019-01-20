@@ -125,6 +125,8 @@
                                        href="/sp/edit">Specializacje</a>
                                     <a class="dropdown-item ${param['name'] == 'protocols' ? ' active':''}"
                                        href="/protocol/all">Protokoły</a>
+                                    <a class="dropdown-item ${param['name'] == 'opinions' ? ' active':''}"
+                                       href="/instructors/opinions/awaiting">Opinie</a>
                                 </div>
                             </div>
                         </li>
