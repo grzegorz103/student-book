@@ -221,11 +221,11 @@
         <c:choose>
             <c:when test="${isOpen}">
                 <a href="/conditions/close"
-                   class="btn btn-raised btn-warning">Zamknij możliwość składania podań o stypendium</a>
+                   class="btn btn-raised btn-warning">Zamknij możliwość składania podań o warunek</a>
             </c:when>
             <c:otherwise>
                 <a href="/conditions/open"
-                   class="btn btn-raised btn-success">Otwórz możliwość składania podań o stypendium</a>
+                   class="btn btn-raised btn-success">Otwórz możliwość składania podań o warunek</a>
             </c:otherwise>
         </c:choose>
     </security:authorize>
