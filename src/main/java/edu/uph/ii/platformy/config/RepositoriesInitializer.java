@@ -254,7 +254,7 @@ public class RepositoriesInitializer
                 studentPerson7.setCourse ( this.courseRepository.getOne ( 1L ) );
                 studentPerson7.setSpecialization ( null );
                 studentPerson7.setSpecChosen ( studentPerson.getSpecialization () != null );
-                studentPerson7.setSemester ( 1L );
+                studentPerson7.setSemester ( 3L );
                 studentPerson7.setBankAccountNumber ( "22345678901234569012345616" );
                 student7.setPerson ( this.studentRepository.save ( studentPerson7 ) );
 
@@ -570,15 +570,15 @@ public class RepositoriesInitializer
                 if ( this.semestralGradesRepository.findAll ()
                         .isEmpty () )
                 {
-                    //student sem 1
-                    this.semestralGradesRepository.save ( new SemestralGrade ( 1L, this.subjectRepository.getOne ( 1L ), ( Student ) this.accountRepository.findByMail ( "student@student.pl" )
+                    //student7 sem 1
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 1L, this.subjectRepository.getOne ( 1L ), ( Student ) this.accountRepository.findByMail ( "student7@student7.pl" )
                             .getPerson (), 4L, null, 4L ) );
-                    this.semestralGradesRepository.save ( new SemestralGrade ( 2L, this.subjectRepository.getOne ( 2L ), ( Student ) this.accountRepository.findByMail ( "student@student.pl" )
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 2L, this.subjectRepository.getOne ( 2L ), ( Student ) this.accountRepository.findByMail ( "student7@student7.pl" )
                             .getPerson (), 5L, null, 5L ) );
-                    //student sem 2
-                    this.semestralGradesRepository.save ( new SemestralGrade ( 3L, this.subjectRepository.getOne ( 3L ), ( Student ) this.accountRepository.findByMail ( "student@student.pl" )
+                    //student7 sem 2
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 3L, this.subjectRepository.getOne ( 3L ), ( Student ) this.accountRepository.findByMail ( "student7@student7.pl" )
                             .getPerson (), 5L, null, 5L ) );
-                    this.semestralGradesRepository.save ( new SemestralGrade ( 4L, this.subjectRepository.getOne ( 4L ), ( Student ) this.accountRepository.findByMail ( "student@student.pl" )
+                    this.semestralGradesRepository.save ( new SemestralGrade ( 4L, this.subjectRepository.getOne ( 4L ), ( Student ) this.accountRepository.findByMail ( "student7@student7.pl" )
                             .getPerson (), 3L, null, 3L ) );
 
                     //student2 sem 1
