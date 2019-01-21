@@ -355,7 +355,7 @@ public class RepositoriesInitializer
                     this.subjectRepository.save ( new Subject ( 12L, "Grafika komputerowa i wizualizacja", 6L, this.courseRepository.getOne ( 1L ), instructorPerson8 ) );
 
                     //matematyka sem 1
-                    this.subjectRepository.save ( new Subject ( 13L, "Analiza matematyczna", 1L, this.courseRepository.getOne ( 2L ), instructorPerson4 ) );
+                    this.subjectRepository.save ( new Subject ( 13L, "Analiza matematyczna", 1L, this.courseRepository.getOne ( 2L ), instructorPerson ) );
                     this.subjectRepository.save ( new Subject ( 14L, "Rachunek prawdopodobieństwa", 1L, this.courseRepository.getOne ( 2L ), instructorPerson6 ) );
                     //matematyka sem 2
                     this.subjectRepository.save ( new Subject ( 15L, "Algebra", 2L, this.courseRepository.getOne ( 2L ), instructorPerson2 ) );
