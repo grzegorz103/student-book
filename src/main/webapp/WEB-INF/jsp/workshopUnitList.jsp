@@ -21,7 +21,9 @@
                 <th>Nazwa</th>
                 <th>Opis</th>
                 <th>Materiały</th>
-                <th>Usuń</th>
+                <security:authorize access="hasRole('INSTRUCTOR')">
+                    <th>Usuń</th>
+                </security:authorize>
 
             </tr>
 
@@ -48,11 +50,11 @@
                                 <c:otherwise><a class="btn btn-raised btn-warning" href="${unit.file}">Pobierz</a></c:otherwise>
                             </c:choose>
                         </td>
-
-                        <td>
-                            <a class="btn btn-raised btn-danger" href="/workshops/${workshop.id}/units/${unit.id}/delete">Usuń</a>
-                        </td>
-
+                        <security:authorize access="hasRole('INSTRUCTOR')">
+                            <td>
+                                <a class="btn btn-raised btn-danger" href="/workshops/${workshop.id}/units/${unit.id}/delete">Usuń</a>
+                            </td>
+                        </security:authorize>
                     </tr>
             </c:forEach>
 
