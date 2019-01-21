@@ -468,9 +468,9 @@ public class RepositoriesInitializer
                     warsztat1.getStudents().add(( Student ) this.accountRepository.findByMail( "student5@student5.pl" ).getPerson ());
 
                     warsztat1.setUnits(new HashSet<>());
-                    warsztat1.getUnits().add(new Unit(1L, "Lekcja 1 - Początki", warsztat1, "Wprowadzenie do Spring Framework i Spring MVC", "https://mirek.ii.uph.edu.pl/m3d/lab4n.doc"));
-                    warsztat1.getUnits().add(new Unit(2L, "Lekcja 2 - Maven", warsztat1, "Wprowadzenie do Maven’a i praca ze statycznymi zasobami", "https://mirek.ii.uph.edu.pl/m3d/lab4n.doc"));
-                    warsztat1.getUnits().add(new Unit(3L, "Lekcja 3 - Formularze", warsztat1, "Obsługa formularzy – zależności formularza i walidacja danych", "https://mirek.ii.uph.edu.pl/m3d/lab4n.doc"));
+                    warsztat1.getUnits().add(new Unit(1L, "Początki", warsztat1, "Wprowadzenie do Spring Framework i Spring MVC", "https://mirek.ii.uph.edu.pl/m3d/lab4n.doc"));
+                    warsztat1.getUnits().add(new Unit(2L, "Maven", warsztat1, "Wprowadzenie do Maven’a i praca ze statycznymi zasobami", "https://mirek.ii.uph.edu.pl/m3d/lab4n.doc"));
+                    warsztat1.getUnits().add(new Unit(3L, "Formularze", warsztat1, "Obsługa formularzy – zależności formularza i walidacja danych", "https://mirek.ii.uph.edu.pl/m3d/lab4n.doc"));
 
                     this.workshopRepository.save(warsztat1);
 
