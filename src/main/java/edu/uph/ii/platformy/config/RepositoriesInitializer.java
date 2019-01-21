@@ -30,9 +30,10 @@ public class RepositoriesInitializer
     private final SemestralGradesRepository semestralGradesRepository;
     private final UtilsRepository utilsRepository;
     private final WorkshopRepository workshopRepository;
+    private final UnitRepository unitRepository;
 
     @Autowired
-    public RepositoriesInitializer ( InstructorRepository instructorRepository, DeanRepository deanRepository, StudentRepository studentRepository, RoleRepository roleRepository, CourseRepository courseRepository, SpecializationRepository specializationRepository, AccountRepository accountRepository, SubjectRepository subjectRepository, PasswordEncoder passwordEncoder, ScholarshipRepository scholarshipRepository, UtilsRepository utilsRepository, SemestralGradesRepository semestralGradesRepository, LessonRepository lessonRepository, AttendanceRepository attendanceRepository, OpinionRepository opinionRepository, WorkshopRepository workshopRepository )
+    public RepositoriesInitializer ( InstructorRepository instructorRepository, DeanRepository deanRepository, StudentRepository studentRepository, RoleRepository roleRepository, CourseRepository courseRepository, SpecializationRepository specializationRepository, AccountRepository accountRepository, SubjectRepository subjectRepository, PasswordEncoder passwordEncoder, ScholarshipRepository scholarshipRepository, UtilsRepository utilsRepository, SemestralGradesRepository semestralGradesRepository, LessonRepository lessonRepository, AttendanceRepository attendanceRepository, OpinionRepository opinionRepository, WorkshopRepository workshopRepository, UnitRepository unitRepository )
     {
         this.instructorRepository = instructorRepository;
         this.deanRepository = deanRepository;
@@ -50,6 +51,7 @@ public class RepositoriesInitializer
         this.utilsRepository = utilsRepository;
         this.semestralGradesRepository = semestralGradesRepository;
         this.workshopRepository = workshopRepository;
+        this.unitRepository = unitRepository;
     }
 
     @Bean
@@ -174,7 +176,7 @@ public class RepositoriesInitializer
                 studentPerson.setCourse ( this.courseRepository.getOne ( 1L ) );
                 studentPerson.setSpecialization ( this.specializationRepository.getOne ( 1L ) );
                 studentPerson.setSpecChosen ( studentPerson.getSpecialization () != null );
-                studentPerson.setSemester ( 1L );
+                studentPerson.setSemester ( 3L );
                 studentPerson.setBankAccountNumber ( "12345678901234567890123456" );
                 student.setPerson ( this.studentRepository.save ( studentPerson ) );
 
@@ -412,103 +414,154 @@ public class RepositoriesInitializer
 
                 //LEKCJE
                 if ( this.lessonRepository.findAll ()
-                        .isEmpty () ) {
+                        .isEmpty () )
+                {
 
                     //Wstęp do programowania
-                    this.lessonRepository.save(new Lesson(1L, new java.sql.Date(118, 10, 3), this.subjectRepository.getOne(1L)));
-                    this.lessonRepository.save(new Lesson(2L, new java.sql.Date(118, 10, 10), this.subjectRepository.getOne(1L)));
-                    this.lessonRepository.save(new Lesson(3L, new java.sql.Date(118, 10, 17), this.subjectRepository.getOne(1L)));
-                    this.lessonRepository.save(new Lesson(4L, new java.sql.Date(118, 10, 24), this.subjectRepository.getOne(1L)));
+                    this.lessonRepository.save ( new Lesson ( 1L, new java.sql.Date ( 118, 10, 3 ), this.subjectRepository.getOne ( 1L ) ) );
+                    this.lessonRepository.save ( new Lesson ( 2L, new java.sql.Date ( 118, 10, 10 ), this.subjectRepository.getOne ( 1L ) ) );
+                    this.lessonRepository.save ( new Lesson ( 3L, new java.sql.Date ( 118, 10, 17 ), this.subjectRepository.getOne ( 1L ) ) );
+                    this.lessonRepository.save ( new Lesson ( 4L, new java.sql.Date ( 118, 10, 24 ), this.subjectRepository.getOne ( 1L ) ) );
                 }
 
                 //OBECNOŚCI
                 if ( this.attendanceRepository.findAll ()
-                        .isEmpty () ) {
+                        .isEmpty () )
+                {
 
                     //Wstęp do programowania L1
-                    this.attendanceRepository.save(new Attendance(1L, ( Student ) this.accountRepository.findByMail( "student@student.pl" ).getPerson (), this.lessonRepository.getOne(1L), true));
-                    this.attendanceRepository.save(new Attendance(2L, ( Student ) this.accountRepository.findByMail( "student7@student7.pl" ).getPerson (), this.lessonRepository.getOne(1L), true));
-                    this.attendanceRepository.save(new Attendance(3L, ( Student ) this.accountRepository.findByMail( "student8@student8.pl" ).getPerson (), this.lessonRepository.getOne(1L), true));
-                    this.attendanceRepository.save(new Attendance(4L, ( Student ) this.accountRepository.findByMail( "student9@student9.pl" ).getPerson (), this.lessonRepository.getOne(1L), true));
-                    this.attendanceRepository.save(new Attendance(5L, ( Student ) this.accountRepository.findByMail( "student10@student10.pl" ).getPerson (), this.lessonRepository.getOne(1L), true));
-                    this.attendanceRepository.save(new Attendance(6L, ( Student ) this.accountRepository.findByMail( "student11@student11.pl" ).getPerson (), this.lessonRepository.getOne(1L), false));
+                    this.attendanceRepository.save ( new Attendance ( 1L, ( Student ) this.accountRepository.findByMail ( "student@student.pl" )
+                            .getPerson (), this.lessonRepository.getOne ( 1L ), true ) );
+                    this.attendanceRepository.save ( new Attendance ( 2L, ( Student ) this.accountRepository.findByMail ( "student7@student7.pl" )
+                            .getPerson (), this.lessonRepository.getOne ( 1L ), true ) );
+                    this.attendanceRepository.save ( new Attendance ( 3L, ( Student ) this.accountRepository.findByMail ( "student8@student8.pl" )
+                            .getPerson (), this.lessonRepository.getOne ( 1L ), true ) );
+                    this.attendanceRepository.save ( new Attendance ( 4L, ( Student ) this.accountRepository.findByMail ( "student9@student9.pl" )
+                            .getPerson (), this.lessonRepository.getOne ( 1L ), true ) );
+                    this.attendanceRepository.save ( new Attendance ( 5L, ( Student ) this.accountRepository.findByMail ( "student10@student10.pl" )
+                            .getPerson (), this.lessonRepository.getOne ( 1L ), true ) );
+                    this.attendanceRepository.save ( new Attendance ( 6L, ( Student ) this.accountRepository.findByMail ( "student11@student11.pl" )
+                            .getPerson (), this.lessonRepository.getOne ( 1L ), false ) );
 
                 }
 
                 //OPINIE
                 if ( this.opinionRepository.findAll ()
-                        .isEmpty () ) {
+                        .isEmpty () )
+                {
 
                     //Jan Kowalski
-                    this.opinionRepository.save(new Opinion(1L, ( Instructor ) this.accountRepository.findByMail( "instructor@instructor.pl" ).getPerson (), this.subjectRepository.getOne(1L), ( Student ) this.accountRepository.findByMail( "student@student.pl" ).getPerson (), Statuses.ACCEPTED, "Super wykładowca, dzięki niemu mam 5 z egzaminu!!!"));
-                    this.opinionRepository.save(new Opinion(2L, ( Instructor ) this.accountRepository.findByMail( "instructor@instructor.pl" ).getPerson (), this.subjectRepository.getOne(6L), ( Student ) this.accountRepository.findByMail( "student7@student7.pl" ).getPerson (), Statuses.ACCEPTED, "Prowadzone przez tego pana wykłady z platform programowania są bardzo nudne i męczące. Nie polecam!"));
+                    this.opinionRepository.save ( new Opinion ( 1L, ( Instructor ) this.accountRepository.findByMail ( "instructor@instructor.pl" )
+                            .getPerson (), this.subjectRepository.getOne ( 1L ), ( Student ) this.accountRepository.findByMail ( "student@student.pl" )
+                            .getPerson (), Statuses.ACCEPTED, "Super wykładowca, dzięki niemu mam 5 z egzaminu!!!" ) );
+                    this.opinionRepository.save ( new Opinion ( 2L, ( Instructor ) this.accountRepository.findByMail ( "instructor@instructor.pl" )
+                            .getPerson (), this.subjectRepository.getOne ( 6L ), ( Student ) this.accountRepository.findByMail ( "student7@student7.pl" )
+                            .getPerson (), Statuses.ACCEPTED, "Prowadzone przez tego pana wykłady z platform programowania są bardzo nudne i męczące. Nie polecam!" ) );
 
                     //Przemysław Nowak
-                    this.opinionRepository.save(new Opinion(3L, ( Instructor ) this.accountRepository.findByMail( "instructor2@instructor2.pl" ).getPerson (), this.subjectRepository.getOne(2L), ( Student ) this.accountRepository.findByMail( "student8@student8.pl" ).getPerson (), Statuses.REJECTED, "Ale dzban xDDDD"));
-                    this.opinionRepository.save(new Opinion(4L, ( Instructor ) this.accountRepository.findByMail( "instructor2@instructor2.pl" ).getPerson (), this.subjectRepository.getOne(2L), ( Student ) this.accountRepository.findByMail( "student9@student9.pl" ).getPerson (), Statuses.AWAITING, "Często się zdarza, że nie odpisuje wcale na maile i nie ma z nim żadnego kontaktu..."));
+                    this.opinionRepository.save ( new Opinion ( 3L, ( Instructor ) this.accountRepository.findByMail ( "instructor2@instructor2.pl" )
+                            .getPerson (), this.subjectRepository.getOne ( 2L ), ( Student ) this.accountRepository.findByMail ( "student8@student8.pl" )
+                            .getPerson (), Statuses.REJECTED, "Ale dzban xDDDD" ) );
+                    this.opinionRepository.save ( new Opinion ( 4L, ( Instructor ) this.accountRepository.findByMail ( "instructor2@instructor2.pl" )
+                            .getPerson (), this.subjectRepository.getOne ( 2L ), ( Student ) this.accountRepository.findByMail ( "student9@student9.pl" )
+                            .getPerson (), Statuses.AWAITING, "Często się zdarza, że nie odpisuje wcale na maile i nie ma z nim żadnego kontaktu..." ) );
                 }
 
                 //WARSZTATY
                 if ( this.workshopRepository.findAll ()
-                        .isEmpty () ) {
+                        .isEmpty () )
+                {
 
                     //Spring Boot
-                    Workshop warsztat1 = new Workshop();
+                    Workshop warsztat1 = new Workshop ();
 
-                    warsztat1.setId(1L);
-                    warsztat1.setName("Kurs Spring Boot");
-                    warsztat1.setLimit(10L);
-                    warsztat1.setInstructor(( Instructor ) this.accountRepository.findByMail( "instructor@instructor.pl" ).getPerson ());
+                    warsztat1.setId ( 1L );
+                    warsztat1.setName ( "Kurs Spring Boot" );
+                    warsztat1.setLimit ( 10L );
+                    warsztat1.setInstructor ( ( Instructor ) this.accountRepository.findByMail ( "instructor@instructor.pl" )
+                            .getPerson () );
 
-                    warsztat1.setStudents(new HashSet<>());
-                    warsztat1.getStudents().add(( Student ) this.accountRepository.findByMail( "student@student.pl" ).getPerson ());
-                    warsztat1.getStudents().add(( Student ) this.accountRepository.findByMail( "student2@student2.pl" ).getPerson ());
-                    warsztat1.getStudents().add(( Student ) this.accountRepository.findByMail( "student3@student3.pl" ).getPerson ());
-                    warsztat1.getStudents().add(( Student ) this.accountRepository.findByMail( "student4@student4.pl" ).getPerson ());
-                    warsztat1.getStudents().add(( Student ) this.accountRepository.findByMail( "student5@student5.pl" ).getPerson ());
+                    warsztat1.setStudents ( new HashSet<> () );
+                    warsztat1.getStudents ()
+                            .add ( ( Student ) this.accountRepository.findByMail ( "student@student.pl" )
+                                    .getPerson () );
+                    warsztat1.getStudents ()
+                            .add ( ( Student ) this.accountRepository.findByMail ( "student2@student2.pl" )
+                                    .getPerson () );
+                    warsztat1.getStudents ()
+                            .add ( ( Student ) this.accountRepository.findByMail ( "student3@student3.pl" )
+                                    .getPerson () );
+                    warsztat1.getStudents ()
+                            .add ( ( Student ) this.accountRepository.findByMail ( "student4@student4.pl" )
+                                    .getPerson () );
+                    warsztat1.getStudents ()
+                            .add ( ( Student ) this.accountRepository.findByMail ( "student5@student5.pl" )
+                                    .getPerson () );
 
-                    warsztat1.setUnits(new HashSet<>());
-                    warsztat1.getUnits().add(new Unit(1L, "Początki", warsztat1, "Wprowadzenie do Spring Framework i Spring MVC", "https://mirek.ii.uph.edu.pl/m3d/lab4n.doc"));
-                    warsztat1.getUnits().add(new Unit(2L, "Maven", warsztat1, "Wprowadzenie do Maven’a i praca ze statycznymi zasobami", "https://mirek.ii.uph.edu.pl/m3d/lab4n.doc"));
-                    warsztat1.getUnits().add(new Unit(3L, "Formularze", warsztat1, "Obsługa formularzy – zależności formularza i walidacja danych", "https://mirek.ii.uph.edu.pl/m3d/lab4n.doc"));
+                    this.workshopRepository.save ( warsztat1 );
+                    warsztat1.setUnits ( new HashSet<> () );
+                    warsztat1.getUnits ()
+                            .add ( this.unitRepository.save ( new Unit ( 1L, "Początki", warsztat1, "Wprowadzenie do Spring Framework i Spring MVC", "https://mirek.ii.uph.edu.pl/m3d/lab4n.doc" ) ) );
+                    warsztat1.getUnits ()
+                            .add ( this.unitRepository.save ( new Unit ( 2L, "Maven", warsztat1, "Wprowadzenie do Maven’a i praca ze statycznymi zasobami", "https://mirek.ii.uph.edu.pl/m3d/lab4n.doc" ) ) );
+                    warsztat1.getUnits ()
+                            .add ( this.unitRepository.save ( new Unit ( 3L, "Formularze", warsztat1, "Obsługa formularzy – zależności formularza i walidacja danych", "https://mirek.ii.uph.edu.pl/m3d/lab4n.doc" ) ) );
 
-                    this.workshopRepository.save(warsztat1);
 
                     //GIT
-                    Workshop warsztat2 = new Workshop();
+                    Workshop warsztat2 = new Workshop ();
 
-                    warsztat2.setId(2L);
-                    warsztat2.setName("Kurs GITa");
-                    warsztat2.setLimit(10L);
-                    warsztat2.setInstructor(( Instructor ) this.accountRepository.findByMail( "instructor@instructor.pl" ).getPerson ());
+                    warsztat2.setId ( 2L );
+                    warsztat2.setName ( "Kurs GITa" );
+                    warsztat2.setLimit ( 10L );
+                    warsztat2.setInstructor ( ( Instructor ) this.accountRepository.findByMail ( "instructor@instructor.pl" )
+                            .getPerson () );
 
-                    warsztat2.setStudents(new HashSet<>());
-                    warsztat2.getStudents().add(( Student ) this.accountRepository.findByMail( "student2@student2.pl" ).getPerson ());
-                    warsztat2.getStudents().add(( Student ) this.accountRepository.findByMail( "student3@student3.pl" ).getPerson ());
-                    warsztat2.getStudents().add(( Student ) this.accountRepository.findByMail( "student4@student4.pl" ).getPerson ());
-                    warsztat2.getStudents().add(( Student ) this.accountRepository.findByMail( "student5@student5.pl" ).getPerson ());
-                    warsztat2.getStudents().add(( Student ) this.accountRepository.findByMail( "student6@student6.pl" ).getPerson ());
-                    warsztat2.getStudents().add(( Student ) this.accountRepository.findByMail( "student7@student7.pl" ).getPerson ());
-                    warsztat2.getStudents().add(( Student ) this.accountRepository.findByMail( "student8@student8.pl" ).getPerson ());
-                    warsztat2.getStudents().add(( Student ) this.accountRepository.findByMail( "student9@student9.pl" ).getPerson ());
-                    warsztat2.getStudents().add(( Student ) this.accountRepository.findByMail( "student10@student10.pl" ).getPerson ());
-                    warsztat2.getStudents().add(( Student ) this.accountRepository.findByMail( "student11@student11.pl" ).getPerson ());
+                    warsztat2.setStudents ( new HashSet<> () );
+                    warsztat2.getStudents ()
+                            .add ( ( Student ) this.accountRepository.findByMail ( "student2@student2.pl" )
+                                    .getPerson () );
+                    warsztat2.getStudents ()
+                            .add ( ( Student ) this.accountRepository.findByMail ( "student3@student3.pl" )
+                                    .getPerson () );
+                    warsztat2.getStudents ()
+                            .add ( ( Student ) this.accountRepository.findByMail ( "student4@student4.pl" )
+                                    .getPerson () );
+                    warsztat2.getStudents ()
+                            .add ( ( Student ) this.accountRepository.findByMail ( "student5@student5.pl" )
+                                    .getPerson () );
+                    warsztat2.getStudents ()
+                            .add ( ( Student ) this.accountRepository.findByMail ( "student6@student6.pl" )
+                                    .getPerson () );
+                    warsztat2.getStudents ()
+                            .add ( ( Student ) this.accountRepository.findByMail ( "student7@student7.pl" )
+                                    .getPerson () );
+                    warsztat2.getStudents ()
+                            .add ( ( Student ) this.accountRepository.findByMail ( "student8@student8.pl" )
+                                    .getPerson () );
+                    warsztat2.getStudents ()
+                            .add ( ( Student ) this.accountRepository.findByMail ( "student9@student9.pl" )
+                                    .getPerson () );
+                    warsztat2.getStudents ()
+                            .add ( ( Student ) this.accountRepository.findByMail ( "student10@student10.pl" )
+                                    .getPerson () );
+                    warsztat2.getStudents ()
+                            .add ( ( Student ) this.accountRepository.findByMail ( "student11@student11.pl" )
+                                    .getPerson () );
 
-                    warsztat2.setUnits(new HashSet<>());
-
-                    this.workshopRepository.save(warsztat2);
+                    this.workshopRepository.save ( warsztat2 );
 
                     //Arduino
-                    Workshop warsztat3 = new Workshop();
+                    Workshop warsztat3 = new Workshop ();
 
-                    warsztat3.setId(3L);
-                    warsztat3.setName("Kurs Arduino");
-                    warsztat3.setLimit(15L);
-                    warsztat3.setInstructor(( Instructor ) this.accountRepository.findByMail( "instructor@instructor.pl" ).getPerson ());
-                    warsztat3.setStudents(new HashSet<>());
-                    warsztat3.setUnits(new HashSet<>());
+                    warsztat3.setId ( 3L );
+                    warsztat3.setName ( "Kurs Arduino" );
+                    warsztat3.setLimit ( 15L );
+                    warsztat3.setInstructor ( ( Instructor ) this.accountRepository.findByMail ( "instructor@instructor.pl" )
+                            .getPerson () );
+                    warsztat3.setStudents ( new HashSet<> () );
 
-                    this.workshopRepository.save(warsztat3);
+                    this.workshopRepository.save ( warsztat3 );
 
                 }
 
