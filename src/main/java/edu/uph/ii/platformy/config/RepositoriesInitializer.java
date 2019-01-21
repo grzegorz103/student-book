@@ -611,5 +611,4 @@ public class RepositoriesInitializer
             }
         };
     }
-
 }
