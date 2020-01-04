@@ -6,7 +6,7 @@
 <div id="footer">
     <div class="container">
     <footer class="blockquote-footer">
-        <br>© 2019 Inżynieria oprogramowania
+        <br>© 2019 Projekt zespołowy
         <sec:authorize access="isAuthenticated()">
             <sec:authentication property="principal.authorities"/>
         </sec:authorize>
